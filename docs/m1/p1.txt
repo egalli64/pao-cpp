@@ -9,9 +9,9 @@ Programmare ad oggetti in C++
 	Build Tools for Visual Studio
 	- run: Developer Command Prompt for VS -> cl.exe
  - GCC per Linux: apt-get install build-essentials -> c++
- - GCC per Windows: https://winlibs.com/
+ - GCC per Windows: https://winlibs.com/ -> c++
 04) Tipi standard
-05) Array e Puntatori
+05) Array, puntatori e reference
 06) Le classi
 07) Costruttori e distruttori
 08) Copia di oggetti

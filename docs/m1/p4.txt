@@ -1,9 +1,11 @@
-Algoritmi e strutture dati
+4 - Ereditarietà e polimorfismo
 
-01) Array
-02) Vettori
-03) Mappe
-05) Liste
-06) Algoritmi STL
-07) Analisi costo computazionale
+1) Generalizzazione ed Ereditarietà
+2) Metodi virtuali: introduzione al polimorfismo
+3) Tabella dei metodi virtuali (vtable)
+4) Classi astratte: override e final
+5) Distruttore Virtuale
+6) Ereditarietà multipla e virtuale
+7) Ereditarietà privata/protetta e polimorfismo
+8) Overloading degli operatori
 

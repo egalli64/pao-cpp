@@ -1,10 +1,10 @@
 2 - Istruzioni di controllo
 
-01) Controllo del flusso: if, else: le istruzioni condizionali
-02) switch
-03) L'istruzione condizionale ?:
-04) Ciclo for
-05) Il ciclo while
-06) Il ciclo do-while
-07) Le istruzioni break e continue
+1) Controllo del flusso: if, else: le istruzioni condizionali
+2) switch
+3) L'operatore ternario ?:
+4) Ciclo for
+5) Ciclo while
+6) Ciclo do-while
+7) Le istruzioni break e continue
 

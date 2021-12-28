@@ -1,11 +1,10 @@
-Ereditarietà e polimorfismo
+3 - Programmare ad oggetti in C++
 
-01) Generalizzazione ed Ereditarietà
-02) Metodi virtuali: introduzione al polimorfismo
-03) Tabella dei metodi virtuali (vtable)
-05) Classi astratte: override e final
-06) Distruttore Virtuale
-07) Ereditarietà multipla e virtuale
-08) Ereditarietà privata/protetta e polimorfismo
-09) Overloading degli operatori
-
+1) Le classi
+2) Costruttori e distruttori
+3) Copia di oggetti
+4) Costruttore di spostamento
+5) Creazione di oggetti
+6) Metodi o funzioni membro
+7) Metodi inline, const, statici
+8) Functor: ridefinizione dell'operatore ()

@@ -9,4 +9,3 @@ int main()
 	cout << "An unused pointer: " << ptr << endl;
 	cout << "A null pointer can't be dereferenced! " << *ptr << endl;
 }
-

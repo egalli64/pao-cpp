@@ -1,4 +1,4 @@
-Programmare ad oggetti in C++
+1 - Programmare ad oggetti in C++
 
 01) Introduzione
  - A Tour of C++ (Second edition) https://www.stroustrup.com/tour2.html
@@ -19,4 +19,4 @@ Programmare ad oggetti in C++
 10) Creazione di oggetti
 11) Metodi o funzioni membro
 12) Metodi inline, const, statici
-
+13) Functor: ridefinizione dell'operatore ()

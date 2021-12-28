@@ -1,11 +1,10 @@
-Istruzioni di controllo
+2 - Istruzioni di controllo
 
-01) Functor: ridefinizione dell'operatore ()
-02) Controllo del flusso: if, else: le istruzioni condizionali
-03) switch
-05) L'istruzione condizionale ?:
-06) Ciclo for
-07) Il ciclo while
-08) Il ciclo do-while
-09) Le istruzioni break e continue
+01) Controllo del flusso: if, else: le istruzioni condizionali
+02) switch
+03) L'istruzione condizionale ?:
+04) Ciclo for
+05) Il ciclo while
+06) Il ciclo do-while
+07) Le istruzioni break e continue
 

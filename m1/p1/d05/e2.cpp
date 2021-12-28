@@ -10,6 +10,7 @@ int main()
 	int* ptr = &value;
 	cout << "A single int variable, address and value: " << ptr << " -> " << *ptr << endl;
 
+	// a pointer could change its referred memory location
 	ptr = &data[0];
 	cout << "First cell in an array, address and value: " << ptr << " -> " << *ptr << endl;
 
@@ -19,6 +20,7 @@ int main()
 	ptr = &data[5];
 	cout << "Last cell: " << ptr << " -> " << *ptr << endl;
 
+	// a reference won't change its referred memory location
 	int& ref = value;
 	cout << "ref and value " << ref << ' ' << value << endl;
 

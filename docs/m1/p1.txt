@@ -1,0 +1,20 @@
+Programmare ad oggetti in C++
+
+01) Introduzione
+02) Preparazione dell'ambiente di sviluppo
+ - VS Code https://code.visualstudio.com/docs/languages/cpp
+03) Compilatori e ambienti di sviluppo
+ - MSVC per Windows: https://visualstudio.microsoft.com/downloads/#other
+	Build Tools for Visual Studio
+	- run: Developer Command Prompt for VS -> cl.exe
+ - GCC per Linux: apt-get install build-essentials -> c++
+04) Tipi standard
+05) Puntatori
+06) Le classi
+07) Costruttori e distruttori
+08) Copia di oggetti
+09) Costruttore di spostamento
+10) Creazione di oggetti
+11) Metodi o funzioni membro
+12) Metodi inline, const, statici
+

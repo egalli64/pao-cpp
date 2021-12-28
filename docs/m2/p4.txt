@@ -1,0 +1,6 @@
+Ottimizzazione del codice
+
+01) La qualità del codice
+02) Ottimizzazione memoria
+03) Ottimizzazione CPU
+

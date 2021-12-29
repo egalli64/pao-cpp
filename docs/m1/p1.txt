@@ -1,14 +1,14 @@
-1 - Programmare ad oggetti in C++
+1 - Programmare in C++
 
 1) Introduzione
  - A Tour of C++ (Second edition) https://www.stroustrup.com/tour2.html
 2) Preparazione dell'ambiente di sviluppo
  - VS Code https://code.visualstudio.com/docs/languages/cpp
 3) Compilatori e ambienti di sviluppo
+ - GCC per Linux: apt-get install build-essentials -> c++
+ - GCC per Windows: https://winlibs.com/ -> c++
  - MSVC per Windows: https://visualstudio.microsoft.com/downloads/#other
 	Build Tools for Visual Studio
 	- run: Developer Command Prompt for VS -> cl.exe
- - GCC per Linux: apt-get install build-essentials -> c++
- - GCC per Windows: https://winlibs.com/ -> c++
 4) Tipi standard
 5) Array, puntatori e reference

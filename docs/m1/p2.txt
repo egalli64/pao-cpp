@@ -3,7 +3,7 @@
 1) if, else
 2) switch
 3) L'operatore ternario ?:
-4) Ciclo for
+4) Ciclo for (classico, range)
 5) Ciclo while
 6) Ciclo do-while
 7) Le istruzioni break e continue

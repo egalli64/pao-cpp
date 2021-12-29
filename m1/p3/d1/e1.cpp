@@ -7,7 +7,7 @@ struct Player
     double score;
 };
 
-main()
+int main()
 {
     Player tom;
     tom.id = 34;

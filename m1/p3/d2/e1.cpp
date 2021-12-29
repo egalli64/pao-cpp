@@ -10,7 +10,7 @@ struct Player
     double score;
 };
 
-main()
+int main()
 {
     // compiler generated default ctor
     Player tom;

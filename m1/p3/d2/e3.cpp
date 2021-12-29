@@ -17,7 +17,7 @@ public:
     double score() { return score_; }
 };
 
-main()
+int main()
 {
     // default ctor not available!
     // Player tom;

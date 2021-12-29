@@ -15,7 +15,7 @@ public:
     void increase_score(double delta) { score_ += delta; }
 };
 
-main()
+int main()
 {
     Player tom(34, 3.12);
 

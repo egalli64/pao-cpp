@@ -20,7 +20,7 @@ public:
     void increase_score(double delta) { score_ += delta; }
 };
 
-main()
+int main()
 {
     Player* p = new Player(12, 3.45);
     p->increase_score(23.3);

@@ -12,3 +12,4 @@
 	- run: Developer Command Prompt for VS -> cl.exe
 4) Tipi standard
 5) Array, puntatori e reference
+6) Lo heap: new e delete

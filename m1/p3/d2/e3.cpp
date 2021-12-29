@@ -10,7 +10,7 @@ private:
 public:
     // Player() = delete; // explicitly no default ctor
     // Player() = default; // force default ctor
-    Player(int id, double score) : id_{id}, score_{score} {} // plain ctor
+    Player(int id, double score) : id_{ id }, score_{ score } {} // plain ctor
     ~Player() { cout << "dtor!" << endl; }                   // dtor
 
     int id() { return id_; }

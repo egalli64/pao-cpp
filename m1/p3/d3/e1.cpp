@@ -8,7 +8,7 @@ private:
     double score_;
 
 public:
-    Player(int id, double score) : id_{id}, score_{score} {}
+    Player(int id, double score) : id_{ id }, score_{ score } {}
 
     // Player(const Player &) = delete;            // no copy ctor
     // Player &operator=(const Player &) = delete; // no assigment operator

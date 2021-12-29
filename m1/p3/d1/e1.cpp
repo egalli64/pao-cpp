@@ -15,10 +15,10 @@ main()
 
     cout << tom.id << ' ' << tom.score << endl;
 
-    Player *p = &tom;
+    Player* p = &tom;
     cout << p->id << endl;
 
-    Player &r = tom;
+    Player& r = tom;
     r.score += 5;
     cout << tom.score << endl;
 }

@@ -8,9 +8,9 @@ private:
     double score_;
 
 public:
-    Player() : id_{0}, score_{0} {}                          // default ctor
-    Player(int id, double score) : id_{id}, score_{score} {} // plain ctor
-    ~Player() { cout << "dtor!" << endl; }                   // dtor
+    Player() : id_{ 0 }, score_{ 0 } {} // default ctor
+    Player(int id, double score) : id_{ id }, score_{ score } {}    // plain ctor
+    ~Player() { cout << "dtor!" << endl; }  // dtor
 
     int id() { return id_; }
     double score() { return score_; }

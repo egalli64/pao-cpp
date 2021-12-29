@@ -36,8 +36,8 @@ int main()
 
     cout << "\nBitwise operators\n\n";
     cout << "x = " << bitset<8>(x) << endl;
-    cout << "y = " << bitset<8>(y) << endl
-         << endl;
+    cout << "y = " << bitset<8>(y) << endl;
+    cout << endl;
 
     cout << "x & y = " << bitset<8>(x & y) << endl;
     cout << "x | y = " << bitset<8>(x | y) << endl;

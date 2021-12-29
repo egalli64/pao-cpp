@@ -5,6 +5,6 @@
 3) Copia di oggetti
 4) Costruttore di spostamento
 5) Creazione di oggetti
-6) Metodi o funzioni membro
+6) Funzioni libere e metodi
 7) Metodi inline, const, statici
 8) Functor: ridefinizione dell'operatore ()

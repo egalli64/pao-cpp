@@ -6,4 +6,4 @@
 4) Classe final
 5) Distruttore Virtuale
 6) Ereditarietà multipla e virtuale
-7) Ereditarietà privata/protetta e polimorfismo
+7) Ereditarietà privata/protetta

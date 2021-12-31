@@ -1,6 +1,9 @@
 #include <iostream>
 using namespace std;
 
+/**
+ * @brief A function object (aka functor)
+ */
 class Adder
 {
 private:

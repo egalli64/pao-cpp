@@ -7,4 +7,4 @@
 5) Creazione di oggetti
 6) Funzioni libere e metodi
 7) Metodi inline, const, statici
-8) Functor: ridefinizione dell'operatore ()
+8) Overloading degli operatori: put-to, functor

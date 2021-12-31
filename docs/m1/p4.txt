@@ -7,5 +7,3 @@
 5) Distruttore Virtuale
 6) Ereditarietà multipla e virtuale
 7) Ereditarietà privata/protetta e polimorfismo
-8) Overloading degli operatori
-

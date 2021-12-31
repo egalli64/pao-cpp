@@ -13,6 +13,7 @@ public:
     Player(int id, int size) : id_{ id }, scores_{ new double[size] }, size_{ size } {}
     ~Player() { delete scores_; }
 
+
     // copy
     Player(const Player& that);
     Player& operator=(const Player& that);
@@ -22,7 +23,7 @@ public:
     Player& operator=(Player&& that);
 
     int id() { return id_; }
-    void add_score(int pos, double score)
+    void addToScore(int pos, double score)
     {
         int i = (pos < 0 || pos >= size_) ? 0 : pos;
         scores_[i] += score;
@@ -81,7 +82,7 @@ Player& Player::operator=(Player&& that)
 int main()
 {
     Player tom(12, 3);
-    tom.add_score(0, 43.12);
+    tom.addToScore(0, 43.12);
     cout << "tom: " << tom.id() << ", " << tom.score(0) << endl;
 
     // copy ctor
@@ -89,13 +90,13 @@ int main()
     Player bob = tom;
 
     // bob has his own data
-    bob.add_score(0, 12.33);
+    bob.addToScore(0, 12.33);
     cout << "bob: " << bob.id() << ", " << bob.score(0) << endl;
     cout << "tom: " << tom.id() << ", " << tom.score(0) << endl;
 
     // tom is moved in al
     Player al = move(tom);
-    al.add_score(0, 1.99);
+    al.addToScore(0, 1.99);
     cout << "al: " << al.id() << ", " << al.score(0) << endl;
     cout << "bob: " << bob.id() << ", " << bob.score(0) << endl;
     cout << "tom: " << tom.id() << ", " << tom.score(0) << endl;

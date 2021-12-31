@@ -13,7 +13,9 @@ int main(int argc, char **argv)
         for (int i = 1; i < argc; i++)
         {
             if (argv[i][0] == 'x')
+            {
                 break;
+            }
             cout << i << ") " << argv[i] << endl;
         }
         cout << "Done" << endl;

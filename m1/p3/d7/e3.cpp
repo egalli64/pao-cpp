@@ -14,7 +14,7 @@ public:
 
     int id() const { return id_; }
     double score() const { return score_; }
-    void increase_score(double delta) { score_ += delta; }
+    void increaseScore(double delta) { score_ += delta; }
 
     static void print_count();
 };

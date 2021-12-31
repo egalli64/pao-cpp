@@ -13,7 +13,7 @@ public:
     int id() const { return id_; }
     double score() const { return score_; }
 
-    void increase_score(double delta) { score_ += delta; }
+    void increaseScore(double delta) { score_ += delta; }
 };
 
 // put-to overload specific for Player
@@ -26,7 +26,7 @@ ostream& operator<<(ostream& os, const Player& item)
 int main()
 {
     Player tom(42, 33.12);
-    tom.increase_score(3.3);
+    tom.increaseScore(3.3);
 
     cout << tom << endl;
 }

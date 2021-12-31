@@ -6,7 +6,7 @@ class Animal
 private:
     string name_;
 public:
-    Animal(string name) : name_(name) {}
+    Animal(const string& name) : name_(name) {}
 
     const string& name() const { return name_; }
 };

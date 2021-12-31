@@ -12,7 +12,7 @@ public:
 
     int id() { return id_; }
     double score() { return score_; }
-    void increase_score(double delta) { score_ += delta; }
+    void increaseScore(double delta) { score_ += delta; }
 };
 
 int main()
@@ -25,6 +25,6 @@ int main()
     cout << p->id() << endl;
 
     Player& r = tom;
-    r.increase_score(5);
+    r.increaseScore(5);
     cout << tom.score() << endl;
 }

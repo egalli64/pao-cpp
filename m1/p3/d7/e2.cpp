@@ -12,13 +12,13 @@ public:
 
     int id() const { return id_; }
     double score() const { return score_; }
-    void increase_score(double delta) { score_ += delta; }
+    void increaseScore(double delta) { score_ += delta; }
 };
 
 int main()
 {
     Player tom(42, 33.12);
-    tom.increase_score(1.4);
+    tom.increaseScore(1.4);
 
     const Player bob(12, 3.7);
 

@@ -17,17 +17,17 @@ public:
 
     int id() { return id_; }
     double score() { return score_; }
-    void increase_score(double delta) { score_ += delta; }
+    void increaseScore(double delta) { score_ += delta; }
 };
 
 int main()
 {
     Player* p = new Player(12, 3.45);
-    p->increase_score(23.3);
+    p->increaseScore(23.3);
     cout << p->id() << ' ' << p->score() << endl;
     delete p;
 
     auto tom = make_unique<Player>(12, 3.45);
-    p->increase_score(23.3);
+    p->increaseScore(23.3);
     cout << tom->id() << ' ' << tom->score() << endl;
 }

@@ -1,9 +1,9 @@
 4 - Ereditarietà e polimorfismo
 
 1) Generalizzazione ed Ereditarietà
-2) Metodi virtuali: introduzione al polimorfismo
-3) Tabella dei metodi virtuali (vtable)
-4) Classi astratte: override e final
-5) Distruttore Virtuale
-6) Ereditarietà multipla e virtuale
-7) Ereditarietà privata/protetta e polimorfismo
+2) Polimorfismo, tabella dei metodi virtuali (vtbl): virtual, override
+3) Classe astratta
+4) Classe final
+4) Distruttore Virtuale
+5) Ereditarietà multipla e virtuale
+6) Ereditarietà privata/protetta e polimorfismo

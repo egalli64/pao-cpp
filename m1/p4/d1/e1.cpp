@@ -16,7 +16,7 @@ class Dog : public Animal
 private:
     string owner_;
 public:
-    Dog(string name, string owner) : Animal(name), owner_(owner) {}
+    Dog(const string& name, const string& owner) : Animal(name), owner_(owner) {}
 
     const string& owner() const { return owner_; }
 };

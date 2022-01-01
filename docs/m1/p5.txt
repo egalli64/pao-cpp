@@ -1,9 +1,8 @@
 5 - Algoritmi e strutture dati
 
 1) Array
-2) Vettori
-3) Mappe
-4) Liste
+2) Vettore
+3) Lista
+4) Mappa
 5) Algoritmi STL
 6) Analisi costo computazionale
-

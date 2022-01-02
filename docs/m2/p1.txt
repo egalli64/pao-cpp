@@ -1,7 +1,7 @@
 Gestione della memoria
 
-01) Memoria di processo
-02) Inter Process Communication
-	Shared Memory	
-	Signals	
+1) Memoria di processo
+2) Inter Process Communication
+ 	Shared Memory	
+   	Signals	
 

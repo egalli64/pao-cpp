@@ -1,5 +1,4 @@
 Programmazione di Rete
 
-01) Protocolli di comunicazione TCP/UDP
-02) Socket
-
+1) Protocolli di comunicazione TCP/UDP
+2) Socket

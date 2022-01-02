@@ -1,8 +1,7 @@
 Programmazione Concorrente
 
-01) Thread
-02) Semafori
-03) Mutex
-05) Programmazione Multithreading
-06) Deadlock e Starvation
-
+1) Thread
+2) Semafori
+3) Mutex
+4) Programmazione Multithreading
+5) Deadlock e Starvation

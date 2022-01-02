@@ -1,7 +1,14 @@
 Gestione della memoria
 
-1) Memoria di processo
+1) Process memory
+	- Text/Code (possibly read only)
+	- Data Segment for global / static variables
+		- Initialized (by code)
+		- (BSS) Uninitialized (set to 0)
+	- Stack
+	- Free memory (heap): new / delete
+		- Smart pointers: unique_ptr, shared_ptr, weak_ptr
+		- allocator
 2) Inter Process Communication
  	Shared Memory	
    	Signals	
-

@@ -1,0 +1,13 @@
+2.2 Puntatori e reference, nullptr
+
+Puntatore: variabile che contiene l'indirizzo di un'altra variabile
+- se non "punta", va segnalato usando il valore riservato nullptr
+
+Reference: alias ad una variabile
+- deve obbligatoriamente riferirsi a una variable (non c'è niente di simile a nullptr)
+- non può cambiare variabile di riferimento
+
+Passaggio di argomenti a una funzione
+- By value: standard
+- By address: via puntatore
+- By reference: via reference (e4.cpp)

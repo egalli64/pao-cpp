@@ -1,10 +1,9 @@
-3 - Programmare ad oggetti in C++
+3 - Istruzioni di controllo
 
-1) Le classi
-2) Costruttori e distruttori
-3) Copia di oggetti
-4) Costruttore di spostamento
-5) Creazione di oggetti
-6) Funzioni libere e metodi
-7) Metodi inline, const, statici
-8) Overloading degli operatori: put-to, functor
+1) if, else
+2) switch
+3) L'operatore ternario ?:
+4) Ciclo for (classico, range)
+5) Ciclo while
+6) Ciclo do-while
+7) Le istruzioni break e continue

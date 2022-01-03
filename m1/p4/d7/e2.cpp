@@ -1,65 +1,27 @@
 #include <iostream>
 using namespace std;
 
-class Tail
+class Player
 {
 private:
-    int count_;
+    int id_;
+    double score_;
+
 public:
-    Tail(int count) : count_(count) {}
+    Player(int id, double score) : id_(id), score_(score) {}
 
-    void wag(const string& name) const
-    {
-        cout << name << ": ";
-        for (int i = 0; i < count_; i++)
-        {
-            cout << "wag";
-        }
-        cout << endl;
-    }
-};
-
-/**
- * @brief Dog has-a Tail, and shares its access to derived classes
- */
-class Dog : protected Tail
-{
-protected:
-    string name_;
-public:
-    Dog(const string& name, int count) : Tail(count), name_(name) {}
-
-    void bark()
-    {
-        cout << name_ << ": bark!" << endl;
-        wag(name_);
-    }
-
-    virtual void eat()
-    {
-        cout << name_ << ": eat" << endl;
-    }
-};
-
-class Poodle : public Dog
-{
-public:
-    Poodle(const string& name) : Dog(name, 2) {}
-
-    void eat() override
-    {
-        cout << name_ << ": eat" << endl;
-        wag(name_);
-    }
+    int id() const { return id_; }
+    double score() const { return score_; }
+    void increaseScore(double delta) { score_ += delta; }
 };
 
 int main()
 {
-    Dog tom("Tom", 3);
-    tom.bark();
-    tom.eat();
+    Player tom(42, 33.12);
+    tom.increaseScore(1.4);
 
-    Poodle bob("Bob");
-    bob.bark();
-    bob.eat();
+    const Player bob(12, 3.7);
+
+    // bob is constant, can't invoke a non-const method on it
+    // bob.increase_score(1.4);
 }

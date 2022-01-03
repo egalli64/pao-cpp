@@ -1,0 +1,15 @@
+1.3 Ambiente di sviluppo
+
+Editor testuale
+- UNIX: vim
+- Windows: notepad++
+
+Code editor
+- Emacs https://www.gnu.org/software/emacs/
+- VS Code https://code.visualstudio.com/
+    Supporto C++: https://code.visualstudio.com/docs/languages/cpp
+
+IDE
+- Visual Studio (MSVC) https://visualstudio.microsoft.com/
+- CLion https://www.jetbrains.com/clion/
+- Eclipse IDE for C/C++ Developers https://www.eclipse.org/downloads/packages/

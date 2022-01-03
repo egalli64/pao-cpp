@@ -1,0 +1,8 @@
+1.2 Compilatori
+
+GCC https://gcc.gnu.org/
+ - per Linux (Debian e derivati): apt-get install build-essentials
+ - per Windows: https://winlibs.com/
+
+MSVC per Windows: https://visualstudio.microsoft.com/downloads/#other
+ - oppure, incluso in Visual Studio

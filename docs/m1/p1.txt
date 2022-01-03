@@ -1,16 +1,5 @@
 1 - Programmare in C++
 
 1) Introduzione
- - A Tour of C++ (Second edition) https://www.stroustrup.com/tour2.html
-2) Preparazione dell'ambiente di sviluppo
- - VS Code https://code.visualstudio.com/docs/languages/cpp
-3) Compilatori e ambienti di sviluppo
- - GCC per Linux: apt-get install build-essentials
- - GCC per Windows: https://winlibs.com/
- - MSVC per Windows: https://visualstudio.microsoft.com/downloads/#other
-	Build Tools for Visual Studio
-	- run: Developer Command Prompt for VS -> cl.exe
-4) Tipi standard
-5) Puntatori e reference, nullptr
-6) Array
-7) Stack e free store (heap) - new e delete
+2) Compilatori
+3) Ambiente di sviluppo

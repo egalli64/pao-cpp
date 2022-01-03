@@ -1,0 +1,18 @@
+1.1 Introduzione 
+
+C (1972) Dennis Ritchie - Bell Labs: Systems Implementation Language per UNIX
+C++ (1982) Bjarne Stroustrup - Bell Labs: Supporto alla programmazione Object-Oriented
+Java (1995) James Gosling - Sun: OOP multiplatform, web server, sintassi simile a C++, in realtà molto diverso
+JavaScript (1995) Brendan Eich - Netscape: web client, sintassi simile a Java, in realtà molto diverso
+
+C++
+- Estrema efficienza (C)
+- Programming in the large (OOP)
+
+OOP - dati e funzionalità associate sono collegate
+- creazione di tipi custom (classi) specifici per il problema corrente
+
+Bibliografia Essenziale
+- A Tour of C++ (2nd Edition) Stroustrup https://www.stroustrup.com/tour2.html
+- C++ Primer (5th Edition) Lippman, Lajoie, Moo https://www.pearson.com/us/higher-education/program/Lippman-C-Primer-5th-Edition/PGM270560.html
+- The C++ Programming Language (4th Edition) Stroustrup https://www.stroustrup.com/4th.html

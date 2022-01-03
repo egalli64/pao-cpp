@@ -1,31 +1,38 @@
 #include <iostream>
-#include <vector>
 using namespace std;
 
-void print(const vector<int>& data)
+class Animal
 {
-    for (int cur : data)
-    {
-        cout << cur << ' ';
-    }
-    cout << endl;
-}
+private:
+    string name_;
+public:
+    Animal(const string& name) : name_(name) {}
+
+    string name() const { return "Animal " + name_; }
+};
+
+class NonPolimorphicDog : public Animal
+{
+private:
+    string owner_;
+public:
+    NonPolimorphicDog(const string& name, const string& owner) : Animal(name), owner_(owner) {}
+
+    string name() const { return Animal::name() + " owned by " + owner_; }
+};
 
 int main()
 {
-    vector<int> empty;
-    cout << "Size of an empty vector is " << empty.size() << endl;
+    Animal tom("Tom");
+    cout << tom.name() << endl;
 
-    vector<int> data{ 6, 4, 3 };
-    print(data);
+    NonPolimorphicDog bob("Bob", "Robert Smith");
+    cout << bob.name() << endl;
 
-    // no filling in vector
-    // values.fill(-1);
-
-    // increase all the elements
-    for (int& cur : data)
+    cout << "Looping on the animals in a NON polimorphic way" << endl;
+    Animal* animals[] = { &tom, &bob };
+    for (Animal* pa : animals)
     {
-        cur += 1;
+        cout << pa->name() << endl;
     }
-    print(data);
 }

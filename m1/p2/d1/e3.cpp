@@ -1,23 +1,17 @@
 #include <iostream>
 using namespace std;
 
-int main(int argc, char **argv)
+int main()
 {
-    cout << "The caller ";
-    if (argc == 1)
-    {
-        cout << "didn't pass any argument\n";
-    }
-    else if (argc == 2)
-    {
-        cout << "passed a argument: " << argv[1] << endl;
-    }
-    else if (argc % 2)
-    {
-        cout << "passed an even number of arguments\n";
-    }
-    else
-    {
-        cout << "passed an odd number of arguments\n";
-    }
+    cout << "\nInitialization\n\n";
+    int x = 42.7; // implicit narrowing
+
+    //	int y {42.7}; // error: explicit narrowing required
+
+    int y{ int(42.7) };
+    auto z = 42.7; // automatic type deduction (here: double)
+
+    cout << "x = " << x << endl;
+    cout << "y = " << y << endl;
+    cout << "z = " << z << " sized " << sizeof(z) << endl;
 }

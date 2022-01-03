@@ -1,47 +1,33 @@
 #include <iostream>
+#include <memory>
 using namespace std;
 
-class BadAnimal
+class Player
 {
 private:
-    string name_;
+    int id_;
+    double score_;
+
 public:
-    BadAnimal(const string& name) : name_(name) {}
-    ~BadAnimal() { cout << "Dtor for " << name_ << endl; }
-
-    const string& name() const { return name_; }
-    virtual string fullName() = 0;
-};
-
-class Dog : public BadAnimal
-{
-private:
-    string owner_;
-public:
-    Dog(const string& name, const string& owner) : BadAnimal(name), owner_(owner) {}
-    ~Dog() { cout << "Dtor for dog owned by " << owner_ << endl; }
-
-    string fullName() override
+    Player(int id, double score) : id_(id), score_(score) {}
+    ~Player()
     {
-        return BadAnimal::name() + " owned by " + owner_;
+        cout << "dtor" << endl;
     }
-};
 
-void bobFunction()
-{
-    Dog bob("Bob", "Robert Smith");
-    cout << bob.fullName() << endl;
-}
+    int id() { return id_; }
+    double score() { return score_; }
+    void increaseScore(double delta) { score_ += delta; }
+};
 
 int main()
 {
-    bobFunction();
+    Player* p = new Player(12, 3.45);
+    p->increaseScore(23.3);
+    cout << p->id() << ' ' << p->score() << endl;
+    delete p;
 
-    Dog* chip = new Dog("Chip", "Charlie Parker");
-    cout << chip->fullName() << endl;
-    delete chip;
-
-    BadAnimal* dick = new Dog("Dick", "Douglas Adams");
-    cout << dick->fullName() << endl;
-    delete dick;
+    auto tom = make_unique<Player>(12, 3.45);
+    p->increaseScore(23.3);
+    cout << tom->id() << ' ' << tom->score() << endl;
 }

@@ -1,9 +1,10 @@
-4 - Ereditarietà e polimorfismo
+4 - Programmare ad oggetti in C++
 
-1) Generalizzazione ed Ereditarietà
-2) Polimorfismo, tabella dei metodi virtuali (vtbl): virtual, override
-3) Classe astratta
-4) Classe final
-5) Distruttore Virtuale
-6) Ereditarietà multipla e virtuale
-7) Ereditarietà privata/protetta
+1) Le classi
+2) Costruttori e distruttori
+3) Copia di oggetti
+4) Costruttore di spostamento
+5) Creazione di oggetti
+6) Funzioni libere e metodi
+7) Metodi inline, const, statici
+8) Overloading degli operatori: put-to, functor

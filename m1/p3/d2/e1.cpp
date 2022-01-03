@@ -1,18 +1,17 @@
-#include <iostream>
+#include<iostream>
 using namespace std;
 
-struct Player
+int main(int argc, char** argv)
 {
-    // Player() {} // implicit
-    // Player() = delete;
-    // Player() = default;
-    int id;
-    double score;
-};
-
-int main()
-{
-    // compiler generated default ctor
-    Player tom;
-    cout << "tom: " << tom.id << ", " << tom.score << endl;
+    switch(argc) {
+    case 1:
+        cout << "The caller didn't pass any parameter\n";
+        break;
+    case 2:
+        cout << "The first parameter is " << argv[1] << endl;
+        break;
+    default:
+        cout << "The last parameter is " << argv[argc-1] << endl;
+        break;
+    }
 }

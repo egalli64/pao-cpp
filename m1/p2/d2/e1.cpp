@@ -1,17 +1,16 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
-int main(int argc, char** argv)
+int main()
 {
-    switch(argc) {
-    case 1:
-        cout << "The caller didn't pass any parameter\n";
-        break;
-    case 2:
-        cout << "The first parameter is " << argv[1] << endl;
-        break;
-    default:
-        cout << "The last parameter is " << argv[argc-1] << endl;
-        break;
-    }
+    cout << "char* " << sizeof(char*) << endl;
+    cout << "double* " << sizeof(double*) << endl;
+    cout << endl;
+
+    char c = 'x';
+    char* pc = &c;
+
+    cout << c << ' ' << *pc << endl;
+    *pc = 'z';
+    cout << c << ' ' << *pc << endl;
 }

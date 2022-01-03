@@ -1,33 +1,13 @@
 #include <iostream>
-#include <memory>
 using namespace std;
 
-class Player
+int main(int argc, char **argv)
 {
-private:
-    int id_;
-    double score_;
-
-public:
-    Player(int id, double score) : id_(id), score_(score) {}
-    ~Player()
+    cout << argv[0] << " has " << argc - 1 << " parameters" << endl;
+    int i = 1;
+    while (i < argc)
     {
-        cout << "dtor" << endl;
+        cout << i << ") " << argv[i] << endl;
+        i += 1;
     }
-
-    int id() { return id_; }
-    double score() { return score_; }
-    void increaseScore(double delta) { score_ += delta; }
-};
-
-int main()
-{
-    Player* p = new Player(12, 3.45);
-    p->increaseScore(23.3);
-    cout << p->id() << ' ' << p->score() << endl;
-    delete p;
-
-    auto tom = make_unique<Player>(12, 3.45);
-    p->increaseScore(23.3);
-    cout << tom->id() << ' ' << tom->score() << endl;
 }

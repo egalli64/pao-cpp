@@ -2,4 +2,4 @@
 
 1) Introduzione
 2) Compilatori
-3) Ambiente di sviluppo
+3) Ambienti di sviluppo

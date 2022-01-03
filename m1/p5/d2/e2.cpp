@@ -10,7 +10,32 @@ private:
     int key_;
     string value_;
 public:
-    Entry(int key, const string& value) : key_(key), value_(value) {}
+    Entry(int key, const string& value) : key_(key), value_(value)
+    {
+        cout << "Plain ctor for " << value_ << endl;
+    }
+
+    Entry(const Entry& that) : key_(that.key_), value_(that.value_)
+    {
+        cout << "Copy ctor for " << value_ << endl;
+    }
+
+    Entry(Entry&& that)
+    {
+        cout << "Move ctor for " << that.value_ << endl;
+
+        key_ = exchange(that.key_, 0);
+        value_ = move(that.value_);
+    }
+
+    Entry& operator=(Entry&& that)
+    {
+        cout << "Move assigment for " << that.value_ << endl;
+
+        key_ = exchange(that.key_, 0);
+        value_ = move(that.value_);
+        return *this;
+    }
 
     int key() const { return key_; }
     const string& value() const { return value_; }
@@ -22,6 +47,8 @@ public:
     {
         cout << "Hello " << value() << endl;
     }
+
+    virtual ~Entry() { cout << "dtor " << key_ << ' ' << value_ << endl; }
 };
 
 ostream& operator<<(ostream& os, const Entry& entry)
@@ -30,36 +57,49 @@ ostream& operator<<(ostream& os, const Entry& entry)
     return os;
 }
 
-void print(const vector<Entry>& data)
+class ExtendedEntry : public Entry
 {
+public:
+    ExtendedEntry(int key, const string& value) : Entry(key, value)
+    {
+        cout << "EE plain ctor for " << value << endl;
+    }
+
+    void sayHello() const override
+    {
+        cout << "EE hello " << value() << "!!!" << endl;
+    }
+
+    virtual ~ExtendedEntry() { cout << "EE dtor " << value() << endl; }
+};
+
+void aVector()
+{
+    vector<int> data;
+    cout << "Empty vector" << endl;
+    cout << "Size is " << data.size() << endl;
+    cout << "Capacity is " << data.capacity() << endl;
+
+    data.push_back(2);
+    data.push_back(12);
+    data.push_back(42);
+    cout << "Size is " << data.size() << endl;
+    cout << "Capacity is " << data.capacity() << endl;
+    cout << "First element is " << data.front() << endl;
+    cout << "Last element is " << data.back() << endl;
+}
+
+void oVector()
+{
+    cout << "Statically typed vector - no polymorphism!" << endl;
+    vector<Entry> data{ {1, "Tom"}, {2, "Bob"} };
     for (const Entry& cur : data)
     {
         cout << cur << ' ';
     }
     cout << endl;
-}
-
-class ExtendedEntry : public Entry
-{
-public:
-    ExtendedEntry(int key, const string& value) : Entry(key, value) {}
-    void sayHello() const override
-    {
-        cout << "Hello " << value() << "!!!" << endl;
-    }
-};
-
-int main()
-{
-    // OK, but only if we are _not_ interested in polymorphism 
-    vector<Entry> empty;
-    cout << "Size of an empty vector is " << empty.size() << endl;
-
-    vector<Entry> data{ {1, "Tom"}, {2, "Bob"} };
-    print(data);
 
     data.push_back({ 3, "Kim" });
-    print(data);
 
     ExtendedEntry wim{ 4, "Wim" };
     wim.sayHello();
@@ -70,18 +110,74 @@ int main()
     {
         cur.sayHello();
     }
-    cout << endl;
+    cout << "Data out of scope" << endl;
+}
 
-    // polymorphic container 
-    vector<unique_ptr<Entry>> polyData;
-    polyData.push_back(make_unique<Entry>(1, "Tom"));
+void rpVector()
+{
+    cout << "Raw Pointer Vector" << endl;
+    vector<Entry*> data{ new Entry(1, "Tom"), new Entry(2, "Bob") };
+    data.push_back(new Entry(3, "Kim"));
 
-    polyData.push_back(make_unique<ExtendedEntry>(2, "Bob"));
-    for (const auto& cur : polyData)
+    data.push_back(new ExtendedEntry(4, "Wim"));
+    for (const auto& cur : data)
     {
         cur->sayHello();
     }
-    cout << endl;
+    cout << "Access to an element in vector: ";
+    data[0]->sayHello();
 
-    polyData[0]->sayHello();
+    cout << "Data out of scope, handmade cleanup!" << endl;
+    for (auto& cur : data)
+    {
+        delete cur;
+    }
+    data.clear(); // paranoic
+}
+
+void spVector()
+{
+    cout << "Shared Smart Pointer Vector" << endl;
+    vector<shared_ptr<Entry>> data{ make_shared<Entry>(1, "Tom"), make_shared<Entry>(2, "Bob") };
+    data.push_back(make_shared<Entry>(3, "Kim"));
+
+    data.push_back(make_shared<ExtendedEntry>(4, "Wim"));
+    for (const auto& cur : data)
+    {
+        cur->sayHello();
+    }
+    cout << "Access to an element in vector: ";
+    data[0]->sayHello();
+    cout << "Data out of scope" << endl;
+}
+
+void upVector()
+{
+    cout << "Unique Smart Pointer Vector" << endl;
+    vector<unique_ptr<Entry>> data;
+    data.push_back(make_unique<Entry>(1, "Tom"));
+    data.push_back(make_unique<Entry>(2, "Bob"));
+    data.push_back(make_unique<Entry>(3, "Kim"));
+
+    data.push_back(make_unique<ExtendedEntry>(4, "Wim"));
+    for (const auto& cur : data)
+    {
+        cur->sayHello();
+    }
+    cout << "Access to an element in vector: ";
+    data[0]->sayHello();
+    cout << "Data out of scope" << endl;
+}
+
+int main()
+{
+    aVector();
+    cout << endl << endl;
+    oVector();
+    cout << endl << endl;
+    rpVector();
+    cout << endl << endl;
+    spVector();
+    cout << endl << endl;
+    upVector();
 }

@@ -1,10 +1,13 @@
 1.1 Introduzione 
 
 C (1972) Dennis Ritchie - Bell Labs: Systems Implementation Language per UNIX
-C++ (1982) Bjarne Stroustrup - Bell Labs: Supporto alla programmazione Object-Oriented
+C++ (1982) Bjarne Stroustrup - Bell Labs: general purpose, supporto OOP
+    per quanto possibile compatibile a C
 Python (1991) Guido van Rossum: semplice e leggibile
-Java (1995) James Gosling - Sun: OOP multiplatform, web server, sintassi simile a C++, in realtà molto diverso
-JavaScript (1995) Brendan Eich - Netscape: web client, sintassi simile a Java, in realtà molto diverso
+Java (1995) James Gosling - Sun: stress su OOP, multiplatform
+    sintassi simile a C++, in realtà molto diverso
+JavaScript (1995) Brendan Eich - Netscape: web client
+    sintassi simile a Java, in realtà molto diverso
 
 C++
 - Estrema efficienza (C)

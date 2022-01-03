@@ -1,0 +1,14 @@
+2.4 Stack e free store (heap)
+
+Di default, le variabili sono allocate sullo stack
+- Accesso più veloce
+- Meno overhead nella gestione
+- Automaticamente rimosse dalla memoria all'uscita dello "scope"
+- Non è semplice per il compilatore gestire oggetti di dimensione nota a runtime
+
+Heap
+- Gestione più complessa
+- Maggior flessibilità
+- Operatori specifici per allocare / rimuovere oggetti
+  - new / delete
+  - new [] / delete []

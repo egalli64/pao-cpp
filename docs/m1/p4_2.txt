@@ -1,0 +1,7 @@
+4.2 Inline
+
+"inline" è un suggerimento per il compilatore
+- è libero di accettarlo o meno
+
+Vorremmo evitare una vera chiamata a funzione
+- il codice andrebbe sostituito nel body del chiamante

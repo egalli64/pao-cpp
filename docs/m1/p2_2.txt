@@ -3,6 +3,18 @@
 Puntatore: variabile che contiene l'indirizzo di un'altra variabile
 - se non "punta", va segnalato usando il valore riservato nullptr
 
+Una variabile puntatore è definita dal tipo del puntato seguito da un asterisco
+Es: un puntatore a carattere è di tipo char*
+
+L'indirizzo di una variabile è ritornato dall'operatore &
+Es: se 'c' è una variabile di tipo char, '&c' rappresenta il suo indirizzo
+
 Reference: alias ad una variabile
 - deve obbligatoriamente riferirsi a una variable (non c'è niente di simile a nullptr)
 - non può cambiare variabile di riferimento
+
+Una variabile reference è definita dal tipo del riferimento seguito da una e commerciale
+Es: un reference a carattere è di tipo char&
+
+Il reference di una variabile è generato automaticamente in fase di definizione
+Es: se 'c' è una variabile di tipo char, char& ref = c, definisce ref come reference a c

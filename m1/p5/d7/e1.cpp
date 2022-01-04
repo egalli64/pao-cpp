@@ -9,25 +9,21 @@ private:
 public:
     Player(int id, double score) : id_(id), score_(score) {}
 
-    // implicit inline
     int id() const { return id_; }
     double score() const { return score_; }
 
-    // explicit inline in definition
-     void increaseScore(double delta);
+    void increaseScore(double delta) { score_ += delta; }
 };
 
-inline void Player::increaseScore(double delta) {
-    score_ += delta;
-}
-
-inline void print(const Player& player) {
-    cout << "The player has id " << player.id() << " and score " << player.score() << endl;
+// put-to output stream overload for Player
+ostream& operator<<(ostream& os, const Player& item) {
+    os << item.id() << " " << item.score();
+    return os;
 }
 
 int main() {
     Player tom(42, 33.12);
     tom.increaseScore(3.3);
 
-    print(tom);
+    cout << tom << endl;
 }

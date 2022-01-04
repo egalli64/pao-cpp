@@ -1,40 +1,49 @@
 #include <iostream>
 using namespace std;
 
-class Player {
-private:
-    static int count_;
-    int id_;
-    double score_;
+enum class Day { MON, TUE, WED, THU, FRI, SAT, SUN, SZ = 7 };
 
-public:
-    Player(int id, double score) : id_(id), score_(score) { count_ += 1; }
-    ~Player() { count_ -= 1; }
-
-    int id() const { return id_; }
-    double score() const { return score_; }
-    void increaseScore(double delta) { score_ += delta; }
-
-    static void print_count();
-};
-
-int Player::count_ = 0;
-
-void Player::print_count() {
-    cout << "Current number of players: " << count_ << endl;
+ostream& operator<<(ostream& os, const Day& day) {
+    os << static_cast<int>(day);
+    return os;
 }
 
-void another_function() {
-    Player bob(12, 3.7);
-    Player::print_count();
+// prefix ++
+Day& operator++(Day& day) {
+    day = static_cast<Day>((static_cast<int>(day) + 1) % (static_cast<int>(Day::SZ)));
+    return day;
 }
 
-int main() {
-    Player::print_count();
+// postfix ++
+Day operator++(Day& day, int) {
+    Day cur = day;
+    day = static_cast<Day>((static_cast<int>(day) + 1) % (static_cast<int>(Day::SZ)));
+    return cur;
+}
 
-    Player tom(42, 33.12);
-    Player::print_count();
+// prefix --
+Day& operator--(Day& day) {
+    day = (day == Day::MON) ? Day::SUN : static_cast<Day>((static_cast<int>(day) - 1));
+    return day;
+}
 
-    another_function();
-    Player::print_count();
+// postfix --
+Day operator--(Day& day, int) {
+    Day cur = day;
+    day = (day == Day::MON) ? Day::SUN : static_cast<Day>((static_cast<int>(day) - 1));
+    return cur;
+}
+
+int main()
+{
+    Day cur{ Day::MON };
+
+    cout << "Current day is " << cur << endl;
+    cout << "Pre-decrement of current day " << --cur << endl;
+    cout << "Pre-increment of current day " << ++cur << endl;
+    cout << "Post-increment of current day " << cur++ << endl;
+    cout << "Current day is " << cur << endl;
+    cout << "Post-decrement of current day " << cur-- << endl;
+    cout << "Post-decrement of current day " << cur-- << endl;
+    cout << "Current day is " << cur << endl;
 }

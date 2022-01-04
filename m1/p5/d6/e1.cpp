@@ -9,31 +9,25 @@ private:
 public:
     Player(int id, double score) : id_(id), score_(score) {}
 
+    // implicit inline
     int id() const { return id_; }
     double score() const { return score_; }
-    void increaseScore(double delta) { score_ += delta; }
+
+    // explicit inline in definition
+     void increaseScore(double delta);
 };
 
-/**
- * @brief Declaring a free function that prints a player
- *
- * @param player passed by constant reference
- */
-void print(const Player& player);
+inline void Player::increaseScore(double delta) {
+    score_ += delta;
+}
+
+inline void print(const Player& player) {
+    cout << "The player has id " << player.id() << " and score " << player.score() << endl;
+}
 
 int main() {
     Player tom(42, 33.12);
+    tom.increaseScore(3.3);
 
-    // a function should be at least declared before invoked
-    // the definition should be available to the executable
     print(tom);
-}
-
-/**
- * @brief Defining a free function that prints a player
- *
- * @param player passed by constant reference
- */
-void print(const Player& player) {
-    cout << "The player has id " << player.id() << " and score " << player.score() << endl;
 }

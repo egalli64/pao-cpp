@@ -37,5 +37,13 @@ Da C++11 si preferisce usare l'inizializzatore uniforme: {}
 Cast esplicito via static_cast<type>()
 Il cast C-style (type) corrisponde al reinterpret_cast<type>() del C++ (sconsigliati)
 
-Da C++ si può definire una variabile via keyword "auto"
+Da C++11 si può definire una variabile via keyword "auto"
 Errore di compilazione solo se non si riesce a dedurre il tipo effettivo
+
+Costanti
+constexpr: C++11, è possibile valutare il valore durante la compilazione
+const: la variabile non deve essere modificata
+
+Enumerazioni
+enum: ereditati dal C, un nome con assegnato un valore int
+enum class: C++11, hanno uno scope e un tipo proprio

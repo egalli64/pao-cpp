@@ -13,4 +13,14 @@ int main() {
 
     cout << "x = " << x << endl;
     cout << "y = " << y << endl;
+
+    // simple enumeration
+    enum { ALPHA, BETA };
+
+    cout << "ALPHA is " << ALPHA << " and BETA is " << BETA << endl;
+
+    // improved enumeration - scoped and strongly typed
+    enum class GreekLetter { ALPHA, BETA };
+    cout << "ALPHA is " << static_cast<int>(GreekLetter::ALPHA);
+    cout << " and BETA is " << static_cast<int>(GreekLetter::BETA) << endl;
 }

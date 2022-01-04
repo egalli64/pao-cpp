@@ -1,0 +1,12 @@
+5.7 Overloading degli operatori
+
+Operatore << (put-to), per uno stream di output
+- definisce come un oggetto di una data classe debba essere serializzato
+
+Operatore () (invocazione di funzione)
+- permette ad un oggetto di operare come se fosse una funzione
+- classi con questa feature sono dette Functor o Function Object
+
+Operatori ++ e --
+- prefisso, prende come parametro un reference all'oggetto da incrementare
+- postfisso, ha un secondo parametro, int, per distinguerlo dalla forma prefissa

@@ -1,8 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int main()
-{
+int main() {
     cout << "char* " << sizeof(char*) << endl;
     cout << "double* " << sizeof(double*) << endl;
     cout << endl;

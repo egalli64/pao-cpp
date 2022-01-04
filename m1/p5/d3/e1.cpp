@@ -1,47 +1,36 @@
 #include <iostream>
 using namespace std;
 
-/**
- * @brief An abstract class
- */
-class Animal
-{
+class Player {
 private:
-    string name_;
-public:
-    Animal(const string& name) : name_(name) {}
+    int id_;
+    double score_;
 
-    const string& name() const { return name_; }
-    // pure virtual method
-    virtual string fullName() = 0;
+public:
+    Player(int id, double score) : id_{ id }, score_{ score } {}
+
+    // Player(const Player &) = delete; // no copy ctor
+    // Player &operator=(const Player &) = delete; // no assigment operator
+
+    int id() { return id_; }
+    double score() { return score_; }
 };
 
-/**
- * @brief to be concrete it must override the base class abstract methods
- */
-class Dog : public Animal
-{
-private:
-    string owner_;
-public:
-    Dog(const string& name, const string& owner) : Animal(name), owner_(owner) {}
+int main() {
+    // no compiler generated default ctor
+    // Player tom;
 
-    string fullName() override
-    {
-        return Animal::name() + " owned by " + owner_;
-    }
-};
+    Player tom(12, 23.5);
+    cout << "tom: " << tom.id() << ", " << tom.score() << endl;
 
-int main()
-{
-    // Can't instantiate an abstract class
-    // Animal animal("Tom");
+    // compiler generated copy ctor
+    Player bob = tom;
+    cout << "bob: " << bob.id() << ", " << bob.score() << endl;
 
-    Dog bob("Bob", "Robert Smith");
-    cout << bob.name() << endl;
-    cout << bob.fullName() << endl;
+    Player al(0, 0);
+    cout << "al: " << al.id() << ", " << al.score() << endl;
 
-    cout << "It is a polimorphic dog" << endl;
-    Animal* pa = &bob;
-    cout << pa->fullName() << endl;
+    // compiler generated assigment operator
+    al = bob;
+    cout << "al (after assignment): " << al.id() << ", " << al.score() << endl;
 }

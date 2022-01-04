@@ -1,45 +1,33 @@
 #include <iostream>
 using namespace std;
 
-class Tail
-{
+class Player {
 private:
-    int count_;
-public:
-    Tail(int count) : count_(count) {}
+    int id_;
+    double score_;
 
-    void wag(const string& name) const
-    {
-        cout << name << ": ";
-        for (int i = 0; i < count_; i++)
-        {
-            cout << "wag";
-        }
-        cout << endl;
-    }
+public:
+    Player(int id, double score) : id_(id), score_(score) {}
+
+    // implicit inline
+    int id() const { return id_; }
+    double score() const { return score_; }
+
+    // explicit inline in definition
+     void increaseScore(double delta);
 };
 
-/**
- * @brief Dog has-a Tail
- */
-class Dog : private Tail
-{
-private:
-    string name_;
-public:
-    Dog(const string& name, int count) : Tail(count), name_(name) {}
+inline void Player::increaseScore(double delta) {
+    score_ += delta;
+}
 
-    void bark()
-    {
-        cout << name_ << ": bark!" << endl;
-        wag(name_);
-    }
-};
+inline void print(const Player& player) {
+    cout << "The player has id " << player.id() << " and score " << player.score() << endl;
+}
 
-int main()
-{
-    Dog tom("Tom", 3);
-    tom.bark();
-    // Tail methods are not part of the dog interface
-    // tom.wag();
+int main() {
+    Player tom(42, 33.12);
+    tom.increaseScore(3.3);
+
+    print(tom);
 }

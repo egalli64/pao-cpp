@@ -1,15 +1,12 @@
 #include <iostream>
 using namespace std;
 
-int main(int argc, char **argv)
-{
+int main(int argc, char** argv) {
     cout << "The caller ";
-    if (argc == 1)
-    {
+    if (argc == 1) {
         cout << "didn't pass any argument\n";
     }
-    else
-    {
+    else {
         cout << "passed at least a argument\n";
     }
 }

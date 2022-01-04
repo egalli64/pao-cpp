@@ -3,8 +3,7 @@ using namespace std;
 
 static int values[10];
 
-int main()
-{
+int main() {
     cout << "int[10] " << sizeof(values) << endl;
     cout << "char[3] " << sizeof(char[3]) << endl;
     cout << "double[3] " << sizeof(int[3]) << endl;

@@ -1,52 +1,39 @@
 #include <iostream>
 using namespace std;
 
-class Animal
-{
+class Player {
 private:
-    string name_;
-public:
-    Animal(const string& name) : name_(name)
-    {
-        cout << "Animal ctor for " << name << endl;
-    }
-    ~Animal() { cout << "Animal dtor for " << name_ << endl; }
+    int id_;
+    double score_;
 
-    const string& name() const { return name_; }
+public:
+    Player(int id, double score) : id_(id), score_(score) {}
+
+    int id() const { return id_; }
+    double score() const { return score_; }
+    void increaseScore(double delta) { score_ += delta; }
 };
 
-class Player
-{
-private:
-    string game_;
-public:
-    Player(const string& game) : game_(game)
-    {
-        cout << "Player ctor for " << game << endl;
-    }
-    ~Player() { cout << "Player dtor for " << game_ << endl; }
+/**
+ * @brief Declaring a free function that prints a player
+ *
+ * @param player passed by constant reference
+ */
+void print(const Player& player);
 
-    const string& game() const { return game_; }
-};
+int main() {
+    Player tom(42, 33.12);
 
+    // a function should be at least declared before invoked
+    // the definition should be available to the executable
+    print(tom);
+}
 
-class Dog : public Animal, Player
-{
-public:
-    Dog(const string& name, const string& game) : Animal(name), Player(game)
-    {
-        cout << "Dog ctor" << endl;
-    }
-    ~Dog() { cout << "Dog dtor" << endl; }
-
-    void message()
-    {
-        cout << name() << " likes playing " << game() << endl;
-    }
-};
-
-int main()
-{
-    Dog tom("Tom", "chess");
-    tom.message();
+/**
+ * @brief Defining a free function that prints a player
+ *
+ * @param player passed by constant reference
+ */
+void print(const Player& player) {
+    cout << "The player has id " << player.id() << " and score " << player.score() << endl;
 }

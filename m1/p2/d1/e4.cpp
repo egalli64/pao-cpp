@@ -1,8 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int main()
-{
+int main() {
     cout << "\nConstants\n\n";
     constexpr auto x = 18; // evaluated at compile time
 

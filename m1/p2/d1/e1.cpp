@@ -1,8 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int main()
-{
+int main() {
     cout << "bool " << sizeof(bool) << endl;
     cout << "char " << sizeof(char) << endl;
     cout << "short " << sizeof(short) << endl;

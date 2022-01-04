@@ -1,8 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int main()
-{
+int main() {
     cout << "\nInitialization\n\n";
     int x = 42.7; // implicit narrowing
 

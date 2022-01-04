@@ -1,21 +1,28 @@
 #include <iostream>
 using namespace std;
 
-void print(int* data, int size)
-{
-    for (int i = 0; i < size; i++)
-    {
-        cout << data[i] << ' ';
-    }
-    cout << endl;
-}
+class Animal {
+private:
+    string name_;
+public:
+    Animal(const string& name) : name_(name) {}
 
-int main()
-{
-    int sValues[]{ 6, 4, 3 };
-    print(sValues, 3);
+    const string& name() const { return name_; }
+};
 
-    int* hValues = new int[3]{ 32, 12, 38 };
-    print(hValues, 3);
-    delete[] hValues;
+class Dog : public Animal {
+private:
+    string owner_;
+public:
+    Dog(const string& name, const string& owner) : Animal(name), owner_(owner) {}
+
+    const string& owner() const { return owner_; }
+};
+
+int main() {
+    Animal tom("Tom");
+    cout << tom.name() << endl;
+
+    Dog bob("Bob", "Robert Smith");
+    cout << bob.name() << " owned by " << bob.owner() << endl;
 }

@@ -1,0 +1,8 @@
+7 - Algoritmi e strutture dati
+
+1) Array
+2) Vettore
+3) Lista
+4) Mappe, ordinate e non
+5) Algoritmi STL
+6) Analisi costo computazionale

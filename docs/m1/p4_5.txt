@@ -1,0 +1,17 @@
+4.5 Template
+
+A volte si riscrive lo stesso codice cambiando solo il tipo delle variabili usate
+L'uso di funzioni generiche ci permette di lasciar fare al compilatore
+Noi scriviamo il codice generico, il compilatore genera il codice specifico
+
+Prima della funzione, indichiamo il tipo generico via
+- template <typename T>
+
+All'interno della funzione usiamo T come tipo della nostra variabile
+- T è qui una meta variabile, una variabile che definisce il tipo delle variabili usate
+
+Chi invoca il metodo fornisce il tipo effettivo
+Il compilatore genera il codice per il tipo fornito, o dà errore
+
+Si può fornire una specializzazione esplicita per una funzione template
+- template <>

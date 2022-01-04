@@ -1,8 +1,7 @@
 #include<iostream>
 using namespace std;
 
-int main(int argc, char** argv)
-{
+int main(int argc, char** argv) {
     switch(argc) {
     case 1:
         cout << "The caller didn't pass any parameter\n";

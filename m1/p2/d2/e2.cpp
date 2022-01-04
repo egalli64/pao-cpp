@@ -1,8 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int main()
-{
+int main() {
     int value = 84;
     int* ptr = &value;
     cout << "A single int variable, address and value: " << ptr << " -> " << *ptr << endl;

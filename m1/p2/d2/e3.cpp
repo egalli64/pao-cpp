@@ -1,8 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int main()
-{
+int main() {
     cout << "Null pointer\n\n";
 
     int* ptr = nullptr;

@@ -1,27 +1,43 @@
 #include <iostream>
-#include <list>
-#include <string>
 using namespace std;
 
-void print(const list<string>& data)
-{
-    for (const string& cur : data)
-    {
-        cout << cur << ' ';
+/**
+ * @brief An abstract class
+ */
+class Animal {
+private:
+    string name_;
+public:
+    Animal(const string& name) : name_(name) {}
+
+    const string& name() const { return name_; }
+    // pure virtual method
+    virtual string fullName() = 0;
+};
+
+/**
+ * @brief to be concrete it must override the base class abstract methods
+ */
+class Dog : public Animal {
+private:
+    string owner_;
+public:
+    Dog(const string& name, const string& owner) : Animal(name), owner_(owner) {}
+
+    string fullName() override {
+        return Animal::name() + " owned by " + owner_;
     }
-    cout << endl;
-}
+};
 
-int main()
-{
-    list<string> empty;
-    cout << "Size of an empty list is " << empty.size() << endl;
+int main() {
+    // Can't instantiate an abstract class
+    // Animal animal("Tom");
 
-    list<string> data{ "tom", "bob", "kim" };
-    print(data);
+    Dog bob("Bob", "Robert Smith");
+    cout << bob.name() << endl;
+    cout << bob.fullName() << endl;
 
-    data.push_front("zoe");
-    data.push_back("dick");
-    data.remove("bob");
-    print(data);
+    cout << "It is a polimorphic dog" << endl;
+    Animal* pa = &bob;
+    cout << pa->fullName() << endl;
 }

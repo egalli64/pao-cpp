@@ -1,11 +1,7 @@
-4 - Programmare ad oggetti in C++
+4 - Blocchi
 
-1) Le classi
-2) Costruttori e distruttori
-3) Copia di oggetti
-4) Costruttore di spostamento
-5) Creazione di oggetti
-6) Funzioni libere e metodi
-7) Metodi inline, const, statici
-8) Overloading degli operatori: put-to, functor
-9) Funzioni generiche
+1) Funzioni libere
+2) Inline
+3) Parametri by value, by pointer, by reference
+4) Overloading
+5) Template

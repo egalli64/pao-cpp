@@ -1,8 +1,9 @@
-6 - Algoritmi e strutture dati
+6 - Ereditarietà e polimorfismo
 
-1) Array
-2) Vettore
-3) Lista
-4) Mappe, ordinate e non
-5) Algoritmi STL
-6) Analisi costo computazionale
+1) Generalizzazione ed Ereditarietà
+2) Polimorfismo, tabella dei metodi virtuali (vtbl): virtual, override
+3) Classe astratta
+4) Classe final
+5) Distruttore Virtuale
+6) Ereditarietà multipla e virtuale
+7) Ereditarietà privata/protetta

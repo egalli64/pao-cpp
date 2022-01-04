@@ -1,8 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int main()
-{
+int main() {
     char c = 'x';
     char* pc = new char;
     *pc = 'z';

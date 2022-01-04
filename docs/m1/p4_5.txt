@@ -15,3 +15,6 @@ Il compilatore genera il codice per il tipo fornito, o dà errore
 
 Si può fornire una specializzazione esplicita per una funzione template
 - template <>
+
+Si possono avere più meta variabili in un template
+- template <typename T, typename U>

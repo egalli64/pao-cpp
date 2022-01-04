@@ -1,0 +1,32 @@
+2.1 Tipi standard
+
+bool
+char
+short
+int
+long
+long long
+
+float
+double
+long double
+
+signed / unsigned
+
+operatore sizeof()
+
+operatori artimetici
+
+operatori di confronto
+
+operatori logici
+
+operatori orientati al bit
+
+operatori di assegnamento
+
+cast implicito
+
+inizializzatore uniforme {}
+
+cast esplicito via static_cast<type>()

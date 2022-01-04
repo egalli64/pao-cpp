@@ -1,4 +1,5 @@
 4.4 Overloading
-- Più funzioni nello stesso "scope" possono avere lo stesso nome
-- Devono avere una "signature" diversa -> nome + lista parametri
-- Utile per una famiglia di funzioni che hanno scopo molto simile ma operano su tipi diversi
+
+Più funzioni nello stesso "scope" possono avere lo stesso nome
+Devono avere una "signature" diversa -> nome + lista parametri
+Utile per una famiglia di funzioni che hanno scopo molto simile ma operano su tipi diversi

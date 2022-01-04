@@ -6,8 +6,20 @@ using namespace std;
  */
 void printHello();
 
+/**
+ * @brief Defining a minimal free function
+ */
+void empty() {}
+
+/**
+ * @brief Defining the main function
+ * 
+ * @return int resulting status of the program, zero for success
+ */
 int main() {
+    // invoking functions
     printHello();
+    empty();
 }
 
 /**

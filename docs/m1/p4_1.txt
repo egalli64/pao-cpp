@@ -1,0 +1,18 @@
+4.1 Funzioni libere
+
+Funzione libera: non appartiene a nessuna classe
+Nella programmazione Object Oriented una funzione che appartiene a una classe è detta metodo
+
+Ogni programma C++ inizia obbligatoriamente dalla funzione main()
+Ha due possibili prototipi
+- int main() // se non ci interessa trattare i possibili argomenti passati al programma
+- int main(int argc, char** argv) // nome del programma e argomenti passati 
+
+Una funzione può essere
+- dichiarata: viene indicato solo il prototipo, ma non il codice associato
+- definita: dichiarazione e codice associato, tra parentesi graffe
+- invocata: si passa il controllo a una funzione definita altrove
+
+Possiamo invocare una funzione
+- solo all'interno del body di una funzione
+- solo se il compilatore ne conosce il prototipo

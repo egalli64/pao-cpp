@@ -3,6 +3,7 @@
 A volte si riscrive lo stesso codice cambiando solo il tipo delle variabili usate
 L'uso di funzioni generiche ci permette di lasciar fare al compilatore
 Noi scriviamo il codice generico, il compilatore genera il codice specifico
+- L'uso di template permette di creare implicitamente overload di funzioni
 
 Prima della funzione, indichiamo il tipo generico via
 - template <typename T>
@@ -18,3 +19,4 @@ Si può fornire una specializzazione esplicita per una funzione template
 
 Si possono avere più meta variabili in un template
 - template <typename T, typename U>
+- tipicamente il codice risultante è molto complesso

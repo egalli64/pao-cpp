@@ -1,32 +1,41 @@
 2.1 Tipi standard
 
-bool
-char
+Come in C, anche in C++ i tipi di dati avere dimensioni diverse a seconda della piattaforma usata
+L'operatore sizeof() ci dà la dimensione in byte del tipo o della variabile a cui viene applicato
+
+bool: false o true 
+
+char: 'a', '7', '@', ... 
+
+numerici interi, possono essere signed (default) o unsigned
+Da C++14 è possibile usare un apice per rendere più leggibili i numeri, es.: 123'456
+
 short
 int
 long
 long long
 
+numerici reali, hanno sempre il segno
+
 float
 double
 long double
 
-signed / unsigned
+operatori artimetici: +, -, *, /, %
+da notare la differenza tra divisione intera e reale
 
-operatore sizeof()
+operatori di confronto: ==, !=, <, <=, >, >=
 
-operatori artimetici
+operatori logici: !, &&, ||
 
-operatori di confronto
+operatori orientati al bit (su unsigned!): &, |, ^, ~
 
-operatori logici
+operatori di assegnamento: =, +=, -=, ..., ++, --
+Attenzione al cast implicito nell'assegnamento!
+Da C++11 si preferisce usare l'inizializzatore uniforme: {}
 
-operatori orientati al bit
+Cast esplicito via static_cast<type>()
+Il cast C-style (type) corrisponde al reinterpret_cast<type>() del C++ (sconsigliati)
 
-operatori di assegnamento
-
-cast implicito
-
-inizializzatore uniforme {}
-
-cast esplicito via static_cast<type>()
+Da C++ si può definire una variabile via keyword "auto"
+Errore di compilazione solo se non si riesce a dedurre il tipo effettivo

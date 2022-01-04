@@ -1,5 +1,24 @@
-4.3 Parametri by value, by pointer, by reference
+4.3 Parametri
 
 - By value
+
+Se non indicato diversamente, un argomento è passato in un parametro per valore
+- Il contenuto della locazione di memoria relativa all'argomento è copiato in quella del parametro
+- Cambiamenti del parametro all'interno del chiamato non si riflettono nell'argomento del chiamante
+
 - By pointer
+
+Si può passare l'indirizzo di un argomento ad una funzione 
+- Il contenuto della locazione di memoria dell'argomento è accessibile al chiamato
+- Rischioso, un puntatore può essere nullptr o non inizializzato correttamente
+- La sintassi è un po' ostica
+
 - By reference
+
+Si può passare il riferimento di un argomento ad una funzione 
+- Il contenuto della locazione di memoria dell'argomento è accessibile al chiamato
+- Più sicuro e un po' più comprensibile
+
+- Default
+
+Si può dare un valore di default al parametro, nel caso l'utente non passi l'argomento

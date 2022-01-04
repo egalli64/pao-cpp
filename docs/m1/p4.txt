@@ -2,6 +2,6 @@
 
 1) Funzioni libere, dichiarazione / definizione
 2) Inline
-3) Parametri by value, by pointer, by reference
+3) Parametri
 4) Overloading
 5) Template

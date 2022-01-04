@@ -8,3 +8,4 @@
 6) Funzioni libere e metodi
 7) Metodi inline, const, statici
 8) Overloading degli operatori: put-to, functor
+9) Funzioni generiche

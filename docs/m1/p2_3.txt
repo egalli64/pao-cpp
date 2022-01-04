@@ -1,0 +1,7 @@
+2.3 Array
+
+Un array è un blocco contiguo di celle di tipo determinato
+La dimensione deve essere data alla definizione della variabile e non può essere cambiata in seguito
+La dimensione di un array allocato su stack deve essere una costante
+
+Gli array locali non sono (necessariamente) inizializzati

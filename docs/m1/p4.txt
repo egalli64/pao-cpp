@@ -1,6 +1,6 @@
-4 - Blocchi
+4 - Funzioni
 
-1) Funzioni libere
+1) Funzioni libere, dichiarazione / definizione
 2) Inline
 3) Parametri by value, by pointer, by reference
 4) Overloading

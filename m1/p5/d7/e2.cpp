@@ -1,20 +1,29 @@
 #include <iostream>
 using namespace std;
 
-/**
- * @brief A function object (aka functor)
- */
-class Adder {
+class Player {
 private:
-    int addendum_;
+    int id_;
+    double score_;
 
 public:
-    Adder(int addendum) : addendum_(addendum) {}
+    Player(int id, double score) : id_(id), score_(score) {}
 
-    int operator()(int value) const { return value + addendum_; }
+    int id() const { return id_; }
+    double score() const { return score_; }
+
+    void increaseScore(double delta) { score_ += delta; }
 };
 
+// put-to output stream overload for Player
+ostream& operator<<(ostream& os, const Player& item) {
+    os << item.id() << " " << item.score();
+    return os;
+}
+
 int main() {
-    Adder add42(42);
-    cout << add42(18) << endl;
+    Player tom(42, 33.12);
+    tom.increaseScore(3.3);
+
+    cout << tom << endl;
 }

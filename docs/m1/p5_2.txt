@@ -10,6 +10,9 @@ Il default ctor è quello che ha la lista dei parametri vuota
 Possiamo forzare il compilatore a _non_ generarlo con "= delete"
 Possiamo forzarlo a generarlo con "= default"
 
+Da C++11 è possibile usare la keyword explicit
+ Ctor utilizzabile solo per inizializzazione diretta (anche via static cast) 
+
 Lista di inizializzazione
 - Dopo la signature di un ctor, tra ":" e la graffa aperta del body
  - si possono inizializzare i data member dell'oggetto

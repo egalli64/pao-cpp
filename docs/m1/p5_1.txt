@@ -1,0 +1,25 @@
+5.1 Classe
+
+Il compilatore richiede un modello di riferimento per creare un oggetto
+
+Le keyword struct e class sono quasi equivalenti
+
+Si preferisce struct per le classi più semplici (es: DTO)
+- raggruppamento di dati coerenti, per default pubblicamente accedibili
+
+Nell'uso normale si preferisce class
+- tipicamente contiene dati e funzionalità, per default non accedibili esternamente
+ - data member (proprietà, campo, attributo, ...)
+ - metodo (functional member)
+
+Classi (e strutture) possono essere divise in aree con diversa visibilità d'accesso ai suoi membri
+- "private", ristretta alla classe corrente (default class)
+    preferita per i data member (data hiding)
+- "public", libera a tutti (default struct)
+    preferita per i metodi, interfaccia tra classe e mondo esterno
+- "protected", limitata alla classe corrente e derivate
+    può essere usata all'interno di gerarchie di classi
+
+Dato un oggetto, per accedere ai suoi membri (dati o metodi che siano) si usa
+- l'operatore ".", se abbiamo l'oggetto o un reference
+- l'operatore "->", per un puntatore

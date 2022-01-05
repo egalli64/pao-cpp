@@ -4,22 +4,19 @@ using namespace std;
 /**
  * @brief A simple class
  */
-struct Player {
-    int id;
-    double score;
+struct Point {
+    int x;
+    int y;
 };
 
 int main() {
-    Player tom;
-    tom.id = 34;
-    tom.score = 3.12;
+    Point a{ 5,7 };
+    cout << a.x << ' ' << a.y << endl;
 
-    cout << tom.id << ' ' << tom.score << endl;
+    Point* p = &a;
+    cout << p->x << ' ' << p->y << endl;
 
-    Player* p = &tom;
-    cout << p->id << endl;
-
-    Player& r = tom;
-    r.score += 5;
-    cout << tom.score << endl;
+    Point& r = a;
+    r.x += 5;
+    cout << r.x << ' ' << r.y << endl;
 }

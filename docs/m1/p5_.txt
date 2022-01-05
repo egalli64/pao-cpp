@@ -1,7 +1,7 @@
 5 - Programmare a oggetti
 
-1) Le classi
-2) Costruttori e distruttori
+1) Classe
+2) Costruttori e distruttore
 3) Copia di oggetti
 4) Costruttore di spostamento
 5) Creazione di oggetti

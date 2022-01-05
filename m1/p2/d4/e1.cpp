@@ -3,17 +3,22 @@ using namespace std;
 
 int main() {
     char c = 'x';
+    cout << "An initialized char on the stack: " << c << endl;
+
     char* pc = new char;
-    *pc = 'z';
-    cout << c << ' ' << *pc << endl;
+    cout << "An uninitialized char on the heap: " << *pc << endl;
     delete pc;
 
-    int sData[6] { 1,2,3,4,5,6 };
-    int* hData = new int[6];
-    hData[0] = 42;
-    hData[5] = 3;
-    cout << sData[0] << ' ' << hData[0] << endl;
-    delete[] hData;
+    char* pz = new char{'Z'};
+    cout << "An initialized char on the heap: " << *pz << endl;
+    delete pz;
 
-    cout << "done" << endl;
+    int sData[6]{ 1,2,3 };
+    cout << "First element in an array on the stack: " << sData[0] << endl;
+    cout << "Last element in an array on the stack: " << sData[5] << endl;
+
+    int* hData = new int[6]{ 1,2,3 };
+    cout << "First element in an array on the stack: " << hData[0] << endl;
+    cout << "Last element in an array on the stack: " << hData[5] << endl;
+    delete[] hData;
 }

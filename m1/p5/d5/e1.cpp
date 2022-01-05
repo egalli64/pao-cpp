@@ -10,7 +10,7 @@ private:
 public:
     Player(int id, double score) : id_(id), score_(score) {}
     ~Player() {
-        cout << "dtor" << endl;
+        cout << "dtor " << id_ << ' ' << score_ << endl;
     }
 
     int id() { return id_; }
@@ -24,7 +24,7 @@ int main() {
     cout << p->id() << ' ' << p->score() << endl;
     delete p;
 
-    auto tom = make_unique<Player>(12, 3.45);
+    auto tom = make_unique<Player>(21, 45.3);
     p->increaseScore(23.3);
     cout << tom->id() << ' ' << tom->score() << endl;
 }

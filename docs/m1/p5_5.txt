@@ -1,0 +1,14 @@
+5.5 Creazione di oggetti
+
+Come per i tipi nativi, anche gli oggetti basati su classi possono essere allocati sullo stack o sullo heap
+
+Occorre ricordarsi tutto quello creato via operatore new va distrutto via delete
+- e lo stesso per new [] / delete []
+
+Nota che le funzioni per la gestione della memoria del C sono disponibili anche in C++
+- malloc - calloc - realloc / free
+- Sono usate solo se strettamente necessario, di solito solo per blocchi di memoria "raw"
+  - Non conoscono i meccanismi C++ di ctor e dtor
+  - Se si deve usare questo approccio, va tenuto ben distinto da quello proprio del C++
+
+Gli smart pointer hanno lo scopo di semplificare l'uso di oggetti nello heap

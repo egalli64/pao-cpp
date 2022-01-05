@@ -8,7 +8,7 @@ private:
 
 public:
     Point() : x_{ 0 }, y_{ 0 } {} // the default ctor
-    Point(int x) : x_{ x }, y_{ 0 } { } // a plain ctor
+    explicit Point(int x) : x_{ x }, y_{ 0 } {} // a plain explicit ctor
     Point(int x, int y) : x_{ x }, y_{ y } {} // another plain ctor
     ~Point() { cout << "dtor " << x_ << ' ' << y_ << endl; } // the dtor
 
@@ -33,6 +33,12 @@ int main() {
     d.increaseX(3);
     cout << "d is " << d.x() << ' ' << d.y() << endl;
 
+    // can't see the explicit constructor
+    // Point e = 42;
+
     Point e{ 42 };
     cout << "e is " << e.x() << ' ' << e.y() << endl;
+
+    Point f = static_cast<Point>(7);
+    cout << "f is " << f.x() << ' ' << f.y() << endl;
 }

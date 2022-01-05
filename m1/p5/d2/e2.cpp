@@ -1,26 +1,38 @@
 #include <iostream>
 using namespace std;
 
-class Player {
+class Point {
 private:
-    int id_;
-    double score_;
+    int x_;
+    const int y_;
 
 public:
-    Player() : id_{ 0 }, score_{ 0 } {} // default ctor
-    Player(int id, double score) : id_{ id }, score_{ score } {}    // plain ctor
-    ~Player() { cout << "dtor!" << endl; }  // dtor
+    Point() : x_{ 0 }, y_{ 0 } {} // the default ctor
+    Point(int x) : x_{ x }, y_{ 0 } { } // a plain ctor
+    Point(int x, int y) : x_{ x }, y_{ y } {} // another plain ctor
+    ~Point() { cout << "dtor " << x_ << ' ' << y_ << endl; } // the dtor
 
-    int id() { return id_; }
-    double score() { return score_; }
+    int x() { return x_; }
+    int y() { return y_; }
+    void increaseX(int delta) { x_ += delta; }
 };
 
 int main() {
     // default ctor
-    Player tom;
-    cout << "tom: " << tom.id() << ", " << tom.score() << endl;
+    Point a;
+    cout << "a is " << a.x() << ' ' << a.y() << endl;
 
-    // plain ctor
-    Player bob(5, 3.8);
-    cout << "bob: " << bob.id() << ", " << bob.score() << endl;
+    Point b{};
+    cout << "b is " << b.x() << ' ' << b.y() << endl;
+
+    // plain ctors
+    Point c(3, 4);
+    cout << "c is " << c.x() << ' ' << c.y() << endl;
+
+    Point d{ 5, 6 };
+    d.increaseX(3);
+    cout << "d is " << d.x() << ' ' << d.y() << endl;
+
+    Point e{ 42 };
+    cout << "e is " << e.x() << ' ' << e.y() << endl;
 }

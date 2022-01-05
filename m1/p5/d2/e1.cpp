@@ -1,16 +1,18 @@
 #include <iostream>
 using namespace std;
 
-struct Player {
-    // Player() {} // implicit
-    // Player() = delete;
-    // Player() = default;
-    int id;
-    double score;
+struct Point {
+    // Point() {} // implicit
+    // Point() = delete;
+    // Point() = default;
+    // Point(int test) { x = y = test; }
+
+    int x;
+    int y;
 };
 
 int main() {
     // compiler generated default ctor
-    Player tom;
-    cout << "tom: " << tom.id << ", " << tom.score << endl;
+    Point a;
+    cout << "Risky, uninitialized point: " << a.x << ' ' << a.y << endl;
 }

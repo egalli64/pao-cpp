@@ -1,0 +1,32 @@
+5.2 Costruttori e distruttore
+
+Il costruttore (ctor) è un metodo speciale, usato per inizializzare un nuovo oggetto
+- Ha lo stesso nome della classe
+- Non un return type
+
+Il default ctor è quello che ha la lista dei parametri vuota
+- Implicitamente fornito dal compilatore se c'è alcun ctor esplicito
+
+Possiamo forzare il compilatore a _non_ generarlo con "= delete"
+Possiamo forzarlo a generarlo con "= default"
+
+Lista di inizializzazione
+- Dopo la signature di un ctor, tra ":" e la graffa aperta del body
+ - si possono inizializzare i data member dell'oggetto
+    Approccio obbligatorio nel caso di data member costante
+ - (e, nel caso di ereditarietà, invocare i ctor delle eventuali classi base)
+Operando nel body si _assegna_ un valore al data member, non è inizializzazione
+
+Il nome del parametro è di solito molto simile o uguale al nome del data member corrispondente
+Tra le convenzioni usate:
+- Il data member ha un underscore postifisso al nome, il parametro no.
+    Se il data member è x_, il parametro ha nome x
+- Hanno entrambi lo stesso nome
+    Nel body, si usa il puntatore "this" sul data member per risolvere l'ambiguità
+    Nella lista di inizializzazione la sintassi x { x } non è ambigua
+
+Il distruttore (dtor) è un metodo speciale, invocato al termine della vita dell'oggetto
+- Ha lo stesso nome della classe, prefissato da tilde ~ (Alt-126), non ha return type
+    Es: l'eventuale dtor della classe Point ha signature ~Point()
+- Implicitamente fornito dal compilatore se c'è alcun dtor esplicito
+- Necessario se l'oggetto possiede delle risorse che devono essere liberate

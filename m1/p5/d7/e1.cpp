@@ -4,7 +4,32 @@ using namespace std;
 enum class Day { MON, TUE, WED, THU, FRI, SAT, SUN, SZ = 7 };
 
 ostream& operator<<(ostream& os, const Day& day) {
-    os << static_cast<int>(day);
+    switch (day) {
+    case Day::MON:
+        os << "Monday";
+        break;
+    case Day::TUE:
+        os << "Tuesday";
+        break;
+    case Day::WED:
+        os << "Wednesday";
+        break;
+    case Day::THU:
+        os << "Thursday";
+        break;
+    case Day::FRI:
+        os << "Friday";
+        break;
+    case Day::SAT:
+        os << "Saturday";
+        break;
+    case Day::SUN:
+        os << "Sunday";
+        break;
+    default:
+        os << "Unknown";
+        break;
+    }
     return os;
 }
 
@@ -39,11 +64,11 @@ int main()
     Day cur{ Day::MON };
 
     cout << "Current day is " << cur << endl;
-    cout << "Pre-decrement of current day " << --cur << endl;
-    cout << "Pre-increment of current day " << ++cur << endl;
-    cout << "Post-increment of current day " << cur++ << endl;
+    cout << "Pre-decrement of current day: " << --cur << endl;
+    cout << "Pre-increment of current day: " << ++cur << endl;
+    cout << "Post-increment of current day: " << cur++ << endl;
     cout << "Current day is " << cur << endl;
-    cout << "Post-decrement of current day " << cur-- << endl;
-    cout << "Post-decrement of current day " << cur-- << endl;
+    cout << "Post-decrement of current day: " << cur-- << endl;
+    cout << "Post-decrement of current day: " << cur-- << endl;
     cout << "Current day is " << cur << endl;
 }

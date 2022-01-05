@@ -1,0 +1,15 @@
+5.3 Copia di oggetti
+
+Shallow copy
+- Semplice, economica
+- Crea un nuovo accesso all'oggetto
+- Un reference a un oggetto è una sua shallow copy
+
+Deep copy
+- Più sicura ma di solito più costosa
+- Crea una copia indipendente
+- In ogni classe il compilatore genera di default
+    Il copy Constructor, per la creazione di un oggetto
+    L'operatore di assegnamento, per la ridefinizione di un oggetto
+  - Vanno ridefiniti entrambi (assieme al dtor) se ha la responsabilità della gestione di risorse 
+ 

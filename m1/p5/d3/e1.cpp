@@ -1,36 +1,49 @@
 #include <iostream>
 using namespace std;
 
-class Player {
+class Point {
 private:
-    int id_;
-    double score_;
+    int x_;
+    int y_;
 
 public:
-    Player(int id, double score) : id_{ id }, score_{ score } {}
+    Point(int x, int y) : x_{ x }, y_{ y } {}
+    ~Point() { cout << "dtor " << x_ << ", " << y_ << endl; }
 
-    // Player(const Player &) = delete; // no copy ctor
-    // Player &operator=(const Player &) = delete; // no assigment operator
+    // Point(const Point&) = delete; // no copy ctor
+    // Point& operator=(const Point&) = delete; // no assigment operator
 
-    int id() { return id_; }
-    double score() { return score_; }
+    int x() { return x_; }
+    int y() { return y_; }
+    void horizontalMove(int delta) { x_ += delta; }
 };
 
 int main() {
     // no compiler generated default ctor
-    // Player tom;
+    // Point a;
 
-    Player tom(12, 23.5);
-    cout << "tom: " << tom.id() << ", " << tom.score() << endl;
+    Point b{ 12, 23 };
+    cout << "b: " << b.x() << ", " << b.y() << endl;
 
     // compiler generated copy ctor
-    Player bob = tom;
-    cout << "bob: " << bob.id() << ", " << bob.score() << endl;
+    Point c = b;
+    c.horizontalMove(12);
 
-    Player al(0, 0);
-    cout << "al: " << al.id() << ", " << al.score() << endl;
+    Point d{ b };
+    d.horizontalMove(-7);
+
+    cout << "c is a deep copy _by copy ctor_ of b (right shifted): " << c.x() << ", " << c.y() << endl;
+    cout << "d is a deep copy _by copy ctor_ of b (left shifted): " << d.x() << ", " << d.y() << endl;
+    cout << "b has not changed: " << b.x() << ", " << b.y() << endl;
 
     // compiler generated assigment operator
-    al = bob;
-    cout << "al (after assignment): " << al.id() << ", " << al.score() << endl;
+    d = c;
+    d.horizontalMove(-4);
+    cout << "d is a deep copy _by assignment_ of c (left shifted): " << d.x() << ", " << d.y() << endl;
+    cout << "c has not changed: " << c.x() << ", " << c.y() << endl;
+
+    Point& e = b;
+    e.horizontalMove(-2);
+    cout << "e is a shallow copy _by reference_ of b (left shifted): " << e.x() << ", " << e.y() << endl;
+    cout << "b HAS changed: " << b.x() << ", " << b.y() << endl;
 }

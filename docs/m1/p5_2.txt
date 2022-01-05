@@ -29,4 +29,4 @@ Il distruttore (dtor) è un metodo speciale, invocato al termine della vita dell
 - Ha lo stesso nome della classe, prefissato da tilde ~ (Alt-126), non ha return type
     Es: l'eventuale dtor della classe Point ha signature ~Point()
 - Implicitamente fornito dal compilatore se c'è alcun dtor esplicito
-- Necessario se l'oggetto possiede delle risorse che devono essere liberate
+- Necessario se l'oggetto possiede delle risorse di cui è il responsabile per il rilascio

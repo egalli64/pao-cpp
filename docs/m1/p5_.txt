@@ -6,4 +6,4 @@
 4) Costruttore di spostamento
 5) Creazione di oggetti
 6) Metodi inline, const, statici
-7) Overloading degli operatori
+7) Overloading degli operatori e funzioni friend

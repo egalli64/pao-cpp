@@ -1,12 +1,30 @@
 5.7 Overloading degli operatori
 
-Operatore << (put-to), per uno stream di output
-- definisce come un oggetto di una data classe debba essere serializzato
+Dopo aver creato una classe, si possono ridefinire operatori su di essa
+- Non se ne può cambiare né la cardinalità né precedenza
+- Non tutti sono ridefinibili, ad esempio l'operatore ternario "?:" e quello di dereferenziazione "."
+- Non se ne possono creare di nuovi 
+
+Dovrebbero fornire alla classe funzionalità simili a quelle degli operatori standard
+ O per lo meno un comportamento intuitivo
+
+Operatore << (put-to), usato comunemente per gli stream di output
+- definisce come un oggetto debba essere serializzato
 
 Operatore () (invocazione di funzione)
-- permette ad un oggetto di operare come se fosse una funzione
-- classi con questa feature sono dette Functor o Function Object
+- Permette ad un oggetto di operare come se fosse una funzione
+- Classi con questa feature sono dette Functor o Function Object
 
 Operatori ++ e --
-- prefisso, prende come parametro un reference all'oggetto da incrementare
-- postfisso, ha un secondo parametro, int, per distinguerlo dalla forma prefissa
+- Prefisso, prende come parametro un reference all'oggetto da incrementare
+- Postfisso, ha un secondo parametro, int, per distinguerlo dalla forma prefissa
+
+Operatori "type"
+- Possiamo specificare come l'oggetto possa essere convertito ad un altra classe
+- Reciproco di un ctor di conversione, utile se non abbiamo accesso alla classe target
+
+Funzioni friend
+- Una funzione non membro di una classe che ha accesso completo alla classe
+- Utile nel caso di operatori che operano su una certa classe ma non possono esserne membro
+ - Esempio, "<<" da un oggetto a uno stream, se richiede proprietà normalmente non accedibili
+    "os << x" è interpretato come os.operator<<(x), quindi dovrebbe essere definito in ostream

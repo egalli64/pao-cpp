@@ -1,4 +1,12 @@
-7 - Algoritmi e strutture dati
+7 - C++ Standard Library
+
+Basata sulla Standard Template Library (STL) di Alexander Stepanov
+
+Tre concetti chiave
+ Container
+ Iteratore, astrazione del concettto di puntatore
+ Algoritmo
+Sviluppati usando i meccanismi della programmazione generica via template
 
 1) Array
 2) Vettore

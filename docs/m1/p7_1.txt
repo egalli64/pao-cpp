@@ -1,0 +1,39 @@
+7.1 Array
+
+Il concetto di array in C è di livello molto basso
+- in cambio offre una estrema efficienza
+
+Un array può essere allocato
+- sullo stack, (di solito) la sua dimensione deve essere nota al compilatore
+- sullo heap, via uso della keyword new[], e quindi richiede un esplicito delete[]
+
+L'indirizzo del primo elemento di un array corrisponde all'indirizzo dell'array
+
+Nella C++ Standard Library, std::array wrappa il concetto di array C
+
+La definizione di una variabile richiede di specificare le variabili meta del template
+- Esempio, se vogliamo un array di int, dimensione 3: std::array<int, 3>
+
+Il costruttore di default di std:array _non_ inizializza la memoria
+Un costruttore variadico permette di inizializzare tutti gli elementi, implicitamente a zero
+- std::array<int, 4> values // non è inizializzato
+- std::array<int, 4> values{ 6, 4, 3 } // values[3] è 0
+
+Scansione degli elementi di uno std::array
+- loop classico: for (size_t i = 0; i < values.size(); ++i) { // ...
+    size_t size() // dimensione dell'array
+    T& operator[](size_t) // accesso all'elemento nella posizione indicata
+- loop via iteratore: for (auto it = values.begin(); it != values.end(); ++it) {
+    auto qui sta per std::array<int, 4>::iterator
+    se non si modifica l'array, meglio usare cbegin() / cend()
+- range for: for (int cur : values) {
+    nasconde la complessità degli iteratori
+    qui il cur è una copia by-value dell'elemento dell'array
+        se si vuole modificare l'array, va usato l'accesso by-reference: int&
+        per tipi complessi è preferito l'accesso by-const-reference: const T& 
+
+Qualche altro metodo di std::array
+- void fill(const T&) // assegna il valore passato a tutti gli elementi
+- T& front() // il primo elemento
+- T& back() // l'ultimo elemento
+- void swap(std::array<int, 4Ui64>&) // scambia il contenuto di due array con la stessa size

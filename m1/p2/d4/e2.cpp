@@ -11,7 +11,7 @@ int dieCast() {
 
 double avg(int* values, int size) {
     double result = 0;
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < size; ++i) {
         result += values[i];
     }
     return result / size;

@@ -9,7 +9,7 @@ public:
 
     void wag(const string& name) const {
         cout << name << ": ";
-        for (int i = 0; i < count_; i++) {
+        for (int i = 0; i < count_; ++i) {
             cout << "wag";
         }
         cout << endl;

@@ -2,7 +2,7 @@
 using namespace std;
 
 void print(int* data, int size) {
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < size; ++i) {
         cout << data[i] << ' ';
     }
     cout << endl;

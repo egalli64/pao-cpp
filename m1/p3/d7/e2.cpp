@@ -7,7 +7,7 @@ int main(int argc, char** argv) {
     }
     else {
         cout << "Arguments NOT starting with an 'x'" << endl;
-        for (int i = 1; i < argc; i++) {
+        for (int i = 1; i < argc; ++i) {
             if (argv[i][0] == 'x') {
                 continue;
             }

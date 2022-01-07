@@ -3,10 +3,10 @@
 Basata sulla Standard Template Library (STL) di Alexander Stepanov
 
 Tre concetti chiave
- Container
- Iteratore, astrazione del concettto di puntatore
+ Container (collezione, aggregato, sequenza)
+ Iteratore (astrazione del concettto di puntatore)
  Algoritmo
-Sviluppati usando i meccanismi della programmazione generica via template
+Sviluppati usando via template i meccanismi della programmazione generica
 
 1) Array
 2) Vettore

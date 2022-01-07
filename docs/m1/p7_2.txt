@@ -1,0 +1,24 @@
+7.2) Vettore
+
+Lo std::vector è tipicamente la prima scelta tra i container della C++ Standard Library
+- Wrappa un array C su heap, superando le sue intrinsiche limitazioni
+ - La dimensione è gestita internamente, dandoci l'illusione che sia dinamica
+ - Quando necessario, gli elementi vengono copiati in un altro blocco
+- std::array è meno flessibile, essendo legato alla gestione su stack della memoria
+
+Alcuni costruttori
+- Quello di default crea un array vuoto
+    vector<int> values;
+- Se sappiamo quanti elementi avrà (probabilmente) il vettore a regime conviene specificarne la capacità
+    vector<int> values{ 5 };
+- Data una dimensione e un valore di inizializzazione
+    vector<int> values(5, -1);
+- Variadico: in questo caso, causa ambiguità tra int e size_t, non è possibile passare un solo elemento
+    vector<int> values{ 6, 4, 3 };
+    vector<string> values{ "hello" };
+
+Alcuni metodi
+- size_t size() // numero di elementi contenuti nel vector
+- void resize(size_t) // cambia size
+- void resize(size_t, const T&) // cambia size, con valore da aggiungere (se necessario)
+

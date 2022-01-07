@@ -12,5 +12,5 @@ Sviluppati usando via template i meccanismi della programmazione generica
 2) Vettore
 3) Lista
 4) Mappe, ordinate e non
-5) Algoritmi STL
+5) Iteratori e algoritmi
 6) Analisi costo computazionale

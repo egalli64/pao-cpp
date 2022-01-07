@@ -4,21 +4,26 @@
 #include <vector>
 using namespace std;
 
-void print(const vector<string>& items) {
-    cout << "[ ";
-    for (const auto& item : items) {
-        cout << item << ' ';
-    }
-    cout << ']' << endl;
-}
-
 int main() {
-    vector<string> data{ "tom", "bob", "kim" };
-    print(data);
-    sort(data.begin(), data.end());
-    print(data);
+    int raw[]{ 5, 6, 42 };
+    for (int value : raw) {
+        cout << value << ' ';
+    }
+    cout << endl;
 
-    string target{ "tom" };
-    auto itTom = find(data.begin(), data.end(), target);
-    cout << target << (itTom == data.end() ? " not " : " ") << "found" << endl;
+    for (int* ptr = raw; ptr != raw + (sizeof(raw) / sizeof(int)); ++ptr) {
+        cout << *ptr << ' ';
+    }
+    cout << endl;
+
+    vector<string> values{ "tom", "bob", "kim" };
+    for (const auto& value : values) {
+        cout << value << ' ';
+    }
+    cout << endl;
+
+    for (auto it = values.cbegin(); it != values.cend(); ++it) {
+        cout << *it << ' ';
+    }
+    cout << endl;
 }

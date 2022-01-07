@@ -6,15 +6,15 @@ I due più deboli, a singola passata e monodirezionali, sono
 - input: sola lettura
  - richiede gli operatori
     ++ (passaggio all'elemento successivo)
-    * (dereferenziamento dell'iteratore per accesso al valore)
+    * e -> (dereferenziamento dell'iteratore per accesso al valore)
     == e != (ad es., poter determinare se si è raggiunta la fine del container)
 - output: sola scrittura
 
-Sempre monodirezionale, ma non a singola passata
-- forward: lettura e scrittura
-
+- forward: lettura e scrittura, anche lui monodirezionale
+    ma la sequenza su cui opera deve essere accedibile anche dopo il suo uso
 - bidirectional
     simile al forward, ma può moversi in due direzioni
+    richiede anche l'operatore --
 - random
     può accedere a ogni elementi del container in tempo O(1)
 
@@ -32,7 +32,18 @@ Agli algoritmi di accesso sequenziale e di ricerca basta un input iterator
     richiede due iteratori che delimitino l'intervallo d'azione (aperto a destra) e il valore di partenza
     ritorna l'accumulo (in questa forma base, la somma), dei valori trovati
 
-Ma, ad esempio, il quick sort richiede accesso casuale agli elementi
+Un algoritmo che richiede lettura e scrittura richiede almeno un forward iterator
+- void replace(iterator, iterator, const T&, const T&) // include algorithm
+    richiede due iteratori che delimitino l'intervallo d'azione (aperto a destra),
+        il valore corrente e il valore che lo sostituisce
+    ritorna void, la modifica è fatta nel container corrente
+
+Un algoritmo che richiede un bidirectional iterator
+- void reverse(iterator, iterator) // include algorithm
+    richiede due iteratori che delimitino l'intervallo d'azione (aperto a destra)
+    modifica in place il container, ribaltandolo
+
+Il quick sort richiede accesso casuale agli elementi
     Obbligatorio l'uso di un iteratore random, con limitazione del campo d'uso
 - void sort(iterator, iterator) // include algorithm
     richiede due iteratori che delimitino l'intervallo d'azione (aperto a destra)

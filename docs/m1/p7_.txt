@@ -6,7 +6,10 @@ Tre concetti chiave
  Container (collezione, aggregato, sequenza)
  Iteratore (astrazione del concettto di puntatore)
  Algoritmo
-Sviluppati usando via template i meccanismi della programmazione generica
+Sviluppati in modo
+    efficiente (seguendo l'impostazione che viene dal C)
+    parametrico - via template, programmazione generica
+    ortogonale - semplice associazione tra i costrutti di base
 
 1) Array
 2) Vettore

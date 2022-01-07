@@ -26,25 +26,39 @@ Il range-for, (parte del linguaggio e non della libreria standard) può operare 
 
 Agli algoritmi di accesso sequenziale e di ricerca basta un input iterator
 - iterator find(iterator, iterator, const T&) // include algorithm
-    richiede due iteratori che delimitino la ricerca (aperto a destra) e il valore cercato
+    richiede due iteratori che delimitano la ricerca (aperto a destra) e il valore cercato
     ritorna l'iteratore all'elemento trovato, o end()
 - int accumulate(iterator, iterator, T) // include numeric
-    richiede due iteratori che delimitino l'intervallo d'azione (aperto a destra) e il valore di partenza
+    richiede due iteratori che delimitano l'intervallo d'azione (aperto a destra) e il valore di partenza
     ritorna l'accumulo (in questa forma base, la somma), dei valori trovati
 
 Un algoritmo che richiede lettura e scrittura richiede almeno un forward iterator
 - void replace(iterator, iterator, const T&, const T&) // include algorithm
-    richiede due iteratori che delimitino l'intervallo d'azione (aperto a destra),
+    richiede due iteratori che delimitano l'intervallo d'azione (aperto a destra),
         il valore corrente e il valore che lo sostituisce
     ritorna void, la modifica è fatta nel container corrente
 
 Un algoritmo che richiede un bidirectional iterator
 - void reverse(iterator, iterator) // include algorithm
-    richiede due iteratori che delimitino l'intervallo d'azione (aperto a destra)
+    richiede due iteratori che delimitano l'intervallo d'azione (aperto a destra)
     modifica in place il container, ribaltandolo
 
-Il quick sort richiede accesso casuale agli elementi
+Gli algoritmi di sorting nella Standard Library richiedono accesso casuale agli elementi
     Obbligatorio l'uso di un iteratore random, con limitazione del campo d'uso
+    Richiedono due iteratori che delimitano l'intervallo d'azione (aperto a destra)
+    Ritornano void, per efficienza l'ordinamento è fatto "in place"
 - void sort(iterator, iterator) // include algorithm
-    richiede due iteratori che delimitino l'intervallo d'azione (aperto a destra)
-    ritorna void, l'ordinamento è fatto "in place"
+    Di solito una versione di Quick Sort
+- void stable_sort(iterator, iterator Last) // include algorithm
+    Di solito basato su Merge Sort
+    Se ci sono più elementi considerati uguali dall'algoritmo, mantengono l'ordine relativo
+
+Programmazione funzionale negli algoritmi
+- iterator find_if(iterator, iterator, Predicate)
+    Richiede due iteratori che delimitano l'intervallo d'azione (aperto a destra)
+        E un predicato: funzione (passata per indirizzo), functor o lambda che ritorna un booleano
+    Ritorna l'iteratore al primo elemento che soddifa il predicato, o end()
+- Function for_each(iterator, iterator, Function)
+    Richiede due iteratori che delimitano l'intervallo d'azione (aperto a destra)
+        E una funzione (passata per indirizzo), functor o lambda, eseguita per ogni elemento
+    Ritorna la funzione passata come parametro

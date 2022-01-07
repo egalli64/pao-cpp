@@ -46,4 +46,12 @@ const: la variabile non deve essere modificata
 
 Enumerazioni
 enum: ereditati dal C, un nome con assegnato un valore int
+    enum { <ENUM_VALUE> [= N]  [, ...] }
+    es: enum { SAT = 0, SUN };
+        cout << ALPHA;
+    per default i valori assegnati agli enum vanno da zero in su
 enum class: C++11, hanno uno scope e un tipo proprio
+    enum class <EnumName> [: integral_type] { <ENUM_VALUE> [= N]  [, ...] }
+    es: enum class WeekendDay : bool { SAT = 0, SUN };
+        cout << static_cast<int>(GreekLetter::ALPHA);
+    per default l'integral_type di riferimento per una enum class è int

@@ -1,0 +1,15 @@
+7.4 Mappe
+
+Noti anche come array associativi o dizionari
+
+Gestiscono relazioni chiave-valore
+    Dove il valore è acceduto normalmente via chiave
+
+std::map = chiavi sono organizzate in un albero binario (BST red-black)
+    ordinate, accesso in tempo logaritmico
+
+std::unordered_map = chiavi sono organizzate in una hash table
+    disordinate, accesso in tempo costante
+
+Normalmente, accediamo alle coppie chiave-valore
+    Struttura pair, con componenti first (chiave) e second (valore)

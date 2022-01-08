@@ -3,26 +3,34 @@ using namespace std;
 
 class Animal {
 private:
-    string name_;
+    const string name_;
 public:
     Animal(const string& name) : name_(name) {}
 
     const string& name() const { return name_; }
 };
 
+ostream& operator<<(ostream& os, Animal animal) {
+    return os << animal.name();
+}
+
 class Dog : public Animal {
 private:
-    string owner_;
+    const string owner_;
 public:
     Dog(const string& name, const string& owner) : Animal(name), owner_(owner) {}
 
     const string& owner() const { return owner_; }
 };
 
+ostream& operator<<(ostream& os, Dog dog) {
+    return os << dog.name() << " owned by " << dog.owner();
+}
+
 int main() {
     Animal tom("Tom");
-    cout << tom.name() << endl;
+    cout << tom << endl;
 
     Dog bob("Bob", "Robert Smith");
-    cout << bob.name() << " owned by " << bob.owner() << endl;
+    cout << bob << endl;
 }

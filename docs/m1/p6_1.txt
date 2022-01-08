@@ -1,0 +1,21 @@
+6.1 Generalizzazione ed Ereditarietà
+
+L'ereditarietà è un meccanismo chiave della programmazione Object Oriented
+    Permette di riutilizzare il codice
+    Basata su polimorfismo, implementato via funzioni virtuali
+    Determina una gerarchia di classi
+
+Richiede un attento design dell'applicazione
+    Quali classi sono necessarie per descrivere il problema
+    Come interagiscono tra loro
+        All'interno di una gerarchia
+        O per mezzo di altre relazioni
+
+La derivazione può seguire tre diverse modalità di accesso ai membri della classe base
+    pubblica, protetta, privata
+La più comunemente usata è la derivazione pubblica
+    Definisce una relazione detta "is-a", la classe derivata è un sotto tipo della classe base
+    Tutto ciò che non è privato nella classe base è disponibile nella classe derivata
+    Tutto ciò che è pubblico nella classe base è disponibile a chi usa la classe derivata
+    Ex: class Extended : public Base { /* ... */ };
+

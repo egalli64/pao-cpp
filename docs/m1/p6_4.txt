@@ -1,0 +1,4 @@
+6.4 Classe e metodo final
+
+Si può impedire che una classe venga estesa, dichiarandola "final"
+Si può anche impedire l'override di un singolo metodo, sempre via "final"

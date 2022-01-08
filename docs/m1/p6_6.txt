@@ -1,0 +1,7 @@
+6.6 Ereditarietà multipla e virtuale
+
+MI - Multiple Inheritance: una classe può avere più super-class
+
+Es: un mezzo anfibio può avere due classi base
+- Autoveicolo, per quanto riguarda la guida su strada
+- Barca, per la navigazione

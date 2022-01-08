@@ -1,0 +1,24 @@
+6.2 Polimorfismo, tabella dei metodi virtuali (vtbl): virtual, override
+
+Metodo virtuale
+    definito in una classe base
+    ridefinito in una classe figlia
+        override: esattamente la stessa signature
+        diverso da overload, stesso nome, diversa lista di parametri
+
+Il metodo virtuale da invocare viene deciso a dinamicamente, a run-time
+    verificando attraverso la vtbl qual è la definizione più vicina al tipo effettivo dell'oggetto
+Meccanismo che determina un (piccolo) overhead in esecuzione
+    Per questo motivo, quando necessario, va esplicitamente abilitato
+
+Un metodo è virtuale se è identificato dalla keyword "virtual"
+    o se ridefinisce un metodo virtuale
+Per segnalare al compilatore (e a chi legge il codice) che un metodo è un override
+    si può identificarlo con la keyword "override", alla fine della signature
+
+Un puntatore a una classe base funziona in modo polimorfico
+- può essere associato ad un oggetto di tutta gerarchia
+- l'invocazione di un metodo, a run-time, tiene conto del tipo effettivo dell'oggetto
+
+Una variabile di classe derivata viene trattata come se fosse di classe base
+- Fenomeno dello "slicing"

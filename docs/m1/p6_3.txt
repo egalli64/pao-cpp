@@ -1,0 +1,10 @@
+6.3 Classe astratta
+
+Un metodo astratto può essere "puro"
+    Non ha un body, è solo dichiarato, e la dichiarazione termina con "= 0;"
+
+Una classe che ha almeno un metodo astratto puro è a sua volta astratta
+    Non si possono istanziare oggetti di quel tipo
+
+Ha senso solo in quanto classe base di una gerarchia
+    Le classi figlie che implementano i metodi astratti sono concrete

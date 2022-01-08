@@ -1,0 +1,22 @@
+5.4 Spostamento (move)
+
+Se un oggetto ha la resposabilità di gestione su una risorsa la può voler passare ad un altro oggetto
+Le semantiche di spostamento ci aiutano ad ottenere il risultato a costo molto ridotto
+
+Invece di fare una "deep copy", e poi eliminare il vecchio oggetto, si fa una "shallow copy"
+
+Comunemente usato negli aggregati, lo vediamo nei container della libreria standard C++
+
+Nel caso (comune) che la risorsa sia memoria allocata sullo heap
+    il "move" riguarda il blocco di memoria che viene passato da un oggetto a un altro
+L'indizio tra i data member c'è un puntatore, e nel ctor c'è il relativo new o new []
+    e di conseguenza nel dtor ci dovrebbe essere un delete / delete []
+
+Richiede un nuovo elemento sintattico, &&  = right hand side reference
+    L'oggetto "other" deve essere alla destra di un assegnamento, e diventerà "vuoto"
+
+    Move ctor per la classe A: A(A&& other);
+    Move assigment operator: A& operator=(A&& other);
+
+Se vogliamo forzare l'uso della semantica move: std::move()
+    Invece di usare un reference, si usa un rhs reference all'oggetto passato

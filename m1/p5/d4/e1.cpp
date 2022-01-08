@@ -1,4 +1,4 @@
-#include<cmath>
+#include <cmath>
 #include <iostream>
 using namespace std;
 
@@ -13,12 +13,12 @@ public:
     ~Player() { delete scores_; }
 
     // copy
-    Player(const Player& that);
-    Player& operator=(const Player& that);
+    Player(const Player& other);
+    Player& operator=(const Player& other);
 
     // move
-    Player(Player&& that);
-    Player& operator=(Player&& that);
+    Player(Player&& other);
+    Player& operator=(Player&& other);
 
     int id() { return id_; }
     void addToScore(int pos, double score) {
@@ -32,52 +32,46 @@ public:
     }
 };
 
-Player::Player(const Player& that) :
-    id_{ that.id_ }, scores_{ new double[that.size_] }, size_{ that.size_ }
-{
+Player::Player(const Player& other) : id_{ other.id_ }, scores_{ new double[other.size_] }, size_{ other.size_ } {
     for (int i = 0; i != size_; ++i) {
-        scores_[i] = that.scores_[i];
+        scores_[i] = other.scores_[i];
     }
 }
 
-Player& Player::operator=(const Player& that)
-{
-    id_ = that.id_;
+Player& Player::operator=(const Player& other) {
+    id_ = other.id_;
 
-    double* buffer = new double[that.size_];
-    for (int i = 0; i != size_; ++i)
-        buffer[i] = that.scores_[i];
+    double* buffer = new double[other.size_];
+    for (int i = 0; i != size_; ++i) {
+        buffer[i] = other.scores_[i];
+    }
 
     delete[] scores_;
     scores_ = buffer;
-    size_ = that.size_;
+    size_ = other.size_;
 
     return *this;
 }
 
-Player::Player(Player&& that) :
-    id_{ that.id_ }, scores_{ that.scores_ }, size_{ that.size_ }
-{
-    that.id_ = 0;
-    that.scores_ = nullptr;
-    that.size_ = 0;
+Player::Player(Player&& other) : id_{ other.id_ }, scores_{ other.scores_ }, size_{ other.size_ } {
+    other.id_ = 0;
+    other.scores_ = nullptr;
+    other.size_ = 0;
 }
 
-Player& Player::operator=(Player&& that)
-{
-    id_ = that.id_;
-    scores_ = that.scores_;
-    size_ = that.size_;
+Player& Player::operator=(Player&& other) {
+    id_ = other.id_;
+    scores_ = other.scores_;
+    size_ = other.size_;
 
-    that.id_ = 0;
-    that.scores_ = nullptr;
-    that.size_ = 0;
+    other.id_ = 0;
+    other.scores_ = nullptr;
+    other.size_ = 0;
 
     return *this;
 }
 
-int main()
-{
+int main() {
     Player tom(12, 3);
     tom.addToScore(0, 43.12);
     cout << "tom: " << tom.id() << ", " << tom.score(0) << endl;

@@ -5,9 +5,16 @@ Metodo virtuale
     ridefinito in una classe figlia
         override: esattamente la stessa signature
         diverso da overload, stesso nome, diversa lista di parametri
+    Solo metodi di istanza (non statici) possono essere virtuali
+        Anche i ctor _non_ possono essere virtuali
+        Se c'è bisogno di un virtual ctor, occorre implementarlo con un metodo apposito
+            Spesso chiamato clone() che ritorna un puntatore all'oggetto creato
+            Vedi anche il design pattern Factory Method
+        I dtor possono essere virtuali, vedi più avanti
 
-Il metodo virtuale da invocare viene deciso a dinamicamente, a run-time
-    verificando attraverso la vtbl qual è la definizione più vicina al tipo effettivo dell'oggetto
+Puntatori ai metodi virtuali sono inseriti in una tabella, detta vtbl
+    Che permette di decidere dinamicamente, a run-time, quale metodo invocare
+    Verificando attraverso la vtbl qual sia la definizione corretta
 Meccanismo che determina un (piccolo) overhead in esecuzione
     Per questo motivo, quando necessario, va esplicitamente abilitato
 

@@ -19,3 +19,7 @@ La più comunemente usata è la derivazione pubblica
     Tutto ciò che è pubblico nella classe base è disponibile a chi usa la classe derivata
     Ex: class Extended : public Base { /* ... */ };
 
+Ogni costruttore della classe derivata deve invocare un costruttore della classe base
+    Allo scopo di inizializzare la parte relativa dell'oggetto in creazione
+    Ex: Extended() : Base() {}
+    Se non viene invocato esplicitamente, il compilatore assume l'uso del default ctor

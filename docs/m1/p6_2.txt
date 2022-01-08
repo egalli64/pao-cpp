@@ -16,6 +16,11 @@ Un metodo è virtuale se è identificato dalla keyword "virtual"
 Per segnalare al compilatore (e a chi legge il codice) che un metodo è un override
     si può identificarlo con la keyword "override", alla fine della signature
 
+Dal body di un metodo override è possibile invocare quel metodo nella versione della classe base
+    Uso dell'operatore di risoluzione di scope ::
+    Ad es. Base::method();
+    Non specificando la classe di appartenenza, si sottointende una chiamata ricorsiva
+
 Un puntatore a una classe base funziona in modo polimorfico
 - può essere associato ad un oggetto di tutta gerarchia
 - l'invocazione di un metodo, a run-time, tiene conto del tipo effettivo dell'oggetto

@@ -5,6 +5,7 @@ class Animal {
 private:
     const string name_;
 public:
+    Animal() : name_("Unkwnown") {};
     Animal(const string& name) : name_(name) {}
 
     const string& name() const { return name_; }
@@ -18,6 +19,7 @@ class Dog : public Animal {
 private:
     const string owner_;
 public:
+    Dog() : owner_("none") {}
     Dog(const string& name, const string& owner) : Animal(name), owner_(owner) {}
 
     const string& owner() const { return owner_; }
@@ -33,4 +35,7 @@ int main() {
 
     Dog bob("Bob", "Robert Smith");
     cout << bob << endl;
+
+    Dog x;
+    cout << x << endl;
 }

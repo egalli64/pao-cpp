@@ -12,4 +12,6 @@ Deep copy
     Il copy Constructor, per la creazione di un oggetto
     L'operatore di assegnamento, per la ridefinizione di un oggetto
   - Vanno ridefiniti entrambi (assieme al dtor) se ha la responsabilità della gestione di risorse 
+      Copy ctor, es: A(const A& other)
+      Assignment operator, es: A& operator=(const A& other)
  

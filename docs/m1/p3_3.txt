@@ -1,0 +1,15 @@
+3.3 L'operatore ternario ?:
+
+Usato per assegnare a una variabile un valore in maniera condizionata
+
+    type variable = (condition) ? value1 : value2;
+
+Equivalente a
+
+    type variable;
+    if (condition) {
+        variable = value1;
+    }
+    else {
+        variable = value2;
+    }

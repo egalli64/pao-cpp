@@ -1,0 +1,54 @@
+3.4 Ciclo for (classico, range)
+
+Permette di esprimere in forma compatta istruzioni ripetute
+
+# for classico
+
+for (/* 1 */; /* 2 */; /* 3 */) {
+    // ...
+}
+
+Alla keyword for segue una parentesi tonda, che contiene tre clausole separate da punto e virgola
+1: Eseguita solo la prima volta, normalmente usata per definire una variabile di loop
+2: Condizione controllata prima di eseguire ogni loop
+    Se è falsa il loop termina, si passa allo statement successivo al for
+3: Eseguita alla fine di ogni loop, prima di verificare nuovamente la condizione
+
+Struttura idiomatica per eseguire n volte un blocco
+
+for (int i = 0; i < n; ++i) {
+    // ...
+}
+
+Se la condizione è sempre vera, si ha un loop infinito, che può essere espresso in forma abbreviata
+
+for (;;) {
+    // infinite loop
+}
+
+Struttura idiomatica per operare su tutte le componenti di un array
+
+double array[] = // ...
+int size = // ...
+
+for (int i = 0; i < size; ++i) {
+    double cur = array[i];
+    // ...
+}
+
+# Range based for
+
+Formulazione più robusta di un loop for
+
+for (loop_variable : data) {
+    // ...
+}
+
+La variabile di loop è una copia by value (se non indicato altrimenti) di un valore dell'array
+    Vedremo che è capace di gestire un qualunque oggetto iterabile
+
+double array[] = // ...
+
+for (double cur : array) {
+    // ...
+}

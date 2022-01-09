@@ -1,0 +1,25 @@
+3.5 Ciclo while
+
+while (condition) {
+    // ...
+}
+
+Equivalente al loop for, più adatto a cicli indefiniti
+    Mentre viene eseguito il loop deve accadere qualcosa che modifichi la condizione
+    Richiede più attenzione a loop infiniti indesiderati
+
+Il loop for che ripete n volte un blocco di istruzioni può essere riscritto così:
+
+int i = 0;
+while (i < n) {
+    // ...
+    ++i;
+}
+
+Si noti che i, variabile di loop per il for, qui è diventata una variabile esterna
+
+Se la condizione è sempre vera, si ha un loop infinito
+
+while (true) {
+    // infinite loop
+}

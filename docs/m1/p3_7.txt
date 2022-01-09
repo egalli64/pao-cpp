@@ -1,0 +1,17 @@
+3.7 break e continue
+
+Istruzioni specifiche per i loop
+    Il break è usato anche nello switch
+
+# break
+
+Forza la terminazione di un loop
+Il controllo viene passato al primo statement che segue il loop
+
+# continue
+
+Forza la terminazione del ciclo corrente
+Il controllo viene passato
+    while: al check della condizione
+    for: alla terza clausola, e poi al check della condizione
+ 

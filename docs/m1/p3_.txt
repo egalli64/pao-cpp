@@ -10,4 +10,4 @@ In seguito alla valutazione di una condizione:
 4) Ciclo for (classico, range)
 5) Ciclo while
 6) Ciclo do-while
-7) Le istruzioni break e continue
+7) break e continue

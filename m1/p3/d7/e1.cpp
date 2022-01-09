@@ -4,10 +4,10 @@ using namespace std;
 int main(int argc, char** argv) {
     if (argc < 2) {
         cout << "Please, enter a few arguments" << endl;
-        return;
+        return 0;
     }
 
-    cout << "I'll stop when I see an 'x' at the beginning of an argument" << endl;
+    cout << "I'll stop earlier if I see an 'x' at the beginning of an argument" << endl;
     for (int i = 1; i < argc; ++i) {
         if (argv[i][0] == 'x') {
             break;

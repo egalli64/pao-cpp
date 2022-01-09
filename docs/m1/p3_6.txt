@@ -1,0 +1,9 @@
+3.6 Ciclo do-while
+
+Esprime bene il fatto che un loop deve essere eseguito almeno una volta
+
+do {
+    // ...
+} while (condition);
+
+Notare il punto e virgola che termina l'istruzione di loop

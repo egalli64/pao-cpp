@@ -1,0 +1,45 @@
+4.1 La qualità del codice
+
+# Correttezza del codice
+
+- Test su pre-condition
+- Codice da certificare
+- Test su post-condition
+
+Es: y = sqrt(x)
+    (pre) x >= 0
+    (post) y * y == x 
+
+Asserzione classica: assert(expr)
+- richiede l'inclusione di cassert
+- se "expr" non è true, il programma termina via abort()
+- è una macro, disabilitata se la costante NDEBUG è definita
+
+# Correttezza delle assunzioni sui tipi di dato
+
+Asserzioni C++11: static_assert(expr, s)
+- "expr" è una constexpr booleana, deve essere valutabile a compile time 
+- "s" è una stringa, descrizione dell'errore di compilazione risultante
+
+# Eccezioni
+
+Correttezza dell'accesso alle risorse
+Correttezza dell'esecuzione
+- In base ai dati passati o in caso di errori inattesi
+- Aiuta a gestire approcci alternativi (soluzioni fallback)
+
+Può portare a codice eccessivamente complesso
+
+Per segnalare che il codice non un ha modo atteso di proseguire
+    "throw" di una variabile di qualunque tipo
+
+Il "throw" di una eccezione causa lo "stack unwinding"
+    Si risale nello stack di esecuzione alla ricerca di codice che gestisca l'eccezione
+
+Un blocco "try" segnala al compilatore che il codice associato può tirare una eccezione
+Un blocco "catch" associato ad un try pemette di riprendere l'esecuzione interrotta dal throw
+    Per gestire tutte le possibili eccezioni si indica "..." nella clausola catch
+
+Si preferisce usare eccezioni di tipo std::exception (define exception) o derivate
+    throw by value, catch by reference
+    Il metodo virtuale what() ritorna il messaggio associato

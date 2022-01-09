@@ -1,0 +1,38 @@
+3.2 switch
+
+switch (variable) {
+case value1:
+    /* ... */
+    break;
+case value2:
+    /* ... */
+    break;
+case ...:
+    /* ... */
+    break;
+default:
+    /* ... */
+    break;
+}
+
+Alternativo, in una forma più limitata, all'if-else if
+
+Alla keyword switch segue, tra parentesi tonde, la variabile che si vuole controllare
+    Il tipo della variabile deve essere integrale o una enumerazione
+Segue un blocco delimitato da parentesi graffe in cui si specificano dei "case"
+Alla keyword case segue un valore integrale corrispondente alla variabile dello switch e due punti
+Può anche essere presente un blocco di default
+Ogni blocco case e l'eventuale blocco default di solito terminano con un break
+
+Se il valore contenuto nella variabile corrisponde a un valore indicato da un case
+    L'esecuzione dello switch inizia da quel punto
+Se non c'è alcuna corrispondenza
+    Se esiste un default, l'esecuzioni inizia da lì
+    Altrimenti si passa alla prima istruzione successiva allo switch
+
+Il break ha lo scopo di terminare l'esecuzione interna allo switch
+Se un case non ha un break, l'esecuzione passa al blocco seguente
+    Fenomeno detto "fall through", poco leggibile, quindi solitamente evitato
+
+Uno switch permette di eseguire solo controlli di uguaglianza su una singola variabile
+L'if-else if è più flessibile

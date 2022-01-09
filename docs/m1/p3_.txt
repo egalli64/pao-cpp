@@ -1,6 +1,10 @@
 3 - Istruzioni di controllo
 
-1) if, else
+In seguito alla valutazione di una condizione:
+    Le istruzioni condizionali permettono di eseguire codice diverso
+    Le istruzioni di loop permettono di eseguire più volte lo stesso codice
+
+1) if
 2) switch
 3) L'operatore ternario ?:
 4) Ciclo for (classico, range)

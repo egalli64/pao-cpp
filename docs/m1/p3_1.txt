@@ -1,0 +1,53 @@
+3.1 if
+
+# if
+
+if (condition) {
+    // ...
+}
+
+La keyword if è seguita da:
+- La condizione che deve essere valutata, tra parentesi tonde
+- Il codice che deve essere eseguito se la condizione è vera
+    Se si tratta di un più statement è necessario delimitarli tra parentesi graffe
+    Una convenzione suggerisce di usare le graffe anche per un singolo statement
+
+
+Il blocco associato a un if può a sua volta contenere un altro if
+    Si cerca di non abusare di questa possibilità per mantenere la leggibilità del codice
+
+# if - else
+
+if (condition) {
+    // ...
+}
+else {
+    // ...
+}
+
+Al blocco if, come descritto sopra, può seguire la keyword else
+- seguita dal codice associato, secondo le stesse modalità per l'if
+
+Il blocco associato all'else viene eseguito se la condizione valutata per l'if è falsa
+Dunque per un if-else viene sempre eseguito del codice
+
+# if - else if ...
+
+if (condition1) {
+    // ...
+}
+else if (condition2) {
+    // ...
+}
+else if (/* ... */) {
+    // ...
+}
+else {
+    // ...
+}
+
+Alla keyword else può far nuovamente seguito la keyword if, che introduce un'altra condizione
+- In un if-else if viene eseguito il primo blocco associato a una condizione vera, se esiste
+- Se l'istruzione è terminata con un else (senza if), il suo blocco è eseguito se nessuna condizione è vera
+- Se non c'è un else finale, può succedere che nessun blocco sia eseguito
+- Non è mai possibile che siano eseguiti più blocchi in una singola istruzione if-else if

@@ -19,6 +19,11 @@ int main() {
     cout << "x / y = " << x / y << endl;
     cout << "x % y = " << x % y << endl;
 
+    cout << "\nString concatenation\n\n";
+    string s{ "Hello" };
+    string t{ "World!" };
+    cout << s + ", " + t << endl;
+
     cout << "\nComparison operators\n\n";
 
     cout << "x == y = " << (x == y) << endl;

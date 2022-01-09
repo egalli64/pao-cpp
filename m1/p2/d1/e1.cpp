@@ -25,6 +25,9 @@ int main() {
     unsigned short int usi = 0xFFFF;
     cout << "signed short integer: " << ssi << ", unsigned short int: " << usi << endl;
 
+    string s = "Hello";
+    cout << s << endl;
+
     cout << "\nImplicit convertions, both widening and narrowing\n";
     int ci = c;
     bool bi = i;

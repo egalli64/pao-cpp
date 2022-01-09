@@ -3,48 +3,74 @@
 Come in C, anche in C++ i tipi di dati avere dimensioni diverse a seconda della piattaforma usata
 L'operatore sizeof() ci dà la dimensione in byte del tipo o della variabile a cui viene applicato
 
+# Booleano
 bool: false o true 
 
+# Singolo carattere
 char: 'a', '7', '@', ... 
 
-numerici interi, possono essere signed (default) o unsigned
+# Numerici interi, possono essere signed (default) o unsigned
 Da C++14 è possibile usare un apice per rendere più leggibili i numeri, es.: 123'456
 
 short
-int
+int <- uso comune
 long
 long long
 
-numerici reali, hanno sempre il segno
+# Numerici reali (floating point), hanno sempre il segno
 
 float
-double
+double <- uso comune
 long double
 
-operatori artimetici: +, -, *, /, %
-da notare la differenza tra divisione intera e reale
+# Stringhe
 
-operatori di confronto: ==, !=, <, <=, >, >=
+In C non esiste il tipo stringa, che viene reso con un array di caratteri terminato da '\0'
+In C++ normalmente si usa la classe std::string
+    In entrambi i casi, le stringhe letterali sono rappresentate tra doppi apici, es: "Hello" 
 
-operatori logici: !, &&, ||
+# Inizializzazione di una variabile
+= operatore di assegnamento, converte implicitamente il valore, se richiesto
+{} inizializzatore uniforme, preferito da C++11
 
-operatori orientati al bit (su unsigned!): &, |, ^, ~
+# Operatori artimetici
+Binari +, -, *, /, %
+    In caso di operandi di diverso tipo, il compilatore converte il più "piccolo" al più "grande"
+    La divisione può essere intera o reale, dipende dagli operandi
+Unari +, -
 
-operatori di assegnamento: =, +=, -=, ..., ++, --
+# Overload dell'operatore + per std::string
+Concatenazione tra stringhe
+
+# Operatori di confronto
+==, !=, <, <=, >, >=
+
+# Operatori logici
+!, &&, ||
+
+# Operatori orientati al bit (su unsigned!)
+&, |, ^, ~
+
+# Altri operatori di assegnamento
++=, -=, ..., ++, --
 Attenzione al cast implicito nell'assegnamento!
-Da C++11 si preferisce usare l'inizializzatore uniforme: {}
 
-Cast esplicito via static_cast<type>()
+# Cast esplicito via static_cast<type>()
 Il cast C-style (type) corrisponde al reinterpret_cast<type>() del C++ (sconsigliati)
 
-Da C++11 si può definire una variabile via keyword "auto"
-Errore di compilazione solo se non si riesce a dedurre il tipo effettivo
+# La conversione tra tipi numerici e stringa richiede l'uso di funzioni, ad es:
+- std::stoi() // string to int
+- std::stod() // string to double
+- std::to_string() // numeric to string
 
-Costanti
+# Da C++11 si può al compilatore la deduzione del tipo, via keyword "auto"
+Errore solo in caso di ambiguità o mancanza di informazioni
+
+# Costanti
 constexpr: C++11, è possibile valutare il valore durante la compilazione
 const: la variabile non deve essere modificata
 
-Enumerazioni
+# Enumerazioni
 enum: ereditati dal C, un nome con assegnato un valore int
     enum { <ENUM_VALUE> [= N]  [, ...] }
     es: enum { SAT = 0, SUN };

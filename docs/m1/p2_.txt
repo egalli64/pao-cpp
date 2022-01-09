@@ -1,5 +1,19 @@
 2 - Tipi di dati
 
+Le variabili sono usate per memorizzare valori di un determinato tipo
+Ogni variabile in C++ ha
+    un tipo di dato associato
+    un nome
+    un valore
+
+Azioni sulle variabili
+    Dichiarazione: si comunica al compilatore che useremo una variabile di dato tipo e nome
+    Inizializzazione: si mette un valore iniziale in una variabile precedentemente dichiarata
+    Definizione: combinazione in un unico statement di dichiarazione e Inizializzazione
+    Assegnamento: si mette un valore in una variabile già inizializzata
+    Accesso: lettura di un valore contenuto in una variabile
+        Non abbiamo garanzie sul valore di una variabile non inizializzata
+
 1) Tipi standard
 2) Puntatori e reference, nullptr
 3) Array

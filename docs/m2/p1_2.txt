@@ -9,8 +9,12 @@ Qui vedremo la soluzione supportata da Linux
 
 Ogni processo è identificato dal sistema operativo con un ID univoco
 
-- getpid() - ID del processo corrente
-- getppid() - ID del processo padre
+- #include <unistd.h>
+- pid_t getpid() - ID del processo corrente
+- pid_t getppid() - ID del processo padre
+
+       pid_t getpid(void);
+       pid_t getppid(void);
 
 # Shared Memory	
 

@@ -1,0 +1,14 @@
+6.5 Distruttore Virtuale
+
+Se una classe è pensata per avere classi derivate è opportuno che il suo distruttore sia dichiarato virtuale
+
+Se una classe ha metodi virtuali, è necessario che anche il distruttore sia virtuale
+
+Una classe che non è pensata per essere derivata andrebbe indicata final
+    E il suo distruttore non deve essere virtuale
+
+La necessità di avere un virtual dtor in una classe polimorfica deriva dal fatto che, in sua assenza,
+    non c'è garanzia che la distruzione di un oggetto di una classe derivata venga fatta correttamente
+
+Se l'oggetto è acceduto via puntatore alla classe base e se il dtor non è virtuale
+    normalmente i dtor delle classi derivate non sono invocati

@@ -1,0 +1,19 @@
+1.2 Inter-Process Communication (IPC)
+
+Permette a processi distinti di operare su memoria condivisa e comunicare tra loro
+
+Non c'è un supporto standard in C++ in quest'area. Ogni sistema operativo offre il proprio supporto.
+Qui vedremo la soluzione supportata da Linux
+
+# Process ID
+
+Ogni processo è identificato dal sistema operativo con un ID univoco
+
+- getpid() - ID del processo corrente
+- getppid() - ID del processo padre
+
+# Shared Memory	
+
+
+
+# Signals	

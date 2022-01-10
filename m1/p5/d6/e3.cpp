@@ -34,6 +34,7 @@ int main() {
 
     Player tom(42, 33.12);
     Player::print_count();
+    tom.print_count(); // a bit confusing: is it an instance method?
 
     another_function();
     Player::print_count();

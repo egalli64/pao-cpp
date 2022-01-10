@@ -1,0 +1,25 @@
+5.6 Metodi inline, const, statici
+
+# inline
+
+Indicazione per funzioni libere o metodi
+    Si chiede al compilatore di sostituire la chiamata al metodo con il codice relativo
+    Lo scopo è quello di eliminare il costo della chiamata a funzione, aumentando però la dimensione dell'eseguibile
+    Un metodo definito in una classe è implicitamente inline
+
+Da C++17 le cose sono più complesse e anche le variabili possono essere dichiarate inline
+
+# const
+
+Dichiara che un metodo di istanza non modifica l'oggetto corrente
+    Su un oggetto costante, o acceduto in modo costante, possono essere invocati solo metodi costanti
+
+# static
+
+Un membro statico non è legato a una particolare istanza della classe
+    Un data member statico rappresenta quindi lo stato della classe, non di una istanza
+    Un metodo statico non può accedere direttamente ai membri non statici della classe
+
+Si accede a un membro statico via operatore di risoluzione di scopo ::
+    Modalità obbligatoria se non c'è a disposizione un oggetto del tipo richiesto
+    Altrimenti è possibile usare un operatore di dereferenziamento come per i metodi di istanza

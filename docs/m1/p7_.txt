@@ -23,7 +23,7 @@ Nell'interfaccia di un container ci aspettiamo
 
 1) Array
 2) Vettore
-3) Lista
+3) Liste
 4) Mappe
 5) Iteratori e algoritmi
 6) Analisi costo computazionale

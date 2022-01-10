@@ -1,0 +1,10 @@
+7.3 Liste
+
+# list
+
+Lista doppiamente linkata
+
+# forward_list
+
+Lista semplicemente linkata, introdotta in C++11
+Funzionalità ridotte al minimo essenziale

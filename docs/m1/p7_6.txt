@@ -1,0 +1,26 @@
+7.6 Analisi costo computazionale
+
+È importante saper valutare l'efficienza del codice utilizzato nel tempo e nello spazio
+
+Lo strumento usato per misurarla è la funzione "O grande" (Big Oh)
+    È la funzione che descrive il limite asintotico superiore della effettiva funzione di interesse
+    Rappresenta l'ordine della complessità di calcolo, trascurando conti precisi
+
+Costante O(1)
+    Es: accesso ad un valore in un array
+
+Logaritmica O(log n)
+    Es: accesso ad un valore in un BST
+
+Lineare O(n)
+    Es: ricerca di un valore in un array
+
+Linearitmico O(n log n)
+    Es: un buon algoritmo di sorting
+
+Quadratica O(n^2)
+    Es: un algoritmi di sorting naive
+
+Polinomiale O(n^c)
+Esponenziale O(c^n)
+Fattoriale O(n!)

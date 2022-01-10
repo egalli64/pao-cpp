@@ -1,0 +1,9 @@
+6.7 Ereditarietà privata/protetta
+
+L'ereditarietà pubblica implica una relazione IS-A tra classe figlia e classe madre
+
+L'ereditarietà privata è un modo usato in C++ per implementare la relazione HAS-A
+    La classe figlia HA al suo interno la classe madre, non É dello stesso tipo
+
+L'ereditarietà è poco usata, non è chiara dal punto di vista concettuale
+    In pratica, l'accesso alla classe madre è concesso anche alle classi che derivano dalla figlia

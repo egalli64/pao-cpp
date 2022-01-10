@@ -4,4 +4,27 @@ Un array è un blocco contiguo di celle di tipo determinato
 La dimensione deve essere data alla definizione della variabile e non può essere cambiata in seguito
 La dimensione di un array allocato su stack deve essere una costante
 
+    type array_name[size];
+
 Gli array locali non sono (necessariamente) inizializzati
+Gli array non locali sono inizializzati a zero
+    (false, nullptr, o come specificato dal default ctor, a seconda del tipo)
+
+# Inizializzazione
+
+    type array_name[size]{ v0, v1, v2, v3, v4, v5 };
+
+Size, se presente, deve essere maggiore o uguale del numero degli elementi passati in inizializzazione
+    Se maggiore, gli altri elementi sono inizializzati a zero (false, ...)
+
+L'elemento in prima posizione ha indice 0, l'ultimo size - 1
+
+# Accesso a un elemento
+
+Es: assegnamento a una variabile del valore in posizione index nell'array
+
+    a_variable = array_name[index] // index può assumere un valore tra 0 e size - 1
+
+# Assegnamento di un valore a un elemento
+
+    array_name[index] = new_value;

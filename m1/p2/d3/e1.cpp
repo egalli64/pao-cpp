@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-static int values[10];
+int values[10];
 
 int main() {
     cout << "int[10] " << sizeof(values) << endl;

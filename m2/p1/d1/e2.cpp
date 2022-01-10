@@ -1,38 +1,7 @@
 #include <iostream>
 #include <memory>
+#include "Derived.h"
 using namespace std;
-
-class Base {
-private:
-    const int x_;
-public:
-    Base(int x) : x_{ x } {
-        cout << "Base ctor " << x_ << endl;
-    }
-
-    virtual void hello() const {
-        cout << "Base hello " << x_ << endl;
-    }
-
-    virtual ~Base() {
-        cout << "Base dtor " << x_ << endl;
-    }
-};
-
-
-class Derived : public Base {
-public:
-    Derived(int x) : Base(x) {}
-
-    void hello() const override {
-        cout << "Derived ";
-        Base::hello();
-    }
-
-    ~Derived() {
-        cout << "Derived dtor" << endl;
-    }
-};
 
 void raw() {
     cout << "Raw pointer" << endl;
@@ -57,6 +26,10 @@ unique_ptr<Base> getUnique() {
 
 void giveUnique(unique_ptr<Base> up) {
     cout << "\nA unique smart pointer is moved in" << endl;
+    up->hello();
+
+    up.reset(new Derived(4));
+    cout << "\nUnique smart pointer reset" << endl;
     up->hello();
 }
 

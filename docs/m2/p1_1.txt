@@ -34,11 +34,18 @@ Nascondono la gestione della memoria sullo heap
 
 Gestisce via puntatore un oggetto (o un array di oggetti) allocato sullo heap, che viene eliminato
 - quando lo smart pointer esce dal suo scope
-- o quando un'altro oggetto è assegnato allo smart pointer via
-	operator=
-	reset()
+- o quando il puntatore a un altro oggetto è assegnato allo smart pointer via reset()
 
+La template function factory make_unique() semplifica la creazione di un unique_ptr
 
+### shared_ptr
 
-shared_ptr
-weak_ptr
+Più shared_ptr possono gestire un unico oggetto
+Un contatore, accedibile via use_count(), tiene traccia del loro numero
+Quando use_count va a zero, ovvero l'ultimo shared_ptr sull'oggetto esce di scope, l'oggetto è eliminato
+
+La template function factory make_shared() semplifica la creazione di un shared_ptr
+
+--
+Esiste anche il concetto di smart pointer debole, weak_ptr
+Permette un accesso temporaneo a un oggetto posseduto da uno shared_ptr

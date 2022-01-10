@@ -1,0 +1,44 @@
+1.1 Process memory
+
+# Text/Code
+
+Area in cui è tenuto il codice eseguibile
+Potrebbe essere memoria read-only
+
+# Data Segment
+
+Area in cui sono gestite le variabili globali e statiche
+
+Divisa in due parti
+- Inizializzata seguendo le richieste del codice
+- (BSS) Non esplicitamente inizializzata (messa a 0)
+
+# Stack
+
+Area a disposizione delle variabili locali, gestita automaticamente
+
+# Free memory (heap)
+
+Area a disposizione delle variabili locali, gestita via new / delete
+	Singolo oggetto: new / delete
+	Array di oggetti: new [] / delete []
+
+È possibile usare le funzioni C: malloc / calloc / realloc e free
+	Con le dovute cautele, e non mescolando blocchi di memoria gestiti in modo diverso
+
+## Smart pointers
+
+Nascondono la gestione della memoria sullo heap
+
+### unique_ptr
+
+Gestisce via puntatore un oggetto (o un array di oggetti) allocato sullo heap, che viene eliminato
+- quando lo smart pointer esce dal suo scope
+- o quando un'altro oggetto è assegnato allo smart pointer via
+	operator=
+	reset()
+
+
+
+shared_ptr
+weak_ptr

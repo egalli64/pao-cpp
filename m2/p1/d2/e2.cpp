@@ -8,16 +8,16 @@ int main() {
 	cout << "Process id " << pid << endl;
 
 	pid_t fid = fork();
-	cout << "Fork returns " << fid << endl;
+	cout << "Fork returns negative (error), zero or child id: " << fid << endl;
 
 	if (fid < 0) {
 		return 1;
 	}
 
 	if (fid == 0) {
-		cout << "Child pid " << getpid() << " parent id " << getppid() << endl;
+		cout << "In child process " << getpid() << " parent " << getppid() << endl;
 	}
 	else {
-		cout << "Original pid " << getpid() << " parent id " << getppid() << endl;
+		cout << "In main process " << getpid() << " child " << fid << " parent " << getppid() <<  endl;
 	}
 }

@@ -1,0 +1,22 @@
+2.3 Mutex
+
+Permette un accesso mutualmente esclusivo a una risorsa condivisa
+    - lock per riservarne l'uso
+    - unlock per liberarlo
+Un thread che richiede accesso a un mutex già preso viene bloccato
+All'unlock tutti gli eventuali thread bloccati tornano in esecuzione
+    il primo che riesce, acquisirà il lock, causando il nuovo blocco degli altri
+
+La responsabilità della corretta serializzazione cade sul programmatore
+
+I mutex sono di tipo pthread_mutex_t e vanno inizializzati prima dell'uso
+    se allocato staticamente via PTHREAD_MUTEX_INITIALIZER
+    se allocato dinamicamente via pthread_mutex_init()
+        a cui deve corrispondere una chiamata a pthread_mutex_destroy()
+
+L'accesso protetto alla risorsa è garantito dalle chiamate
+    pthread_mutex_lock()
+    pthread_mutex_unlock()
+
+Se non vogliamo bloccare il thread nel caso il mutex non sia disponibile
+    pthread_mutex_trylock() ritorna immediatamente EBUSY

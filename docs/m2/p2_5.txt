@@ -1,0 +1,7 @@
+2.5 Deadlock e Starvation
+
+Un thread è in deadlock se si mette in attesa su di un lock che non potrà mai ottenere
+    Esempio: basta che tenti di acquisire due volte lo stesso lock senza prima rilasciarlo
+
+Se due thread diversi cercano di acquisire più lock
+    Occorre regolamentare l'ordine di accesso ai lock

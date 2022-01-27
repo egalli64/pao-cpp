@@ -31,14 +31,14 @@ int main() {
     {   // create a thread that does not return anything
         int status = pthread_create(&tids[0], nullptr, nuller, nullptr);
         if (status != 0) {
-            cout << "Can't create thread 1, error code " << status << endl;
+            cout << "Can't create thread 0, error code " << status << endl;
         }
     }
 
     {   // create a thread that returns a long
         int status = pthread_create(&tids[1], nullptr, life, nullptr);
         if (status != 0) {
-            cout << "Can't create thread 2, error code " << status << endl;
+            cout << "Can't create thread 1, error code " << status << endl;
         }
     }
 

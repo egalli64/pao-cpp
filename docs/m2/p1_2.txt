@@ -24,4 +24,19 @@ Per mezzo che comando di sistema fork() un processo può fare lo spawn di un nuo
 
 
 
-# Signals	
+# Signal
+
+Un signal è un interrupt sofware
+Il comando UNIX kill, e la funzione di sistema omonima, permettono di mandare un segnale a un processo 
+Ogni signal è identificato da una costante simbolica SIGxxx definita in signal.h 
+Il processo può determinare cosa fare se riceve un dato signal
+    - esegui il default, che, semplificando, può essere ignora, blocca o termina (con core)
+    - ignora, non applicabile per SIGKILL e SIGSTOP
+    - esegui codice definito dal processo
+
+La funzione signal() dichiarata in signal.h - void (*signal(int signo, void (*func)(int)))(int);
+    richiede come parametri
+        l'id del segnale che vogliamo gestire
+        il puntatore alla funzione che vogliamo assegnare al segnale
+            funzione void che accetta un intero (l'id del segnale)
+    ritorna SIG_ERR in caso di errore, o il puntatore al precedente gestore

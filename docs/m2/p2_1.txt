@@ -1,0 +1,36 @@
+2.1 Thread
+
+Se vogliamo eseguire un programma in modalità strettamente sequenziale,
+    il corrispondente processo può avere un solo thread di esecuzione
+Più thread in esecuzione in un processo permettono di:
+    dividere i compiti del processo tra i diversi thread
+        es: gestione dell'interazione con l'utente divisa dall'esecuzione dei task richiesti
+    gestire eventi asincroni assegnando un thread a ognuno
+    avere memoria condivisa tra i diversi thread
+
+I vantaggi del multithreading sono evidenziati in presenza di più CPU / core / hardware thread
+    reale parallelismo di esecuzione
+
+Con il termine pthread si sottolinea l'uso dello standard POSIX, vedi pthread.h
+In genere si deve specificare l'opzione di compilazione -pthread (o simile)
+
+L'id di un thread è di tipo pthread_t
+    ritornato da pthread_self()
+    confronto tra thread via pthread_equal()
+
+Creazione di un nuovo thread via pthread_create()
+Quattro parametri
+    ptr all'id
+    attributi per il thread
+    la funzione da eseguire nel thread
+    argomenti per la funzione
+Ritorna 0 in caso di successo
+
+Nel caso base, secondo e quarto parametro possono essere NULL
+
+Un thread termina
+    - con la fine dell'esecuzione della funzione associata
+    - se viene eliminato da un altro thread via pthread_cancel()
+    - invocando pthread_exit()
+
+Gli altri thread sincronizzarsi sulla sua terminazione via pthread_join()

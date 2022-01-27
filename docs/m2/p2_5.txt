@@ -3,5 +3,12 @@
 Un thread è in deadlock se si mette in attesa su di un lock che non potrà mai ottenere
     Esempio: basta che tenti di acquisire due volte lo stesso lock senza prima rilasciarlo
 
-Se due thread diversi cercano di acquisire più lock
-    Occorre regolamentare l'ordine di accesso ai lock
+Se due thread diversi cercano di acquisire più lock occorre regolamentare l'ordine di accesso ai lock
+
+Per evitare il rischio di un lock indefinito o comunque troppo lungo
+    pthread_mutex_timedlock() ritorna ETIMEDOUT in caso non si riesca ad acquisire il lock nel tempo indicato
+
+Si ha starvation quando un thread non riesce ad acquisire una risorsa che gli è necessaria
+    Un deadlock è la causa più comune
+    La competizione di molti thread su poche risorse potrebbe essere un'altra causa
+        come soluzione lo scheduling dovrebbe tener conto del tempo passato in coda

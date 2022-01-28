@@ -53,9 +53,12 @@ Concatenazione tra stringhe
 
 # Altri operatori di assegnamento
 +=, -=, ..., ++, --
-Attenzione al cast implicito nell'assegnamento!
 
 # Cast esplicito via static_cast<type>()
+Altri cast in C++
+    const_cast - rimuove o aggiunge il const a una variabile
+    dynamic_cast - per l'uso all'interno di una gerarchia
+    reinterpret_cast - assegna un nuovo senso ai byte correlati
 Il cast C-style (type) corrisponde al reinterpret_cast<type>() del C++ (sconsigliati)
 
 # La conversione tra tipi numerici e stringa richiede l'uso di funzioni, ad es:

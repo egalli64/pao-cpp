@@ -1,6 +1,6 @@
 2.1 Tipi standard
 
-Come in C, anche in C++ i tipi di dati avere dimensioni diverse a seconda della piattaforma usata
+Come in C, anche in C++ i tipi di dati possono avere dimensioni diverse a seconda della piattaforma usata
 L'operatore sizeof() ci dà la dimensione in byte del tipo o della variabile a cui viene applicato
 
 # Booleano

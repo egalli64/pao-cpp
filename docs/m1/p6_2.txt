@@ -6,7 +6,7 @@ Metodo virtuale
         override: esattamente la stessa signature
         diverso da overload, stesso nome, diversa lista di parametri
     Solo metodi di istanza (non statici) possono essere virtuali
-        Anche i ctor _non_ possono essere virtuali
+        Neanche i ctor _non_ possono essere virtuali
         Se c'è bisogno di un virtual ctor, occorre implementarlo con un metodo apposito
             Spesso chiamato clone() che ritorna un puntatore all'oggetto creato
             Vedi anche il design pattern Factory Method

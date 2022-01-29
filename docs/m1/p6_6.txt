@@ -5,3 +5,14 @@ MI - Multiple Inheritance: una classe può avere più super-class
 Es: un mezzo anfibio può avere due classi base
 - Autoveicolo, per quanto riguarda la guida su strada
 - Barca, per la navigazione
+
+Problema del diamante (Deadly Diamond of Death)
+    classe base, due classi derivate
+    Una quarta classe deriva da entrambe le classi di livello intermedio
+    se una classe figlia ha accesso a un membro di classi madri duplicato, quale va scelto?
+
+Una soluzione: accesso esplicito via operatore di risoluzione ::
+
+L'ereditarietà virtuale affronta il problema eliminando la doppia istanza della classe di base
+- le classi intermedie devono dichiarare di estendere virtualmente la classe base
+- la classe figlia deve chiamare i costruttori delle altre classi del diamante

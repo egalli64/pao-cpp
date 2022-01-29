@@ -1,9 +1,9 @@
 6.3 Classe astratta
 
-Un metodo astratto può essere "puro"
+Un metodo virtuale può essere "puro"
     Non ha un body, è solo dichiarato, e la dichiarazione termina con "= 0;"
 
-Una classe che ha almeno un metodo astratto puro è a sua volta astratta
+Una classe che ha almeno un metodo virtuale puro è astratta
     Non si possono istanziare oggetti di quel tipo
 
 Ha senso solo in quanto classe base di una gerarchia

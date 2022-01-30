@@ -36,4 +36,4 @@ Qualche altro metodo di std::array
 - void fill(const T&) // assegna il valore passato a tutti gli elementi
 - T& front() // il primo elemento
 - T& back() // l'ultimo elemento
-- void swap(std::array<int, 4Ui64>&) // scambia il contenuto di due array con la stessa size
+- void swap(std::array<int, 4>&) // scambia il contenuto di due array con la stessa size

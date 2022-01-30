@@ -72,7 +72,7 @@ void aVector() {
 
     values.push_back(2);
     values.push_back(12);
-    values.push_back(42);
+    values.emplace_back(42);
     cout << "Size is " << values.size() << endl;
     cout << "Capacity is " << values.capacity() << endl;
     cout << "First element is " << values.front() << endl;
@@ -88,8 +88,9 @@ void oVector() {
     cout << endl;
 
     values.push_back({ 3, "Kim" });
+    values.emplace_back(4, "Obi");
 
-    ExtendedEntry wim{ 4, "Wim" };
+    ExtendedEntry wim{ 5, "Wim" };
     wim.sayHello();
 
     // BAD! Wim is sliced off !!!

@@ -31,7 +31,21 @@ int pipe(int pipedes[2]);
 
 # Shared Memory	
 
+Due o più processi condividono un blocco di memoria
+    veloce, ma richiede sincronizzazione sull'accesso
 
+- int shmget(key_t key, size_t size, int flag)
+    ritorna l'id di un blocco di memoria condivisa, inizializzata con zero in ogni cella
+
+- int shmctl(int shmid, int cmd, struct shmid_ds* buf)
+    cmd è il comando che vogliamo eseguire
+        IPC_RMID
+
+- void* shmat(int shmid, const void* addr, int flag)
+    attach a un blocco precedentemente creato
+
+- int shmdt(const void* addr)
+    detach
 
 # Signal
 

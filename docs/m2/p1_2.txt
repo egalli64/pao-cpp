@@ -20,6 +20,15 @@ Per mezzo che comando di sistema fork() un processo può fare lo spawn di un nuo
 
 - getppid() - ID del processo padre
 
+# Pipe
+
+per compatibilità, conviene assumere siano monodirezionali (half duplex)
+funzionano solo tra processi con un parente in comune
+    normalmente usati tra padre e figlio dopo un fork
+
+// pipe descriptor read / write
+int pipe(int pipedes[2]);
+
 # Shared Memory	
 
 

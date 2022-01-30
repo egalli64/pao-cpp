@@ -1,0 +1,9 @@
+# make -f <filename> <target>
+
+all: hello
+
+hello: main.cpp other.cpp
+	g++ -o hello main.cpp other.cpp
+
+clean:
+	rm -rf hello

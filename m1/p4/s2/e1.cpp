@@ -13,7 +13,7 @@ void empty() {}
 
 /**
  * @brief Defining the main function
- * 
+ *
  * @return int resulting status of the program, zero for success
  */
 int main() {
@@ -24,8 +24,6 @@ int main() {
 
 /**
  * @brief Defining a free function
- *
- * @param player passed by constant reference
  */
 void printHello() {
     cout << "Hello" << endl;

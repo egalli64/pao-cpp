@@ -3,9 +3,7 @@
 using namespace std;
 
 int main() {
-    cout << "\nInitialization\n\n";
     int x = 42.7; // implicit narrowing
-
     //	int y {42.7}; // error: explicit narrowing required
 
     int y{ static_cast<int>(42.7) };
@@ -13,7 +11,7 @@ int main() {
 
     cout << "x = " << x << endl;
     cout << "y = " << y << endl;
-    cout << "z = " << z << " sized " << sizeof(z) << endl;
+    cout << "z = " << z << " is sized " << sizeof(z) << endl;
 
     string s = "42";
     int i = stoi(s);

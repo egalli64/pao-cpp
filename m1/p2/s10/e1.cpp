@@ -6,5 +6,7 @@ int main() {
 
     int* ptr = nullptr;
     cout << "An unused pointer: " << ptr << endl;
-    cout << "A null pointer can't be dereferenced! " << *ptr << endl;
+    cout << "A null pointer can't be dereferenced ... " << endl;
+
+    cout << *ptr << endl;
 }

@@ -12,7 +12,7 @@ public:
 
     const string& name() const { return name_; }
     // pure virtual method
-    virtual string fullName() = 0;
+    virtual string fullName() const = 0;
 };
 
 /**
@@ -24,7 +24,7 @@ private:
 public:
     Dog(const string& name, const string& owner) : Animal(name), owner_(owner) {}
 
-    string fullName() override {
+    string fullName() const override {
         return Animal::name() + " owned by " + owner_;
     }
 };

@@ -1,3 +1,4 @@
+#include <cctype>
 #include <iostream>
 using namespace std;
 
@@ -8,6 +9,9 @@ int main(int argc, char** argv) {
     }
     else if (argc == 2) {
         cout << "passed a argument: " << argv[1] << endl;
+        if (isdigit(argv[1][0])) {
+            cout << "First char is a digit!" << endl;
+        }
     }
     else if (argc % 2) {
         cout << "passed an even number of arguments\n";

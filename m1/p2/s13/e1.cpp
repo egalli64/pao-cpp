@@ -6,7 +6,7 @@ int main() {
     cout << "An initialized char on the stack: " << c << endl;
 
     char* pc = new char;
-    cout << "An uninitialized char on the heap: " << *pc << endl;
+    cout << "An uninitialized char on the heap: " << static_cast<int>(*pc) << endl;
     delete pc;
 
     char* pz = new char{'Z'};

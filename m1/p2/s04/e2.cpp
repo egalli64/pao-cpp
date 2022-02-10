@@ -26,4 +26,7 @@ int main() {
 
     int i_widened = c;
     cout << "A char implicitly converted to int: " << i_widened << endl;
+
+    char other = i_widened;
+    cout << "A int implicitly converted to char: " << other << endl;
 }

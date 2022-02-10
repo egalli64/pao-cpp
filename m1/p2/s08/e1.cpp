@@ -9,7 +9,7 @@ int main() {
     char c = 'x';
     char* pc = &c;
 
-    cout << c << ' ' << *pc << endl;
+    cout << c << ' ' << *pc << ' ' << static_cast<void*>(pc) << endl;
     *pc = 'z';
     cout << c << ' ' << *pc << endl;
 }

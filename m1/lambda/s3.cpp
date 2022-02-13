@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <functional>
 #include <iostream>
 #include <iterator>
 #include <vector>
@@ -10,18 +11,33 @@ void print(const string& message, const vector<int>& data) {
     cout << endl;
 }
 
+void increaseByOne(int& value) {
+    value += 1;
+}
+
+void increase(int& value, int delta) {
+    value += delta;
+}
+
 int main() {
-    vector<int> values{ 5, 3, 21, 9, 8, 24 };
+    vector<int> values{ 1, 2, 3, 4, 5 };
     print("A few values", values);
 
-    cout << "Capture the values at the moment of lambda creation" << endl;
+    cout << "Increase by 1 using for_each + function" << endl;
+    for (int i = 0; i < 3; ++i) {
+        for_each(values.begin(), values.end(), increaseByOne);
+        cout << i;
+        print(" ...", values);
+    }
+
+    cout << "Increase by [0 .. 3) using for_each + lambda, capturing by value" << endl;
     for (int i = 0; i < 3; ++i) {
         for_each(values.begin(), values.end(), [i](int& cur) { cur += i;});
         cout << i;
         print(" ...", values);
     }
 
-    cout << "The captured value, by default, is a copy!" << endl;
+    cout << "Increase always by 0! The capture is done when the lambda is created" << endl;
     int i = 0;
     auto wrong = [i](int& cur) { cur += i;};
     while (i < 3) {
@@ -31,7 +47,7 @@ int main() {
         i += 1;
     }
 
-    cout << "Capturing by reference (could be dangerous)" << endl;
+    cout << "Capturing by reference (be careful with this one!)" << endl;
     i = 0;
     auto risky = [&i](int& cur) { cur += i;};
     while (i < 3) {
@@ -39,5 +55,12 @@ int main() {
         cout << i;
         print(" ...", values);
         i += 1;
+    }
+    
+    cout << "(Spoiler: using for_each + bind to increase by an adapted function)" << endl;
+    for (int i = 0; i < 3; ++i) {
+        for_each(values.begin(), values.end(), bind(increase, std::placeholders::_1, i));
+        cout << i;
+        print(" ...", values);
     }
 }

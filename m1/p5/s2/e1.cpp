@@ -19,4 +19,8 @@ int main() {
     Point& r = a;
     r.x += 5;
     cout << r.x << ' ' << r.y << endl;
+
+    // !!! not initialized !!!
+    Point b;
+    cout << b.x << ' ' << b.y << endl;
 }

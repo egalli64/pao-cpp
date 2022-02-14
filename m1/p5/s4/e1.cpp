@@ -2,10 +2,11 @@
 using namespace std;
 
 struct Point {
-    // Point() {} // implicit
+    // Point() {} // implicit - here uninitialized data member!
     // Point() = delete;
     // Point() = default;
     // Point(int test) { x = y = test; }
+    // Point() { x = y = 0; }
 
     int x;
     int y;

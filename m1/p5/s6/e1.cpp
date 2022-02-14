@@ -9,8 +9,13 @@ private:
     int size_;
 
 public:
-    Player(int id, int size) : id_{ id }, scores_{ new double[size] }, size_{ size } {}
-    ~Player() { delete [] scores_; }
+    Player(int id, int size) : id_{ id }, scores_{ new double[size] }, size_{ size } {
+        cout << "Ctor" << endl;
+    }
+
+    ~Player() {
+        delete [] scores_; 
+    }
 
     // copy
     Player(const Player& other);
@@ -33,33 +38,38 @@ public:
 };
 
 Player::Player(const Player& other) : id_{ other.id_ }, scores_{ new double[other.size_] }, size_{ other.size_ } {
+    cout << "Copy ctor" << endl;
     for (int i = 0; i != size_; ++i) {
         scores_[i] = other.scores_[i];
     }
 }
 
 Player& Player::operator=(const Player& other) {
+    cout << "Copy assigment" << endl;
     id_ = other.id_;
 
-    double* buffer = new double[other.size_];
+    delete[] scores_;
+    scores_ = new double[other.size_];
     for (int i = 0; i != size_; ++i) {
-        buffer[i] = other.scores_[i];
+        scores_[i] = other.scores_[i];
     }
 
-    delete[] scores_;
-    scores_ = buffer;
     size_ = other.size_;
 
     return *this;
 }
 
 Player::Player(Player&& other) : id_{ other.id_ }, scores_{ other.scores_ }, size_{ other.size_ } {
+    cout << "Move ctor" << endl;
+
     other.id_ = 0;
     other.scores_ = nullptr;
     other.size_ = 0;
 }
 
 Player& Player::operator=(Player&& other) {
+    cout << "Move assigment" << endl;
+
     id_ = other.id_;
     scores_ = other.scores_;
     size_ = other.size_;
@@ -71,12 +81,13 @@ Player& Player::operator=(Player&& other) {
     return *this;
 }
 
-Player createPlayer(const char* name) {
-    int id = 23;
+Player createPlayer(int id) {
     int size = 12;
     Player x(id, size);
+    x.addToScore(0, 42);
 
-    return move(x);
+    // Copy elision! Do not move (anymore)
+    return x;
 }
 
 int main() {
@@ -100,6 +111,7 @@ int main() {
     cout << "bob: " << bob.id() << ", " << bob.score(0) << endl;
     cout << "tom: " << tom.id() << ", " << tom.score(0) << endl;
 
-    Player zoe = createPlayer("Tom");
+    cout << "Zoe" << endl;
+    Player zoe = createPlayer(12);
     cout << "zoe: " << zoe.id() << ", " << zoe.score(0) << endl;
 }

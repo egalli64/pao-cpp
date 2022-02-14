@@ -15,27 +15,27 @@ public:
     double score() const { return score_; }
     void increaseScore(double delta) { score_ += delta; }
 
-    static void print_count();
+    static void printCount();
 };
 
 int Player::count_ = 0;
 
-void Player::print_count() {
+void Player::printCount() {
     cout << "Current number of players: " << count_ << endl;
 }
 
 void another_function() {
     Player bob(12, 3.7);
-    Player::print_count();
+    Player::printCount();
 }
 
 int main() {
-    Player::print_count();
+    Player::printCount();
 
     Player tom(42, 33.12);
-    Player::print_count();
-    tom.print_count(); // a bit confusing: is it an instance method?
+    Player::printCount();
+    tom.printCount(); // a bit confusing: is it an instance method?
 
     another_function();
-    Player::print_count();
+    Player::printCount();
 }

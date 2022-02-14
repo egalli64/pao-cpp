@@ -6,6 +6,7 @@ struct Point {
     // Point() = delete;
     // Point() = default;
     // Point(int test) { x = y = test; }
+    // Point() : x(0), y(0) { }
     // Point() { x = y = 0; }
 
     int x;

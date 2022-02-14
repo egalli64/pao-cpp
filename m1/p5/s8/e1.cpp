@@ -14,7 +14,7 @@ public:
     double score() const { return score_; }
 
     // explicit inline in definition
-     void increaseScore(double delta);
+    void increaseScore(double delta);
 };
 
 inline void Player::increaseScore(double delta) {

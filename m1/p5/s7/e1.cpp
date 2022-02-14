@@ -25,6 +25,6 @@ int main() {
     delete p;
 
     auto tom = make_unique<Player>(21, 45.3);
-    p->increaseScore(23.3);
+    tom->increaseScore(23.3);
     cout << tom->id() << ' ' << tom->score() << endl;
 }

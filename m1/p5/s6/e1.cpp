@@ -10,7 +10,7 @@ private:
 
 public:
     Player(int id, int size) : id_{ id }, scores_{ new double[size] }, size_{ size } {}
-    ~Player() { delete scores_; }
+    ~Player() { delete [] scores_; }
 
     // copy
     Player(const Player& other);
@@ -71,6 +71,14 @@ Player& Player::operator=(Player&& other) {
     return *this;
 }
 
+Player createPlayer(const char* name) {
+    int id = 23;
+    int size = 12;
+    Player x(id, size);
+
+    return move(x);
+}
+
 int main() {
     Player tom(12, 3);
     tom.addToScore(0, 43.12);
@@ -91,4 +99,7 @@ int main() {
     cout << "al: " << al.id() << ", " << al.score(0) << endl;
     cout << "bob: " << bob.id() << ", " << bob.score(0) << endl;
     cout << "tom: " << tom.id() << ", " << tom.score(0) << endl;
+
+    Player zoe = createPlayer("Tom");
+    cout << "zoe: " << zoe.id() << ", " << zoe.score(0) << endl;
 }

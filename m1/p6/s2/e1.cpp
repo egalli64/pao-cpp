@@ -11,7 +11,7 @@ public:
     const string& name() const { return name_; }
 };
 
-ostream& operator<<(ostream& os, Animal animal) {
+ostream& operator<<(ostream& os, const Animal& animal) {
     return os << animal.name();
 }
 

@@ -6,7 +6,7 @@ using namespace std;
  */
 class Adder {
 private:
-    int addendum_;
+    const int addendum_;
 
 public:
     Adder(int addendum) : addendum_(addendum) {}

@@ -17,7 +17,7 @@ public:
 
 // put-to output stream overload for Player
 ostream& operator<<(ostream& os, const Player& item) {
-    os << item.id() << " " << item.score();
+    os << '{' << item.id() << ", " << item.score() << '}';
     return os;
 }
 
@@ -25,5 +25,5 @@ int main() {
     Player tom(42, 33.12);
     tom.increaseScore(3.3);
 
-    cout << tom << endl;
+    cout << "Tom: " << tom << endl;
 }

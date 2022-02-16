@@ -2,7 +2,7 @@
 #include <string>
 using namespace std;
 
-struct Player {
+class Player {
 private:
     static const int SZ = 5;
     int id_;

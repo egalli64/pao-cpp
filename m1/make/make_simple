@@ -2,8 +2,8 @@
 
 all: hello
 
-hello: main.cpp other.cpp
+hello: main.cpp other.cpp other.h
 	g++ -o hello main.cpp other.cpp
 
 clean:
-	rm -rf hello
+	rm -rf hello *.o

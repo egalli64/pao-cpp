@@ -25,6 +25,14 @@ public:
         value_ = std::move(other.value_);
     }
 
+    Entry& operator=(const Entry& other) {
+        std::cout << "Assigment for " << other.value_ << std::endl;
+
+        key_ = other.key_;
+        value_ = other.value_;
+        return *this;
+    }
+
     Entry& operator=(Entry&& other) {
         std::cout << "Move assigment for " << other.value_ << std::endl;
 

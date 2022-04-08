@@ -5,7 +5,9 @@ class BadAnimal {
 private:
     string name_;
 public:
-    BadAnimal(const string& name) : name_(name) {}
+    BadAnimal(const string& name) : name_(name) {
+        cout << "BadAnimal ctor " << name << endl;
+    }
     ~BadAnimal() { cout << "Dtor for " << name_ << endl; }
 
     const string& name() const { return name_; }
@@ -16,7 +18,10 @@ class Dog : public BadAnimal {
 private:
     string owner_;
 public:
-    Dog(const string& name, const string& owner) : BadAnimal(name), owner_(owner) {}
+    Dog(const string& name, const string& owner) : BadAnimal(name), owner_(owner) {
+        cout << "Dog ctor " << owner << endl;
+    }
+
     ~Dog() { cout << "Dtor for dog owned by " << owner_ << endl; }
 
     string fullName() const override {

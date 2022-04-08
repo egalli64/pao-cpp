@@ -12,7 +12,7 @@ void print(const array<int, 4>& values, const string& label) {
 }
 
 int main() {
-    array<int, 4> values{ 6, 4, 3, 7 };
+    array<int, 4> values{ 6, 3, 7 };
     print(values, "An array");
 
     // all elements implicitly initialized to 0

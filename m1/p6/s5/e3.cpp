@@ -21,8 +21,7 @@ private:
 public:
     Dog(const string& name, const string& owner) : Animal(name), owner_(owner) {}
 
-    string fullName() override final
-    {
+    string fullName() override final {
         return Animal::name() + " owned by " + owner_;
     }
 };

@@ -29,6 +29,13 @@ void normal(const Animal& byConstRef) {
     cout << "Animal passed by const reference: " << byConstRef.name() << endl;
 }
 
+void byPointer(const Animal* p) {
+    if(p == nullptr) {
+        return;
+    }
+    cout << "Animal passed by const ptr: " << p->name() << endl;
+}
+
 int main() {
     Animal npas[] = { Animal("Tom"), PolimorphicDog("Bob", "Robert Smith") };
     cout << "Looping on animals in a non-polimorphic way" << endl;
@@ -41,6 +48,10 @@ int main() {
 
     PolimorphicDog bob("Bob", "Robert Smith");
     cout << "A polimorphic dog: " << bob.name() << endl;
+
+    badIdea(bob);
+    normal(bob);
+    byPointer(&bob);
 
     cout << "Looping on the animals in a polimorphic way" << endl;
     Animal* animals[] = { &tom, &bob };

@@ -16,7 +16,7 @@ int main() {
     vector<int> empty;
     cout << "Size of an empty vector is " << empty.size() << endl;
 
-    vector<int> anotherEmpty{ 5 };
+    vector<int> anotherEmpty{ };
     cout << "Size of another empty vector is " << empty.size() << endl;
 
     vector<int> filled(5, -1);

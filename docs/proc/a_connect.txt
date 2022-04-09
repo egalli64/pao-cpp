@@ -1,0 +1,38 @@
+Oracle Pro*C/C++ Precompiler
+
+1) File .pc
+2) Pro*C precompila il file convertendolo in .c o .cpp - opzione code=cpp
+	l'eseguibile proc è distribuito con i file binari nel folder home di Oracle DB
+3) Segue la normale compilazione C o C++
+4) Link all'Oracle Runtime Library, detta anche SQLLIB
+	folder precomp nella distribuzione di Oracle DB, es: orasql.lib
+
+Può essere integrato (anche se sostanzialmente alternativo) all'uso di Oracle Call Interface (OCI)
+
+Area delle dichiarazioni per comunicazione tra SQL e C/C++
+
+--> EXEC SQL BEGIN DECLARE SECTION;
+--> // ...
+--> EXEC SQL END DECLARE SECTION;
+
+Es: per definire la stringa di connessione 
+--> static const char* connection_string = "hron/password@localhost:1521/xepdb1";
+
+SQL Communications Area, per gestione delle informazioni da Oracle DB
+Se già definita in un altro file oggetto
+--> #define SQLCA_STORAGE_CLASS extern
+La prima volta non deve essere extern 
+--> EXEC SQL INCLUDE sqlca;
+
+Connessione al database
+--> EXEC SQL CONNECT :connection_string;
+La variabile che definisce la stringa di connessione deve essere
+	Definita nell'area di comunicazione
+	Prefissata da ':'
+
+Verifica se la connessione è andata a buon fine via sqlca
+* successo: sqlca.sqlcode è 0
+* altrimenti: sqlca.sqlerrm.sqlerrmc contiene il messaggio di errore
+
+Disconnessione dal database
+--> EXEC SQL COMMIT WORK RELEASE;

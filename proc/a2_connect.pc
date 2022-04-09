@@ -1,0 +1,35 @@
+/*
+ * a2_connect.pc / c
+ *
+ * Connecting to Oracle DB in C++
+ *
+ * To precompile run: proc code=cpp a2_connect.pc
+ */
+
+#include <iostream>
+#include "hron.h"
+#include "a2_connect.h"
+
+EXEC SQL BEGIN DECLARE SECTION;
+
+static const char* connection_string = HRON_CONNECTION;
+
+EXEC SQL END DECLARE SECTION;
+
+#define SQLCA_STORAGE_CLASS extern
+EXEC SQL INCLUDE sqlca;
+
+void connect() {
+	std::cout << "Connecting ... ";
+
+	EXEC SQL CONNECT :connection_string;
+
+	if(sqlca.sqlcode == 0) {
+		std::cout << "done!";
+	} else {
+		std::cout << "error " << sqlca.sqlerrm.sqlerrmc;
+	}
+	std::cout << std::endl;
+
+	EXEC SQL COMMIT WORK RELEASE;
+}

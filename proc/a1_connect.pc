@@ -1,0 +1,33 @@
+/*
+ * a1_connect.pc / c
+ *
+ * Connecting to Oracle DB in C
+ *
+ * To precompile run: proc a1_connect.pc
+ */
+
+#include <stdio.h>
+#include "hron.h"
+#include "a1_connect.h"
+
+EXEC SQL BEGIN DECLARE SECTION;
+
+static const char* connection_string = HRON_CONNECTION;
+
+EXEC SQL END DECLARE SECTION;
+
+EXEC SQL INCLUDE sqlca;
+
+void connect_c(void) {
+	printf("Connecting ... ");
+
+	EXEC SQL CONNECT :connection_string;
+
+	if(sqlca.sqlcode == 0) {
+		printf("done!\n");
+	} else {
+		printf("error %s\n", sqlca.sqlerrm.sqlerrmc);
+	}
+
+	EXEC SQL COMMIT WORK RELEASE;
+}

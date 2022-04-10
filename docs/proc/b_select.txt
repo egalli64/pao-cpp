@@ -1,0 +1,23 @@
+Pro*C SELECT INTO
+
+Nella DECLARE SECTION può essere usato lo "pseudotipo" varchar, convertito da pro*c in una struct di len e arr
+es: varchar street_address[41]; --> struct { unsigned short len; unsigned char arr[41]; } street_address;
+
+Le variabili definite nella DECLARE SECTION possono essere usate nelle SELECT INTO
+--> EXEC SQL SELECT street_address INTO :street_address FROM location WHERE location_id = :location_id;
+
+Nel caso di char array / varchar, occorre settare esplicitamente il terminatore per poterli usare come stringhe, es:
+--> street_address.arr[street_address.len] = '\0';
+
+---
+Nella DECLARE SECTION definito un oggetto di struct definita contestualmente, utilizzabile nella clausola INTO
+es: varchar street_address[41]; --> struct { unsigned short len; unsigned char arr[41]; } street_address;
+
+Per interrompere un loop nel caso una SELECT non trovi nessuna riga
+--> EXEC SQL WHENEVER NOT FOUND DO break;
+
+--- SELECT INTO - INDICATOR
+Nel caso un valore sia NULL, Pro*c non popola il corrispondente campo
+Una struct "indicator" corrispondente alla struct usata nell'INTO permette di identificare il caso
+- lo short corrispondente è settato a -1 per indicare un NULL
+ 

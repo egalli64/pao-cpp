@@ -60,16 +60,16 @@ static struct sqltdss sqltds =
 struct sqlcxp
 {
   unsigned short fillen;
-           char  filnam[16];
+           char  filnam[15];
 };
 static const struct sqlcxp sqlfpn =
 {
-    15,
-    ".\\a2_connect.pc"
+    14,
+    ".\\b1_select.pc"
 };
 
 
-static unsigned int sqlctx = 2047115;
+static unsigned int sqlctx = 1026955;
 
 
 static struct sqlexd {
@@ -137,31 +137,48 @@ typedef struct { unsigned short len; unsigned char arr[1]; } varchar;
 /* cud (compilation unit data) array */
 static const short sqlcud0[] =
 {13,4130,178,0,0,
-5,0,0,0,0,0,27,24,0,0,4,4,0,1,0,1,97,0,0,1,10,0,0,1,10,0,0,1,10,0,0,
-36,0,0,2,0,0,30,33,0,0,0,0,0,1,0,
+5,0,0,0,0,0,27,34,0,0,4,4,0,1,0,1,97,0,0,1,10,0,0,1,10,0,0,1,10,0,0,
+36,0,0,2,93,0,4,42,0,0,4,1,0,1,0,2,9,0,0,2,9,0,0,2,97,0,0,1,3,0,0,
+67,0,0,3,0,0,30,56,0,0,0,0,0,1,0,
 };
 
 
 /*
- * a2_connect.pc / cpp
+ * b1_select.pc / cpp
  *
- * Connecting to Oracle DB in C++
+ * Oracle DB select
  *
- * To precompile run: proc code=cpp a2_connect.pc
+ * To precompile run: proc code=cpp b1_select.pc
  */
 
 #include <iostream>
 #include "hron.h"
-#include "a2_connect.h"
+#include "b1_select.h"
 
 /* EXEC SQL BEGIN DECLARE SECTION; */ 
 
 
 static const char* connection_string = HRON_CONNECTION;
 
+static int location_id;
+
+const int STREET_ADDRESS_LEN = 40;
+/* varchar street_address[STREET_ADDRESS_LEN + 1]; */ 
+struct { unsigned short len; unsigned char arr[41]; } street_address;
+
+
+const int CITY_LEN = 30;
+/* varchar city[CITY_LEN + 1]; */ 
+struct { unsigned short len; unsigned char arr[31]; } city;
+
+
+const int COUNTRY_ID_LEN = 2;
+char country_id[COUNTRY_ID_LEN + 1];
+
 /* EXEC SQL END DECLARE SECTION; */ 
 
 
+#define SQLCA_STORAGE_CLASS extern
 /* EXEC SQL INCLUDE sqlca;
  */ 
 /*
@@ -265,9 +282,7 @@ SQLCA_STORAGE_CLASS struct sqlca sqlca
 /* end SQLCA */
 
 
-void connect() {
-	std::cout << "Connecting ... ";
-
+void select_a_location(int id) {
 	/* EXEC SQL CONNECT :connection_string; */ 
 
 {
@@ -308,13 +323,88 @@ void connect() {
 }
 
 
-
-	if(sqlca.sqlcode == 0) {
-		std::cout << "done!";
-	} else {
-		std::cout << "error " << sqlca.sqlerrm.sqlerrmc;
+	if(sqlca.sqlcode != 0) {
+		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << std::endl;
+		return;
 	}
-	std::cout << std::endl;
+
+    location_id = id;
+        
+    /* EXEC SQL SELECT street_address, city, country_id INTO :street_address, :city, :country_id
+        FROM location
+        WHERE location_id = :location_id; */ 
+
+{
+    struct sqlexd sqlstm;
+    sqlstm.sqlvsn = 13;
+    sqlstm.arrsiz = 4;
+    sqlstm.sqladtp = &sqladt;
+    sqlstm.sqltdsp = &sqltds;
+    sqlstm.stmt = "select street_address ,city ,country_id into :b0,:b1,:b2 \
+ from location where location_id=:b3";
+    sqlstm.iters = (unsigned int  )1;
+    sqlstm.offset = (unsigned int  )36;
+    sqlstm.selerr = (unsigned short)1;
+    sqlstm.sqlpfmem = (unsigned int  )0;
+    sqlstm.cud = sqlcud0;
+    sqlstm.sqlest = (unsigned char  *)&sqlca;
+    sqlstm.sqlety = (unsigned short)4352;
+    sqlstm.occurs = (unsigned int  )0;
+    sqlstm.sqhstv[0] = (         void  *)&street_address;
+    sqlstm.sqhstl[0] = (unsigned int  )43;
+    sqlstm.sqhsts[0] = (         int  )0;
+    sqlstm.sqindv[0] = (         void  *)0;
+    sqlstm.sqinds[0] = (         int  )0;
+    sqlstm.sqharm[0] = (unsigned int  )0;
+    sqlstm.sqadto[0] = (unsigned short )0;
+    sqlstm.sqtdso[0] = (unsigned short )0;
+    sqlstm.sqhstv[1] = (         void  *)&city;
+    sqlstm.sqhstl[1] = (unsigned int  )33;
+    sqlstm.sqhsts[1] = (         int  )0;
+    sqlstm.sqindv[1] = (         void  *)0;
+    sqlstm.sqinds[1] = (         int  )0;
+    sqlstm.sqharm[1] = (unsigned int  )0;
+    sqlstm.sqadto[1] = (unsigned short )0;
+    sqlstm.sqtdso[1] = (unsigned short )0;
+    sqlstm.sqhstv[2] = (         void  *)country_id;
+    sqlstm.sqhstl[2] = (unsigned int  )3;
+    sqlstm.sqhsts[2] = (         int  )0;
+    sqlstm.sqindv[2] = (         void  *)0;
+    sqlstm.sqinds[2] = (         int  )0;
+    sqlstm.sqharm[2] = (unsigned int  )0;
+    sqlstm.sqadto[2] = (unsigned short )0;
+    sqlstm.sqtdso[2] = (unsigned short )0;
+    sqlstm.sqhstv[3] = (         void  *)&location_id;
+    sqlstm.sqhstl[3] = (unsigned int  )sizeof(int);
+    sqlstm.sqhsts[3] = (         int  )0;
+    sqlstm.sqindv[3] = (         void  *)0;
+    sqlstm.sqinds[3] = (         int  )0;
+    sqlstm.sqharm[3] = (unsigned int  )0;
+    sqlstm.sqadto[3] = (unsigned short )0;
+    sqlstm.sqtdso[3] = (unsigned short )0;
+    sqlstm.sqphsv = sqlstm.sqhstv;
+    sqlstm.sqphsl = sqlstm.sqhstl;
+    sqlstm.sqphss = sqlstm.sqhsts;
+    sqlstm.sqpind = sqlstm.sqindv;
+    sqlstm.sqpins = sqlstm.sqinds;
+    sqlstm.sqparm = sqlstm.sqharm;
+    sqlstm.sqparc = sqlstm.sqharc;
+    sqlstm.sqpadto = sqlstm.sqadto;
+    sqlstm.sqptdso = sqlstm.sqtdso;
+    sqlcxt((void **)0, &sqlctx, &sqlstm, &sqlfpn);
+}
+
+
+
+	if(sqlca.sqlcode != 0) {
+		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << std::endl;
+	} else {
+		street_address.arr[street_address.len] = '\0';
+		city.arr[city.len] = '\0';
+		country_id[COUNTRY_ID_LEN] = '\0';
+
+		std::cout << "Location is: " << street_address.arr << ", " << city.arr << " - " << country_id << std::endl;
+	}
 
 	/* EXEC SQL COMMIT WORK RELEASE; */ 
 
@@ -325,7 +415,7 @@ void connect() {
  sqlstm.sqladtp = &sqladt;
  sqlstm.sqltdsp = &sqltds;
  sqlstm.iters = (unsigned int  )1;
- sqlstm.offset = (unsigned int  )36;
+ sqlstm.offset = (unsigned int  )67;
  sqlstm.cud = sqlcud0;
  sqlstm.sqlest = (unsigned char  *)&sqlca;
  sqlstm.sqlety = (unsigned short)4352;

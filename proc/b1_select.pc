@@ -1,0 +1,57 @@
+/*
+ * b1_select.pc / cpp
+ *
+ * Oracle DB select
+ *
+ * To precompile run: proc code=cpp b1_select.pc
+ */
+
+#include <iostream>
+#include "hron.h"
+#include "b1_select.h"
+
+EXEC SQL BEGIN DECLARE SECTION;
+
+static const char* connection_string = HRON_CONNECTION;
+
+static int location_id;
+
+const int STREET_ADDRESS_LEN = 40;
+varchar street_address[STREET_ADDRESS_LEN + 1];
+
+const int CITY_LEN = 30;
+varchar city[CITY_LEN + 1];
+
+const int COUNTRY_ID_LEN = 2;
+char country_id[COUNTRY_ID_LEN + 1];
+
+EXEC SQL END DECLARE SECTION;
+
+#define SQLCA_STORAGE_CLASS extern
+EXEC SQL INCLUDE sqlca;
+
+void select_a_location(int id) {
+	EXEC SQL CONNECT :connection_string;
+	if(sqlca.sqlcode != 0) {
+		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << std::endl;
+		return;
+	}
+
+    location_id = id;
+        
+    EXEC SQL SELECT street_address, city, country_id INTO :street_address, :city, :country_id
+        FROM location
+        WHERE location_id = :location_id;
+
+	if(sqlca.sqlcode != 0) {
+		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << std::endl;
+	} else {
+		street_address.arr[street_address.len] = '\0';
+		city.arr[city.len] = '\0';
+		country_id[COUNTRY_ID_LEN] = '\0';
+
+		std::cout << "Location is: " << street_address.arr << ", " << city.arr << " - " << country_id << std::endl;
+	}
+
+	EXEC SQL COMMIT WORK RELEASE;
+}

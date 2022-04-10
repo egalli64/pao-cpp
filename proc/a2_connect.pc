@@ -1,5 +1,5 @@
 /*
- * a2_connect.pc / c
+ * a2_connect.pc / cpp
  *
  * Connecting to Oracle DB in C++
  *
@@ -16,7 +16,6 @@ static const char* connection_string = HRON_CONNECTION;
 
 EXEC SQL END DECLARE SECTION;
 
-#define SQLCA_STORAGE_CLASS extern
 EXEC SQL INCLUDE sqlca;
 
 void connect() {

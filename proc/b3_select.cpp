@@ -60,16 +60,16 @@ static struct sqltdss sqltds =
 struct sqlcxp
 {
   unsigned short fillen;
-           char  filnam[16];
+           char  filnam[15];
 };
 static const struct sqlcxp sqlfpn =
 {
-    15,
-    ".\\a2_connect.pc"
+    14,
+    ".\\b3_select.pc"
 };
 
 
-static unsigned int sqlctx = 2047115;
+static unsigned int sqlctx = 1029003;
 
 
 static struct sqlexd {
@@ -103,16 +103,16 @@ static struct sqlexd {
    unsigned int   sqcmod;
    unsigned int   sqfmod;
    unsigned int   sqlpfmem;
-            void  *sqhstv[4];
-   unsigned int   sqhstl[4];
-            int   sqhsts[4];
-            void  *sqindv[4];
-            int   sqinds[4];
-   unsigned int   sqharm[4];
-   unsigned int   *sqharc[4];
-   unsigned short  sqadto[4];
-   unsigned short  sqtdso[4];
-} sqlstm = {13,4};
+            void  *sqhstv[5];
+   unsigned int   sqhstl[5];
+            int   sqhsts[5];
+            void  *sqindv[5];
+            int   sqinds[5];
+   unsigned int   sqharm[5];
+   unsigned int   *sqharc[5];
+   unsigned short  sqadto[5];
+   unsigned short  sqtdso[5];
+} sqlstm = {13,5};
 
 // Prototypes
 extern "C" {
@@ -137,31 +137,60 @@ typedef struct { unsigned short len; unsigned char arr[1]; } varchar;
 /* cud (compilation unit data) array */
 static const short sqlcud0[] =
 {13,4130,178,0,0,
-5,0,0,0,0,0,27,24,0,0,4,4,0,1,0,1,97,0,0,1,10,0,0,1,10,0,0,1,10,0,0,
-36,0,0,2,0,0,30,33,0,0,0,0,0,1,0,
+5,0,0,0,0,0,27,44,0,0,4,4,0,1,0,1,97,0,0,1,10,0,0,1,10,0,0,1,10,0,0,
+36,0,0,2,129,0,4,54,0,0,5,1,0,1,0,2,9,0,0,2,9,0,0,2,9,0,0,2,97,0,0,1,3,0,0,
+71,0,0,3,0,0,30,79,0,0,0,0,0,1,0,
 };
 
 
 /*
- * a2_connect.pc / cpp
+ * b3_select.pc / cpp
  *
- * Connecting to Oracle DB in C++
+ * select into - indicator
  *
- * To precompile run: proc code=cpp a2_connect.pc
+ * To precompile run: proc code=cpp b3_select.pc
  */
 
 #include <iostream>
 #include "hron.h"
-#include "a2_connect.h"
+#include "b3_select.h"
 
 /* EXEC SQL BEGIN DECLARE SECTION; */ 
 
 
 static const char* connection_string = HRON_CONNECTION;
 
+static int location_id;
+
+const int STREET_ADDRESS_LEN = 40;
+const int CITY_LEN = 30;
+const int STATE_PROVINCE_LEN = 25;
+const int COUNTRY_ID_LEN = 2;
+
+static struct Location {
+	/* varchar street_address[STREET_ADDRESS_LEN + 1]; */ 
+struct { unsigned short len; unsigned char arr[41]; } street_address;
+
+	/* varchar city[CITY_LEN + 1]; */ 
+struct { unsigned short len; unsigned char arr[31]; } city;
+
+	/* varchar state_province[STATE_PROVINCE_LEN + 1]; */ 
+struct { unsigned short len; unsigned char arr[26]; } state_province;
+
+	char country_id[COUNTRY_ID_LEN + 1];
+} location;
+
+static struct LocationIndicator {
+	short street_address;
+	short city;
+	short state_province;
+	short country_id;
+} indicator;
+
 /* EXEC SQL END DECLARE SECTION; */ 
 
 
+#define SQLCA_STORAGE_CLASS extern
 /* EXEC SQL INCLUDE sqlca;
  */ 
 /*
@@ -265,9 +294,7 @@ SQLCA_STORAGE_CLASS struct sqlca sqlca
 /* end SQLCA */
 
 
-void connect() {
-	std::cout << "Connecting ... ";
-
+void select_locations_null_from(int id) {
 	/* EXEC SQL CONNECT :connection_string; */ 
 
 {
@@ -308,24 +335,122 @@ void connect() {
 }
 
 
-
-	if(sqlca.sqlcode == 0) {
-		std::cout << "done!";
-	} else {
-		std::cout << "error " << sqlca.sqlerrm.sqlerrmc;
+	if(sqlca.sqlcode != 0) {
+		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << std::endl;
+		return;
 	}
-	std::cout << std::endl;
+
+	for(int current_id = id; ; current_id += 100) {
+		location_id = current_id;
+
+		/* EXEC SQL WHENEVER NOT FOUND DO break; */ 
+
+		/* EXEC SQL SELECT street_address, city, state_province, country_id
+			INTO :location INDICATOR :indicator
+			FROM location
+			WHERE location_id = :location_id; */ 
+
+{
+  struct sqlexd sqlstm;
+  sqlstm.sqlvsn = 13;
+  sqlstm.arrsiz = 5;
+  sqlstm.sqladtp = &sqladt;
+  sqlstm.sqltdsp = &sqltds;
+  sqlstm.stmt = "select street_address ,city ,state_province ,country_id int\
+o :s1:i1 ,:s2:i2 ,:s3:i3 ,:s4:i4   from location where location_id=:b2";
+  sqlstm.iters = (unsigned int  )1;
+  sqlstm.offset = (unsigned int  )36;
+  sqlstm.selerr = (unsigned short)1;
+  sqlstm.sqlpfmem = (unsigned int  )0;
+  sqlstm.cud = sqlcud0;
+  sqlstm.sqlest = (unsigned char  *)&sqlca;
+  sqlstm.sqlety = (unsigned short)4352;
+  sqlstm.occurs = (unsigned int  )0;
+  sqlstm.sqhstv[0] = (         void  *)&location.street_address;
+  sqlstm.sqhstl[0] = (unsigned int  )43;
+  sqlstm.sqhsts[0] = (         int  )0;
+  sqlstm.sqindv[0] = (         void  *)&indicator.street_address;
+  sqlstm.sqinds[0] = (         int  )0;
+  sqlstm.sqharm[0] = (unsigned int  )0;
+  sqlstm.sqadto[0] = (unsigned short )0;
+  sqlstm.sqtdso[0] = (unsigned short )0;
+  sqlstm.sqhstv[1] = (         void  *)&location.city;
+  sqlstm.sqhstl[1] = (unsigned int  )33;
+  sqlstm.sqhsts[1] = (         int  )0;
+  sqlstm.sqindv[1] = (         void  *)&indicator.city;
+  sqlstm.sqinds[1] = (         int  )0;
+  sqlstm.sqharm[1] = (unsigned int  )0;
+  sqlstm.sqadto[1] = (unsigned short )0;
+  sqlstm.sqtdso[1] = (unsigned short )0;
+  sqlstm.sqhstv[2] = (         void  *)&location.state_province;
+  sqlstm.sqhstl[2] = (unsigned int  )28;
+  sqlstm.sqhsts[2] = (         int  )0;
+  sqlstm.sqindv[2] = (         void  *)&indicator.state_province;
+  sqlstm.sqinds[2] = (         int  )0;
+  sqlstm.sqharm[2] = (unsigned int  )0;
+  sqlstm.sqadto[2] = (unsigned short )0;
+  sqlstm.sqtdso[2] = (unsigned short )0;
+  sqlstm.sqhstv[3] = (         void  *)location.country_id;
+  sqlstm.sqhstl[3] = (unsigned int  )3;
+  sqlstm.sqhsts[3] = (         int  )0;
+  sqlstm.sqindv[3] = (         void  *)&indicator.country_id;
+  sqlstm.sqinds[3] = (         int  )0;
+  sqlstm.sqharm[3] = (unsigned int  )0;
+  sqlstm.sqadto[3] = (unsigned short )0;
+  sqlstm.sqtdso[3] = (unsigned short )0;
+  sqlstm.sqhstv[4] = (         void  *)&location_id;
+  sqlstm.sqhstl[4] = (unsigned int  )sizeof(int);
+  sqlstm.sqhsts[4] = (         int  )0;
+  sqlstm.sqindv[4] = (         void  *)0;
+  sqlstm.sqinds[4] = (         int  )0;
+  sqlstm.sqharm[4] = (unsigned int  )0;
+  sqlstm.sqadto[4] = (unsigned short )0;
+  sqlstm.sqtdso[4] = (unsigned short )0;
+  sqlstm.sqphsv = sqlstm.sqhstv;
+  sqlstm.sqphsl = sqlstm.sqhstl;
+  sqlstm.sqphss = sqlstm.sqhsts;
+  sqlstm.sqpind = sqlstm.sqindv;
+  sqlstm.sqpins = sqlstm.sqinds;
+  sqlstm.sqparm = sqlstm.sqharm;
+  sqlstm.sqparc = sqlstm.sqharc;
+  sqlstm.sqpadto = sqlstm.sqadto;
+  sqlstm.sqptdso = sqlstm.sqtdso;
+  sqlcxt((void **)0, &sqlctx, &sqlstm, &sqlfpn);
+  if (sqlca.sqlcode == 1403) break;
+}
+
+
+
+		if(sqlca.sqlcode != 0) {
+			std::cout << "error " << sqlca.sqlerrm.sqlerrmc << std::endl;
+		} else {
+			location.street_address.arr[location.street_address.len] = '\0';
+			location.city.arr[location.city.len] = '\0';
+			if(indicator.state_province != -1) {
+				location.state_province.arr[location.state_province.len] = '\0';
+			} else {
+				location.state_province.arr[0] = '-';
+				location.state_province.arr[1] = '\0';
+			}
+			location.country_id[COUNTRY_ID_LEN] = '\0';
+
+			std::cout << '[' << current_id << "] "
+				<< location.street_address.arr << ", "
+				<< location.city.arr << " ("<< location.state_province.arr << ") "
+				<< location.country_id << std::endl;
+		}
+	}
 
 	/* EXEC SQL COMMIT WORK RELEASE; */ 
 
 {
  struct sqlexd sqlstm;
  sqlstm.sqlvsn = 13;
- sqlstm.arrsiz = 4;
+ sqlstm.arrsiz = 5;
  sqlstm.sqladtp = &sqladt;
  sqlstm.sqltdsp = &sqltds;
  sqlstm.iters = (unsigned int  )1;
- sqlstm.offset = (unsigned int  )36;
+ sqlstm.offset = (unsigned int  )71;
  sqlstm.cud = sqlcud0;
  sqlstm.sqlest = (unsigned char  *)&sqlca;
  sqlstm.sqlety = (unsigned short)4352;

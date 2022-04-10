@@ -1,0 +1,80 @@
+/*
+ * b3_select.pc / cpp
+ *
+ * select into - indicator
+ *
+ * To precompile run: proc code=cpp b3_select.pc
+ */
+
+#include <iostream>
+#include "hron.h"
+#include "b3_select.h"
+
+EXEC SQL BEGIN DECLARE SECTION;
+
+static const char* connection_string = HRON_CONNECTION;
+
+static int location_id;
+
+const int STREET_ADDRESS_LEN = 40;
+const int CITY_LEN = 30;
+const int STATE_PROVINCE_LEN = 25;
+const int COUNTRY_ID_LEN = 2;
+
+static struct Location {
+	varchar street_address[STREET_ADDRESS_LEN + 1];
+	varchar city[CITY_LEN + 1];
+	varchar state_province[STATE_PROVINCE_LEN + 1];
+	char country_id[COUNTRY_ID_LEN + 1];
+} location;
+
+static struct LocationIndicator {
+	short street_address;
+	short city;
+	short state_province;
+	short country_id;
+} indicator;
+
+EXEC SQL END DECLARE SECTION;
+
+#define SQLCA_STORAGE_CLASS extern
+EXEC SQL INCLUDE sqlca;
+
+void select_locations_null_from(int id) {
+	EXEC SQL CONNECT :connection_string;
+	if(sqlca.sqlcode != 0) {
+		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << std::endl;
+		return;
+	}
+
+	for(int current_id = id; ; current_id += 100) {
+		location_id = current_id;
+
+		EXEC SQL WHENEVER NOT FOUND DO break;
+		EXEC SQL SELECT street_address, city, state_province, country_id
+			INTO :location INDICATOR :indicator
+			FROM location
+			WHERE location_id = :location_id;
+
+		if(sqlca.sqlcode != 0) {
+			std::cout << "error " << sqlca.sqlerrm.sqlerrmc << std::endl;
+		} else {
+			location.street_address.arr[location.street_address.len] = '\0';
+			location.city.arr[location.city.len] = '\0';
+			if(indicator.state_province != -1) {
+				location.state_province.arr[location.state_province.len] = '\0';
+			} else {
+				location.state_province.arr[0] = '-';
+				location.state_province.arr[1] = '\0';
+			}
+			location.country_id[COUNTRY_ID_LEN] = '\0';
+
+			std::cout << '[' << current_id << "] "
+				<< location.street_address.arr << ", "
+				<< location.city.arr << " ("<< location.state_province.arr << ") "
+				<< location.country_id << std::endl;
+		}
+	}
+
+	EXEC SQL COMMIT WORK RELEASE;
+}

@@ -1,0 +1,73 @@
+/*
+ * c1_dml.pc / cpp
+ *
+ * insert
+ *
+ * To precompile run: proc code=cpp c1_dml.pc
+ */
+
+#include <iostream>
+#include "hron.h"
+#include "c1_dml.h"
+
+EXEC SQL BEGIN DECLARE SECTION;
+
+static const char* connection_string = HRON_CONNECTION;
+
+static int location_id;
+
+const int COUNTRY_ID_LEN = 2;
+const int NAME_LEN = 40;
+
+static struct Country {
+	char country_id[COUNTRY_ID_LEN + 1];
+	varchar name[NAME_LEN + 1];
+	int region_id;
+} country;
+
+EXEC SQL END DECLARE SECTION;
+
+#define SQLCA_STORAGE_CLASS extern
+EXEC SQL INCLUDE sqlca;
+
+static void select_spain(bool expected) {
+	EXEC SQL SELECT country_id, name, region_id
+		INTO :country
+		FROM country
+		WHERE country_id = 'Spain';
+
+	if(!expected && sqlca.sqlcode == 0) {
+		std::cout << "Spain should not be present in the database!" << std::endl;
+	} else 
+	
+	if(sqlca.sqlcode != 0) {
+		if(!expected) {
+			std::cout << "As expected, Spain is not be present in the database" << std::endl;
+		} else {
+			std::cout << "Unexpectedly, can't get Spain, error " << sqlca.sqlerrm.sqlerrmc << std::endl;
+		}
+	} else {
+		if(!expected) {
+			std::cout << "Unexpected, Spain shuld not be present in the database!" << std::endl;
+		}
+
+		country.country_id[COUNTRY_ID_LEN] = '\0';
+		country.name.arr[country.name.len] = '\0';
+
+		std::cout << country.country_id << ": " << country.name.arr
+			<< " ("<< country.region_id << ")" << std::endl;
+	}
+}
+
+void insert_country() {
+	EXEC SQL CONNECT :connection_string;
+	if(sqlca.sqlcode != 0) {
+		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << std::endl;
+		return;
+	}
+
+	select_spain(false);
+	select_spain(true);
+
+	EXEC SQL COMMIT WORK RELEASE;
+}

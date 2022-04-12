@@ -9,6 +9,7 @@ extern "C" {
 #include "b1_select.h"
 #include "b2_select.h"
 #include "b3_select.h"
+#include "c1_dml.h"
 
 int main() {
 	std::string confirm;
@@ -45,5 +46,12 @@ int main() {
 
 	if (!confirm.empty()) {
 		select_locations_null_from(std::stoi(confirm));
+	}
+
+	std::cout << "Insert country (then rollback) [N]? ";
+	std::getline(std::cin, confirm);
+
+	if (!confirm.empty()) {
+		insert_country();
 	}
 }

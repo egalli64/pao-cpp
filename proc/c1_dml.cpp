@@ -137,16 +137,18 @@ typedef struct { unsigned short len; unsigned char arr[1]; } varchar;
 /* cud (compilation unit data) array */
 static const short sqlcud0[] =
 {13,4130,178,0,0,
-5,0,0,1,93,0,4,34,0,0,3,0,0,1,0,2,97,0,0,2,9,0,0,2,3,0,0,
-32,0,0,0,0,0,27,63,0,0,4,4,0,1,0,1,97,0,0,1,10,0,0,1,10,0,0,1,10,0,0,
-63,0,0,3,0,0,30,72,0,0,0,0,0,1,0,
+5,0,0,1,87,0,4,34,0,0,3,0,0,1,0,2,97,0,0,2,9,0,0,2,3,0,0,
+32,0,0,0,0,0,27,61,0,0,4,4,0,1,0,1,97,0,0,1,10,0,0,1,10,0,0,1,10,0,0,
+63,0,0,3,71,0,3,70,0,0,0,0,0,1,0,
+78,0,0,4,0,0,31,78,0,0,0,0,0,1,0,
+93,0,0,5,0,0,32,83,0,0,0,0,0,1,0,
 };
 
 
 /*
  * c1_dml.pc / cpp
  *
- * insert
+ * insert (rollback)
  *
  * To precompile run: proc code=cpp c1_dml.pc
  */
@@ -284,7 +286,7 @@ static void select_spain(bool expected) {
 	/* EXEC SQL SELECT country_id, name, region_id
 		INTO :country
 		FROM country
-		WHERE country_id = 'Spain'; */ 
+		WHERE name = 'Spain'; */ 
 
 {
  struct sqlexd sqlstm;
@@ -293,7 +295,7 @@ static void select_spain(bool expected) {
  sqlstm.sqladtp = &sqladt;
  sqlstm.sqltdsp = &sqltds;
  sqlstm.stmt = "select country_id ,name ,region_id into :s1 ,:s2 ,:s3   from\
- country where country_id='Spain'";
+ country where name='Spain'";
  sqlstm.iters = (unsigned int  )1;
  sqlstm.offset = (unsigned int  )5;
  sqlstm.selerr = (unsigned short)1;
@@ -340,25 +342,23 @@ static void select_spain(bool expected) {
 
 
 
-	if(!expected && sqlca.sqlcode == 0) {
-		std::cout << "Spain should not be present in the database!" << std::endl;
-	} else 
-	
 	if(sqlca.sqlcode != 0) {
 		if(!expected) {
-			std::cout << "As expected, Spain is not be present in the database" << std::endl;
+			std::cout << "As expected, Spain is not in the database" << std::endl;
 		} else {
-			std::cout << "Unexpectedly, can't get Spain, error " << sqlca.sqlerrm.sqlerrmc << std::endl;
+			std::cout << "Unexpectedly, can't get Spain. Error " << sqlca.sqlerrm.sqlerrmc << std::endl;
 		}
 	} else {
 		if(!expected) {
-			std::cout << "Unexpected, Spain shuld not be present in the database!" << std::endl;
+			std::cout << "Unexpected! Spain should not be in the database" << std::endl;
+		} else {
+			std::cout << "As expected, Spain is in the database" << ": ";
 		}
 
 		country.country_id[COUNTRY_ID_LEN] = '\0';
 		country.name.arr[country.name.len] = '\0';
 
-		std::cout << country.country_id << ": " << country.name.arr
+		std::cout << country.country_id << " - " << country.name.arr
 			<< " ("<< country.region_id << ")" << std::endl;
 	}
 }
@@ -409,10 +409,37 @@ void insert_country() {
 		return;
 	}
 
+	std::cout << "Before INSERT INTO" << std::endl;
 	select_spain(false);
+
+	/* EXEC SQL INSERT INTO country (country_id, name, region_id) VALUES ('ES', 'Spain', 1); */ 
+
+{
+ struct sqlexd sqlstm;
+ sqlstm.sqlvsn = 13;
+ sqlstm.arrsiz = 4;
+ sqlstm.sqladtp = &sqladt;
+ sqlstm.sqltdsp = &sqltds;
+ sqlstm.stmt = "insert into country (country_id,name,region_id) values ('ES'\
+,'Spain',1)";
+ sqlstm.iters = (unsigned int  )1;
+ sqlstm.offset = (unsigned int  )63;
+ sqlstm.cud = sqlcud0;
+ sqlstm.sqlest = (unsigned char  *)&sqlca;
+ sqlstm.sqlety = (unsigned short)4352;
+ sqlstm.occurs = (unsigned int  )0;
+ sqlcxt((void **)0, &sqlctx, &sqlstm, &sqlfpn);
+}
+
+
+	if(sqlca.sqlcode != 0) {
+		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << std::endl;
+	}
+
+	std::cout << "After INSERT INTO" << std::endl;
 	select_spain(true);
 
-	/* EXEC SQL COMMIT WORK RELEASE; */ 
+	/* EXEC SQL ROLLBACK; */ 
 
 {
  struct sqlexd sqlstm;
@@ -421,7 +448,29 @@ void insert_country() {
  sqlstm.sqladtp = &sqladt;
  sqlstm.sqltdsp = &sqltds;
  sqlstm.iters = (unsigned int  )1;
- sqlstm.offset = (unsigned int  )63;
+ sqlstm.offset = (unsigned int  )78;
+ sqlstm.cud = sqlcud0;
+ sqlstm.sqlest = (unsigned char  *)&sqlca;
+ sqlstm.sqlety = (unsigned short)4352;
+ sqlstm.occurs = (unsigned int  )0;
+ sqlcxt((void **)0, &sqlctx, &sqlstm, &sqlfpn);
+}
+
+
+
+	std::cout << "After ROLLBACK" << std::endl;
+	select_spain(false);
+
+	/* EXEC SQL ROLLBACK RELEASE; */ 
+
+{
+ struct sqlexd sqlstm;
+ sqlstm.sqlvsn = 13;
+ sqlstm.arrsiz = 4;
+ sqlstm.sqladtp = &sqladt;
+ sqlstm.sqltdsp = &sqltds;
+ sqlstm.iters = (unsigned int  )1;
+ sqlstm.offset = (unsigned int  )93;
  sqlstm.cud = sqlcud0;
  sqlstm.sqlest = (unsigned char  *)&sqlca;
  sqlstm.sqlety = (unsigned short)4352;

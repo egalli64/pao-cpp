@@ -1,0 +1,58 @@
+/*
+ * c0_select.pc / cpp
+ *
+ * select country by id
+ * assumes an existing connection to Oracle DB
+ *
+ * To precompile run: proc code=cpp c0_select.pc
+ */
+
+#include <iostream>
+#include "c0_select.h"
+
+EXEC SQL BEGIN DECLARE SECTION;
+
+const int COUNTRY_ID_LEN = 2;
+const int NAME_LEN = 40;
+
+const char* country_id;
+
+static struct Country {
+	char country_id[COUNTRY_ID_LEN + 1];
+	varchar name[NAME_LEN + 1];
+	int region_id;
+} country;
+
+EXEC SQL END DECLARE SECTION;
+
+#define SQLCA_STORAGE_CLASS extern
+EXEC SQL INCLUDE sqlca;
+
+void select_country_by_id(const char* id, bool expected) {
+	country_id = id;
+
+	EXEC SQL SELECT country_id, name, region_id
+		INTO :country
+		FROM country
+		WHERE country_id = :country_id;
+
+	if(sqlca.sqlcode != 0) {
+		if(!expected) {
+			std::cout << "As expected, " << id << " is not in the database" << std::endl;
+		} else {
+			std::cout << "Unexpectedly, can't get " << id << ". Error " << sqlca.sqlerrm.sqlerrmc << std::endl;
+		}
+	} else {
+		if(!expected) {
+			std::cout << "Unexpected! " << id << " should not be in the database" << std::endl;
+		} else {
+			std::cout << "As expected, " << id << " is in the database" << ": ";
+		}
+
+		country.country_id[COUNTRY_ID_LEN] = '\0';
+		country.name.arr[country.name.len] = '\0';
+
+		std::cout << country.country_id << " - " << country.name.arr
+			<< " ("<< country.region_id << ")" << std::endl;
+	}
+}

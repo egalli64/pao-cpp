@@ -60,16 +60,16 @@ static struct sqltdss sqltds =
 struct sqlcxp
 {
   unsigned short fillen;
-           char  filnam[10];
+           char  filnam[13];
 };
 static const struct sqlcxp sqlfpn =
 {
-    9,
-    "c1_dml.pc"
+    12,
+    "c0_select.pc"
 };
 
 
-static unsigned int sqlctx = 33931;
+static unsigned int sqlctx = 274315;
 
 
 static struct sqlexd {
@@ -137,30 +137,37 @@ typedef struct { unsigned short len; unsigned char arr[1]; } varchar;
 /* cud (compilation unit data) array */
 static const short sqlcud0[] =
 {13,4130,178,0,0,
-5,0,0,0,0,0,27,24,0,0,4,4,0,1,0,1,97,0,0,1,10,0,0,1,10,0,0,1,10,0,0,
-36,0,0,2,71,0,3,33,0,0,0,0,0,1,0,
-51,0,0,3,0,0,31,41,0,0,0,0,0,1,0,
-66,0,0,4,0,0,32,46,0,0,0,0,0,1,0,
+5,0,0,1,89,0,4,34,0,0,4,1,0,1,0,2,97,0,0,2,9,0,0,2,3,0,0,1,97,0,0,
 };
 
 
 /*
- * c1_dml.pc / cpp
+ * c0_select.pc / cpp
  *
- * insert (rollback)
+ * select country by id
+ * assumes an existing connection to Oracle DB
  *
- * To precompile run: proc code=cpp c1_dml.pc
+ * To precompile run: proc code=cpp c0_select.pc
  */
 
 #include <iostream>
-#include "hron.h"
 #include "c0_select.h"
-#include "c1_dml.h"
 
 /* EXEC SQL BEGIN DECLARE SECTION; */ 
 
 
-static const char* connection_string = HRON_CONNECTION;
+const int COUNTRY_ID_LEN = 2;
+const int NAME_LEN = 40;
+
+const char* country_id;
+
+static struct Country {
+	char country_id[COUNTRY_ID_LEN + 1];
+	/* varchar name[NAME_LEN + 1]; */ 
+struct { unsigned short len; unsigned char arr[41]; } name;
+
+	int region_id;
+} country;
 
 /* EXEC SQL END DECLARE SECTION; */ 
 
@@ -269,8 +276,13 @@ SQLCA_STORAGE_CLASS struct sqlca sqlca
 /* end SQLCA */
 
 
-void insert_country() {
-	/* EXEC SQL CONNECT :connection_string; */ 
+void select_country_by_id(const char* id, bool expected) {
+	country_id = id;
+
+	/* EXEC SQL SELECT country_id, name, region_id
+		INTO :country
+		FROM country
+		WHERE country_id = :country_id; */ 
 
 {
  struct sqlexd sqlstm;
@@ -278,20 +290,48 @@ void insert_country() {
  sqlstm.arrsiz = 4;
  sqlstm.sqladtp = &sqladt;
  sqlstm.sqltdsp = &sqltds;
- sqlstm.iters = (unsigned int  )10;
+ sqlstm.stmt = "select country_id ,name ,region_id into :s1 ,:s2 ,:s3   from\
+ country where country_id=:b1";
+ sqlstm.iters = (unsigned int  )1;
  sqlstm.offset = (unsigned int  )5;
+ sqlstm.selerr = (unsigned short)1;
+ sqlstm.sqlpfmem = (unsigned int  )0;
  sqlstm.cud = sqlcud0;
  sqlstm.sqlest = (unsigned char  *)&sqlca;
  sqlstm.sqlety = (unsigned short)4352;
  sqlstm.occurs = (unsigned int  )0;
- sqlstm.sqhstv[0] = (         void  *)connection_string;
- sqlstm.sqhstl[0] = (unsigned int  )0;
+ sqlstm.sqhstv[0] = (         void  *)country.country_id;
+ sqlstm.sqhstl[0] = (unsigned int  )3;
  sqlstm.sqhsts[0] = (         int  )0;
  sqlstm.sqindv[0] = (         void  *)0;
  sqlstm.sqinds[0] = (         int  )0;
  sqlstm.sqharm[0] = (unsigned int  )0;
  sqlstm.sqadto[0] = (unsigned short )0;
  sqlstm.sqtdso[0] = (unsigned short )0;
+ sqlstm.sqhstv[1] = (         void  *)&country.name;
+ sqlstm.sqhstl[1] = (unsigned int  )43;
+ sqlstm.sqhsts[1] = (         int  )0;
+ sqlstm.sqindv[1] = (         void  *)0;
+ sqlstm.sqinds[1] = (         int  )0;
+ sqlstm.sqharm[1] = (unsigned int  )0;
+ sqlstm.sqadto[1] = (unsigned short )0;
+ sqlstm.sqtdso[1] = (unsigned short )0;
+ sqlstm.sqhstv[2] = (         void  *)&country.region_id;
+ sqlstm.sqhstl[2] = (unsigned int  )sizeof(int);
+ sqlstm.sqhsts[2] = (         int  )0;
+ sqlstm.sqindv[2] = (         void  *)0;
+ sqlstm.sqinds[2] = (         int  )0;
+ sqlstm.sqharm[2] = (unsigned int  )0;
+ sqlstm.sqadto[2] = (unsigned short )0;
+ sqlstm.sqtdso[2] = (unsigned short )0;
+ sqlstm.sqhstv[3] = (         void  *)country_id;
+ sqlstm.sqhstl[3] = (unsigned int  )0;
+ sqlstm.sqhsts[3] = (         int  )0;
+ sqlstm.sqindv[3] = (         void  *)0;
+ sqlstm.sqinds[3] = (         int  )0;
+ sqlstm.sqharm[3] = (unsigned int  )0;
+ sqlstm.sqadto[3] = (unsigned short )0;
+ sqlstm.sqtdso[3] = (unsigned short )0;
  sqlstm.sqphsv = sqlstm.sqhstv;
  sqlstm.sqphsl = sqlstm.sqhstl;
  sqlstm.sqphss = sqlstm.sqhsts;
@@ -301,88 +341,28 @@ void insert_country() {
  sqlstm.sqparc = sqlstm.sqharc;
  sqlstm.sqpadto = sqlstm.sqadto;
  sqlstm.sqptdso = sqlstm.sqtdso;
- sqlstm.sqlcmax = (unsigned int )100;
- sqlstm.sqlcmin = (unsigned int )2;
- sqlstm.sqlcincr = (unsigned int )1;
- sqlstm.sqlctimeout = (unsigned int )0;
- sqlstm.sqlcnowait = (unsigned int )0;
  sqlcxt((void **)0, &sqlctx, &sqlstm, &sqlfpn);
 }
+
 
 
 	if(sqlca.sqlcode != 0) {
-		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << std::endl;
-		return;
+		if(!expected) {
+			std::cout << "As expected, " << id << " is not in the database" << std::endl;
+		} else {
+			std::cout << "Unexpectedly, can't get " << id << ". Error " << sqlca.sqlerrm.sqlerrmc << std::endl;
+		}
+	} else {
+		if(!expected) {
+			std::cout << "Unexpected! " << id << " should not be in the database" << std::endl;
+		} else {
+			std::cout << "As expected, " << id << " is in the database" << ": ";
+		}
+
+		country.country_id[COUNTRY_ID_LEN] = '\0';
+		country.name.arr[country.name.len] = '\0';
+
+		std::cout << country.country_id << " - " << country.name.arr
+			<< " ("<< country.region_id << ")" << std::endl;
 	}
-
-	std::cout << "Before INSERT INTO" << std::endl;
-	select_country_by_id("ES", false);
-
-	/* EXEC SQL INSERT INTO country (country_id, name, region_id) VALUES ('ES', 'Spain', 1); */ 
-
-{
- struct sqlexd sqlstm;
- sqlstm.sqlvsn = 13;
- sqlstm.arrsiz = 4;
- sqlstm.sqladtp = &sqladt;
- sqlstm.sqltdsp = &sqltds;
- sqlstm.stmt = "insert into country (country_id,name,region_id) values ('ES'\
-,'Spain',1)";
- sqlstm.iters = (unsigned int  )1;
- sqlstm.offset = (unsigned int  )36;
- sqlstm.cud = sqlcud0;
- sqlstm.sqlest = (unsigned char  *)&sqlca;
- sqlstm.sqlety = (unsigned short)4352;
- sqlstm.occurs = (unsigned int  )0;
- sqlcxt((void **)0, &sqlctx, &sqlstm, &sqlfpn);
-}
-
-
-	if(sqlca.sqlcode != 0) {
-		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << std::endl;
-	}
-
-	std::cout << "After INSERT INTO" << std::endl;
-	select_country_by_id("ES", true);
-
-	/* EXEC SQL ROLLBACK; */ 
-
-{
- struct sqlexd sqlstm;
- sqlstm.sqlvsn = 13;
- sqlstm.arrsiz = 4;
- sqlstm.sqladtp = &sqladt;
- sqlstm.sqltdsp = &sqltds;
- sqlstm.iters = (unsigned int  )1;
- sqlstm.offset = (unsigned int  )51;
- sqlstm.cud = sqlcud0;
- sqlstm.sqlest = (unsigned char  *)&sqlca;
- sqlstm.sqlety = (unsigned short)4352;
- sqlstm.occurs = (unsigned int  )0;
- sqlcxt((void **)0, &sqlctx, &sqlstm, &sqlfpn);
-}
-
-
-
-	std::cout << "After ROLLBACK" << std::endl;
-	select_country_by_id("ES", false);
-
-	/* EXEC SQL ROLLBACK RELEASE; */ 
-
-{
- struct sqlexd sqlstm;
- sqlstm.sqlvsn = 13;
- sqlstm.arrsiz = 4;
- sqlstm.sqladtp = &sqladt;
- sqlstm.sqltdsp = &sqltds;
- sqlstm.iters = (unsigned int  )1;
- sqlstm.offset = (unsigned int  )66;
- sqlstm.cud = sqlcud0;
- sqlstm.sqlest = (unsigned char  *)&sqlca;
- sqlstm.sqlety = (unsigned short)4352;
- sqlstm.occurs = (unsigned int  )0;
- sqlcxt((void **)0, &sqlctx, &sqlstm, &sqlfpn);
-}
-
-
 }

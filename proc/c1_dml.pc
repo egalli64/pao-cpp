@@ -8,54 +8,17 @@
 
 #include <iostream>
 #include "hron.h"
+#include "c0_select.h"
 #include "c1_dml.h"
 
 EXEC SQL BEGIN DECLARE SECTION;
 
 static const char* connection_string = HRON_CONNECTION;
 
-static int location_id;
-
-const int COUNTRY_ID_LEN = 2;
-const int NAME_LEN = 40;
-
-static struct Country {
-	char country_id[COUNTRY_ID_LEN + 1];
-	varchar name[NAME_LEN + 1];
-	int region_id;
-} country;
-
 EXEC SQL END DECLARE SECTION;
 
 #define SQLCA_STORAGE_CLASS extern
 EXEC SQL INCLUDE sqlca;
-
-static void select_spain(bool expected) {
-	EXEC SQL SELECT country_id, name, region_id
-		INTO :country
-		FROM country
-		WHERE name = 'Spain';
-
-	if(sqlca.sqlcode != 0) {
-		if(!expected) {
-			std::cout << "As expected, Spain is not in the database" << std::endl;
-		} else {
-			std::cout << "Unexpectedly, can't get Spain. Error " << sqlca.sqlerrm.sqlerrmc << std::endl;
-		}
-	} else {
-		if(!expected) {
-			std::cout << "Unexpected! Spain should not be in the database" << std::endl;
-		} else {
-			std::cout << "As expected, Spain is in the database" << ": ";
-		}
-
-		country.country_id[COUNTRY_ID_LEN] = '\0';
-		country.name.arr[country.name.len] = '\0';
-
-		std::cout << country.country_id << " - " << country.name.arr
-			<< " ("<< country.region_id << ")" << std::endl;
-	}
-}
 
 void insert_country() {
 	EXEC SQL CONNECT :connection_string;
@@ -65,7 +28,7 @@ void insert_country() {
 	}
 
 	std::cout << "Before INSERT INTO" << std::endl;
-	select_spain(false);
+	select_country_by_id("ES", false);
 
 	EXEC SQL INSERT INTO country (country_id, name, region_id) VALUES ('ES', 'Spain', 1);
 	if(sqlca.sqlcode != 0) {
@@ -73,12 +36,12 @@ void insert_country() {
 	}
 
 	std::cout << "After INSERT INTO" << std::endl;
-	select_spain(true);
+	select_country_by_id("ES", true);
 
 	EXEC SQL ROLLBACK;
 
 	std::cout << "After ROLLBACK" << std::endl;
-	select_spain(false);
+	select_country_by_id("ES", false);
 
 	EXEC SQL ROLLBACK RELEASE;
 }

@@ -11,6 +11,7 @@ extern "C" {
 #include "b3_select.h"
 #include "c1_dml.h"
 #include "c2_dml.h"
+#include "c3_dml.h"
 
 int main() {
 	std::string confirm;
@@ -61,5 +62,12 @@ int main() {
 
 	if (!confirm.empty()) {
 		update_country();
+	}
+
+	std::cout << "[C3] Delete country (then rollback) [N]? ";
+	std::getline(std::cin, confirm);
+
+	if (!confirm.empty()) {
+		delete_country();
 	}
 }

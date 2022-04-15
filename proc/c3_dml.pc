@@ -1,0 +1,47 @@
+/*
+ * c3_dml.pc / cpp
+ *
+ * delete (rollback)
+ *
+ * To precompile run: proc code=cpp c3_dml.pc
+ */
+
+#include <iostream>
+#include "hron.h"
+#include "c0_select.h"
+#include "c3_dml.h"
+
+EXEC SQL BEGIN DECLARE SECTION;
+
+static const char* connection_string = HRON_CONNECTION;
+
+EXEC SQL END DECLARE SECTION;
+
+#define SQLCA_STORAGE_CLASS extern
+EXEC SQL INCLUDE sqlca;
+
+void delete_country() {
+	EXEC SQL CONNECT :connection_string;
+	if(sqlca.sqlcode != 0) {
+		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << std::endl;
+		return;
+	}
+
+	std::cout << "Before DELETE" << std::endl;
+	select_country_by_id("KW", true);
+
+	EXEC SQL DELETE country WHERE country_id = 'KW';
+	if(sqlca.sqlcode != 0) {
+		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << std::endl;
+	}
+
+	std::cout << "After DELETE" << std::endl;
+	select_country_by_id("KW", false);
+
+	EXEC SQL ROLLBACK;
+
+	std::cout << "After ROLLBACK" << std::endl;
+	select_country_by_id("KW", true);
+
+	EXEC SQL ROLLBACK RELEASE;
+}

@@ -10,48 +10,56 @@ extern "C" {
 #include "b2_select.h"
 #include "b3_select.h"
 #include "c1_dml.h"
+#include "c2_dml.h"
 
 int main() {
 	std::string confirm;
-	std::cout << "C connect [N]? ";
+	std::cout << "[A1] C connect [N]? ";
 	std::getline(std::cin, confirm);
 
 	if (!confirm.empty()) {
 		connect_c();
 	}
 
-	std::cout << "C++ connect [N]? ";
+	std::cout << "[A2] C++ connect [N]? ";
 	std::getline(std::cin, confirm);
 
 	if (!confirm.empty()) {
 		connect();
 	}
 
-	std::cout << "Select location [N / id (es: 1000)]? ";
+	std::cout << "[B1] Select location [N / id (es: 1000)]? ";
 	std::getline(std::cin, confirm);
 
 	if (!confirm.empty()) {
 		select_a_location(std::stoi(confirm));
 	}
 
-	std::cout << "Select locations from [N / id (es: 1000)]? ";
+	std::cout << "[B2] Select locations from [N / id (es: 1000)]? ";
 	std::getline(std::cin, confirm);
 
 	if (!confirm.empty()) {
 		select_locations_from(std::stoi(confirm));
 	}
 
-	std::cout << "Select locations (null) from [N / id (es: 1000)]? ";
+	std::cout << "[B3] Select locations (null) from [N / id (es: 1000)]? ";
 	std::getline(std::cin, confirm);
 
 	if (!confirm.empty()) {
 		select_locations_null_from(std::stoi(confirm));
 	}
 
-	std::cout << "Insert country (then rollback) [N]? ";
+	std::cout << "[C1] Insert country (then rollback) [N]? ";
 	std::getline(std::cin, confirm);
 
 	if (!confirm.empty()) {
 		insert_country();
+	}
+
+	std::cout << "[C2] Update country (then rollback) [N]? ";
+	std::getline(std::cin, confirm);
+
+	if (!confirm.empty()) {
+		update_country();
 	}
 }

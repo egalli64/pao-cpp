@@ -1,0 +1,33 @@
+/*
+ * a1_connect.pgc / c
+ *
+ * Connecting to PostgreSQL in C
+ *
+ * 1) precompile -> ecpg a1_connect.pgc
+ * 2) compile    -> gcc -I"C:\Program Files\PostgreSQL\14\include" -c a1_connect.c
+ * 3) link       -> gcc -o a a1_connect.o -L"C:\Program Files\PostgreSQL\14\lib" -lecpg
+ */
+
+#include <stdio.h>
+
+EXEC SQL BEGIN DECLARE SECTION;
+
+static const char* target = "tcp:postgresql://localhost:5432/hron";
+static const char* user = "hron";
+static const char* password = "password";
+
+EXEC SQL END DECLARE SECTION;
+
+int main() {
+	printf("Connecting ... ");
+
+	EXEC SQL CONNECT TO :target USER :user USING :password;
+
+	if(sqlca.sqlcode == 0) {
+		printf("done!\n");
+	} else {
+		printf("error %s\n", sqlca.sqlerrm.sqlerrmc);
+	}
+
+	EXEC SQL DISCONNECT;
+}

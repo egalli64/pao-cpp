@@ -60,16 +60,16 @@ static struct sqltdss sqltds =
 struct sqlcxp
 {
   unsigned short fillen;
-           char  filnam[16];
+           char  filnam[14];
 };
 static const struct sqlcxp sqlfpn =
 {
-    15,
-    ".\\a1_connect.pc"
+    13,
+    "a1_connect.pc"
 };
 
 
-static unsigned int sqlctx = 2045067;
+static unsigned int sqlctx = 537739;
 
 
 static struct sqlexd {
@@ -135,8 +135,8 @@ typedef struct { unsigned short len; unsigned char arr[1]; } varchar;
 /* cud (compilation unit data) array */
 static const short sqlcud0[] =
 {13,4130,178,0,0,
-5,0,0,0,0,0,27,23,0,0,4,4,0,1,0,1,97,0,0,1,10,0,0,1,10,0,0,1,10,0,0,
-36,0,0,2,0,0,30,31,0,0,0,0,0,1,0,
+5,0,0,0,0,0,27,24,0,0,4,4,0,1,0,1,97,0,0,1,10,0,0,1,10,0,0,1,10,0,0,
+36,0,0,2,0,0,30,32,0,0,0,0,0,1,0,
 };
 
 
@@ -147,14 +147,15 @@ static const short sqlcud0[] =
  *
  * To precompile run: proc a1_connect.pc
  */
+
 #include <stdio.h>
-#include "hron.h"
 #include "a1_connect.h"
 
 /* EXEC SQL BEGIN DECLARE SECTION; */ 
 
 
-static const char* connection_string = HRON_CONNECTION;
+// do not expose sensitive data in real code!
+static const char* connection_string = "hron/password@localhost:1521/xepdb1";
 
 /* EXEC SQL END DECLARE SECTION; */ 
 

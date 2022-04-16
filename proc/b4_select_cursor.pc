@@ -1,0 +1,66 @@
+/*
+ * b4_select_cursor.pc / cpp
+ *
+ * select by cursor
+ *
+ * To precompile run: proc code=cpp b4_select_cursor.pc
+ */
+
+#include <iostream>
+#include "hron.h"
+#include "b4_select_cursor.h"
+
+EXEC SQL BEGIN DECLARE SECTION;
+
+static const char* connection_string = HRON_CONNECTION;
+
+const int STREET_ADDRESS_LEN = 40;
+const int CITY_LEN = 30;
+const int STATE_PROVINCE_LEN = 25;
+
+static struct Location {
+	int location_id;
+	varchar street_address[STREET_ADDRESS_LEN + 1];
+	varchar city[CITY_LEN + 1];
+	varchar state_province[STATE_PROVINCE_LEN + 1];
+} location;
+
+struct Location* pLocation = &location;
+
+EXEC SQL END DECLARE SECTION;
+
+#define SQLCA_STORAGE_CLASS extern
+EXEC SQL INCLUDE sqlca;
+
+void select_locations() {
+	EXEC SQL CONNECT :connection_string;
+	if(sqlca.sqlcode != 0) {
+		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << std::endl;
+		return;
+	}
+
+	EXEC SQL DECLARE locations CURSOR FOR 
+		SELECT location_id, street_address, city, state_province
+		FROM location
+		WHERE country_id = 'US'; 
+
+	EXEC SQL OPEN locations;
+
+	EXEC SQL WHENEVER NOT FOUND DO break; 
+    for (;;) {
+        EXEC SQL FETCH locations INTO :pLocation;
+
+		location.street_address.arr[location.street_address.len] = '\0';
+		location.city.arr[location.city.len] = '\0';
+		location.state_province.arr[location.state_province.len] = '\0';
+
+		std::cout << '[' << location.location_id << "] ";
+		std::cout << location.street_address.arr << " - ";
+		std::cout << location.city.arr;
+		std::cout << " [" << location.state_province.arr << ']' << std::endl;
+    } 
+ 
+    EXEC SQL CLOSE locations; 
+
+	EXEC SQL COMMIT WORK RELEASE;
+}

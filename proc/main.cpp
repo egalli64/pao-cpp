@@ -9,6 +9,7 @@ extern "C" {
 #include "b1_select.h"
 #include "b2_select.h"
 #include "b3_select.h"
+#include "b4_select_cursor.h"
 #include "c1_dml.h"
 #include "c2_dml.h"
 #include "c3_dml.h"
@@ -48,6 +49,13 @@ int main() {
 
 	if (!confirm.empty()) {
 		select_locations_null_from(std::stoi(confirm));
+	}
+
+	std::cout << "[B4] Select locations by cursor [N]? ";
+	std::getline(std::cin, confirm);
+
+	if (!confirm.empty()) {
+		select_locations();
 	}
 
 	std::cout << "[C1] Insert country (then rollback) [N]? ";

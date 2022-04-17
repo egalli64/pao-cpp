@@ -17,13 +17,21 @@ static const char* connection_string = HRON_CONNECTION;
 static int location_id;
 
 const int STREET_ADDRESS_LEN = 40;
+typedef char StreetAddress[STREET_ADDRESS_LEN + 1];
+EXEC SQL TYPE StreetAddress IS STRING(CITY_LEN + 1) REFERENCE;
+
 const int CITY_LEN = 30;
+typedef char City[CITY_LEN + 1];
+EXEC SQL TYPE City IS STRING(CITY_LEN + 1) REFERENCE;
+
 const int COUNTRY_ID_LEN = 2;
+typedef char CountryId[COUNTRY_ID_LEN + 1];
+EXEC SQL TYPE CountryId IS STRING(COUNTRY_ID_LEN + 1) REFERENCE;
 
 static struct Location {
-	varchar street_address[STREET_ADDRESS_LEN + 1];
-	varchar city[CITY_LEN + 1];
-	char country_id[COUNTRY_ID_LEN + 1];
+	StreetAddress street_address;
+	City city;
+	CountryId country_id;
 } location;
 
 EXEC SQL END DECLARE SECTION;
@@ -34,13 +42,12 @@ EXEC SQL INCLUDE sqlca;
 void select_locations_from(int id) {
 	EXEC SQL CONNECT :connection_string;
 	if(sqlca.sqlcode != 0) {
-		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << std::endl;
+		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << '\n';
 		return;
 	}
 
-	for(int current_id = id; ; current_id += 100) {
-		location_id = current_id;
-
+	location_id = id;
+	while(true) {
 		EXEC SQL WHENEVER NOT FOUND DO break;
 		EXEC SQL SELECT street_address, city, country_id
 			INTO :location
@@ -48,17 +55,15 @@ void select_locations_from(int id) {
 			WHERE location_id = :location_id;
 
 		if(sqlca.sqlcode != 0) {
-			std::cout << "error " << sqlca.sqlerrm.sqlerrmc << std::endl;
+			std::cout << "error " << sqlca.sqlerrm.sqlerrmc << '\n';
 		} else {
-			location.street_address.arr[location.street_address.len] = '\0';
-			location.city.arr[location.city.len] = '\0';
-			location.country_id[COUNTRY_ID_LEN] = '\0';
-
-			std::cout << '[' << current_id << "] "
-				<< location.street_address.arr << ", "
-				<< location.city.arr << " - "
-				<< location.country_id << std::endl;
+			std::cout << location_id << ": "
+				<< location.street_address << ", "
+				<< location.city << " - "
+				<< location.country_id << '\n';
 		}
+
+		location_id += 100;
 	}
 
 	EXEC SQL COMMIT WORK RELEASE;

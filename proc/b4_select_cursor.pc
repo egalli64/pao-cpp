@@ -15,14 +15,22 @@ EXEC SQL BEGIN DECLARE SECTION;
 static const char* connection_string = HRON_CONNECTION;
 
 const int STREET_ADDRESS_LEN = 40;
+typedef char StreetAddress[STREET_ADDRESS_LEN + 1];
+EXEC SQL TYPE StreetAddress IS STRING(CITY_LEN + 1) REFERENCE;
+
 const int CITY_LEN = 30;
+typedef char City[CITY_LEN + 1];
+EXEC SQL TYPE City IS STRING(CITY_LEN + 1) REFERENCE;
+
 const int STATE_PROVINCE_LEN = 25;
+typedef char StateProvince[STATE_PROVINCE_LEN + 1];
+EXEC SQL TYPE StateProvince IS STRING(STATE_PROVINCE_LEN + 1) REFERENCE;
 
 static struct Location {
 	int location_id;
-	varchar street_address[STREET_ADDRESS_LEN + 1];
-	varchar city[CITY_LEN + 1];
-	varchar state_province[STATE_PROVINCE_LEN + 1];
+	StreetAddress street_address;
+	City city;
+	StateProvince state_province;
 } location;
 
 struct Location* pLocation = &location;
@@ -35,7 +43,7 @@ EXEC SQL INCLUDE sqlca;
 void select_locations() {
 	EXEC SQL CONNECT :connection_string;
 	if(sqlca.sqlcode != 0) {
-		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << std::endl;
+		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << '\n';
 		return;
 	}
 
@@ -50,14 +58,10 @@ void select_locations() {
     for (;;) {
         EXEC SQL FETCH locations INTO :pLocation;
 
-		location.street_address.arr[location.street_address.len] = '\0';
-		location.city.arr[location.city.len] = '\0';
-		location.state_province.arr[location.state_province.len] = '\0';
-
-		std::cout << '[' << location.location_id << "] ";
-		std::cout << location.street_address.arr << " - ";
-		std::cout << location.city.arr;
-		std::cout << " [" << location.state_province.arr << ']' << std::endl;
+		std::cout << location.location_id << ": ";
+		std::cout << location.street_address << " - ";
+		std::cout << location.city;
+		std::cout << " [" << location.state_province << ']' << '\n';
     } 
  
     EXEC SQL CLOSE locations; 

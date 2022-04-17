@@ -141,11 +141,11 @@ typedef struct { unsigned short len; unsigned char arr[1]; } varchar;
 /* cud (compilation unit data) array */
 static const short sqlcud0[] =
 {13,4130,178,0,0,
-5,0,0,0,0,0,27,36,0,0,4,4,0,1,0,1,97,0,0,1,10,0,0,1,10,0,0,1,10,0,0,
-36,0,0,2,104,0,9,47,0,0,0,0,0,1,0,
-51,0,0,2,0,0,13,51,0,0,4,0,0,1,0,2,3,0,0,2,9,0,0,2,9,0,0,2,9,0,0,
-82,0,0,2,0,0,15,63,0,0,0,0,0,1,0,
-97,0,0,3,0,0,30,65,0,0,0,0,0,1,0,
+5,0,0,0,0,0,27,44,0,0,4,4,0,1,0,1,97,0,0,1,10,0,0,1,10,0,0,1,10,0,0,
+36,0,0,2,104,0,9,55,0,0,0,0,0,1,0,
+51,0,0,2,0,0,13,59,0,0,4,0,0,1,0,2,3,0,0,2,5,0,0,2,5,0,0,2,5,0,0,
+82,0,0,2,0,0,15,67,0,0,0,0,0,1,0,
+97,0,0,3,0,0,30,69,0,0,0,0,0,1,0,
 };
 
 
@@ -167,20 +167,25 @@ static const short sqlcud0[] =
 static const char* connection_string = HRON_CONNECTION;
 
 const int STREET_ADDRESS_LEN = 40;
+typedef char StreetAddress[STREET_ADDRESS_LEN + 1];
+/* EXEC SQL TYPE StreetAddress IS STRING(CITY_LEN + 1) REFERENCE; */ 
+
+
 const int CITY_LEN = 30;
+typedef char City[CITY_LEN + 1];
+/* EXEC SQL TYPE City IS STRING(CITY_LEN + 1) REFERENCE; */ 
+
+
 const int STATE_PROVINCE_LEN = 25;
+typedef char StateProvince[STATE_PROVINCE_LEN + 1];
+/* EXEC SQL TYPE StateProvince IS STRING(STATE_PROVINCE_LEN + 1) REFERENCE; */ 
+
 
 static struct Location {
 	int location_id;
-	/* varchar street_address[STREET_ADDRESS_LEN + 1]; */ 
-struct { unsigned short len; unsigned char arr[41]; } street_address;
-
-	/* varchar city[CITY_LEN + 1]; */ 
-struct { unsigned short len; unsigned char arr[31]; } city;
-
-	/* varchar state_province[STATE_PROVINCE_LEN + 1]; */ 
-struct { unsigned short len; unsigned char arr[26]; } state_province;
-
+	StreetAddress street_address;
+	City city;
+	StateProvince state_province;
 } location;
 
 struct Location* pLocation = &location;
@@ -334,7 +339,7 @@ void select_locations() {
 
 
 	if(sqlca.sqlcode != 0) {
-		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << std::endl;
+		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << '\n';
 		return;
 	}
 
@@ -396,24 +401,24 @@ void select_locations() {
         sqlstm.sqharm[0] = (unsigned int  )0;
         sqlstm.sqadto[0] = (unsigned short )0;
         sqlstm.sqtdso[0] = (unsigned short )0;
-        sqlstm.sqhstv[1] = (         void  *)&pLocation->street_address;
-        sqlstm.sqhstl[1] = (unsigned int  )43;
+        sqlstm.sqhstv[1] = (         void  *)pLocation->street_address;
+        sqlstm.sqhstl[1] = (unsigned int  )31;
         sqlstm.sqhsts[1] = (         int  )0;
         sqlstm.sqindv[1] = (         void  *)0;
         sqlstm.sqinds[1] = (         int  )0;
         sqlstm.sqharm[1] = (unsigned int  )0;
         sqlstm.sqadto[1] = (unsigned short )0;
         sqlstm.sqtdso[1] = (unsigned short )0;
-        sqlstm.sqhstv[2] = (         void  *)&pLocation->city;
-        sqlstm.sqhstl[2] = (unsigned int  )33;
+        sqlstm.sqhstv[2] = (         void  *)pLocation->city;
+        sqlstm.sqhstl[2] = (unsigned int  )31;
         sqlstm.sqhsts[2] = (         int  )0;
         sqlstm.sqindv[2] = (         void  *)0;
         sqlstm.sqinds[2] = (         int  )0;
         sqlstm.sqharm[2] = (unsigned int  )0;
         sqlstm.sqadto[2] = (unsigned short )0;
         sqlstm.sqtdso[2] = (unsigned short )0;
-        sqlstm.sqhstv[3] = (         void  *)&pLocation->state_province;
-        sqlstm.sqhstl[3] = (unsigned int  )28;
+        sqlstm.sqhstv[3] = (         void  *)pLocation->state_province;
+        sqlstm.sqhstl[3] = (unsigned int  )26;
         sqlstm.sqhsts[3] = (         int  )0;
         sqlstm.sqindv[3] = (         void  *)0;
         sqlstm.sqinds[3] = (         int  )0;
@@ -435,14 +440,10 @@ void select_locations() {
 
 
 
-		location.street_address.arr[location.street_address.len] = '\0';
-		location.city.arr[location.city.len] = '\0';
-		location.state_province.arr[location.state_province.len] = '\0';
-
-		std::cout << '[' << location.location_id << "] ";
-		std::cout << location.street_address.arr << " - ";
-		std::cout << location.city.arr;
-		std::cout << " [" << location.state_province.arr << ']' << std::endl;
+		std::cout << location.location_id << ": ";
+		std::cout << location.street_address << " - ";
+		std::cout << location.city;
+		std::cout << " [" << location.state_province << ']' << '\n';
     } 
  
     /* EXEC SQL CLOSE locations; */ 

@@ -21,6 +21,7 @@ int main() {
 
 	if (!confirm.empty()) {
 		connect_c();
+		return 0;
 	}
 
 	std::cout << "[A2] C++ connect [N]? ";
@@ -28,6 +29,7 @@ int main() {
 
 	if (!confirm.empty()) {
 		connect();
+		return 0;
 	}
 
 	std::cout << "[B1] Select location [N / id (es: 1000)]? ";
@@ -35,6 +37,7 @@ int main() {
 
 	if (!confirm.empty()) {
 		select_a_location(std::stoi(confirm));
+		return 0;
 	}
 
 	std::cout << "[B2] Select locations from [N / id (es: 1000)]? ";
@@ -42,6 +45,7 @@ int main() {
 
 	if (!confirm.empty()) {
 		select_locations_from(std::stoi(confirm));
+		return 0;
 	}
 
 	std::cout << "[B3] Select locations (null) from [N / id (es: 1000)]? ";
@@ -49,6 +53,7 @@ int main() {
 
 	if (!confirm.empty()) {
 		select_locations_null_from(std::stoi(confirm));
+		return 0;
 	}
 
 	std::cout << "[B4] Select locations by cursor [N]? ";
@@ -56,6 +61,7 @@ int main() {
 
 	if (!confirm.empty()) {
 		select_locations();
+		return 0;
 	}
 
 	std::cout << "[C1] Insert country (then rollback) [N]? ";
@@ -63,6 +69,7 @@ int main() {
 
 	if (!confirm.empty()) {
 		insert_country();
+		return 0;
 	}
 
 	std::cout << "[C2] Update country (then rollback) [N]? ";
@@ -70,6 +77,7 @@ int main() {
 
 	if (!confirm.empty()) {
 		update_country();
+		return 0;
 	}
 
 	std::cout << "[C3] Delete country (then rollback) [N]? ";
@@ -77,5 +85,8 @@ int main() {
 
 	if (!confirm.empty()) {
 		delete_country();
+		return 0;
 	}
+
+	return 0;
 }

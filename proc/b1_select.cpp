@@ -60,16 +60,16 @@ static struct sqltdss sqltds =
 struct sqlcxp
 {
   unsigned short fillen;
-           char  filnam[15];
+           char  filnam[13];
 };
 static const struct sqlcxp sqlfpn =
 {
-    14,
-    ".\\b1_select.pc"
+    12,
+    "b1_select.pc"
 };
 
 
-static unsigned int sqlctx = 1026955;
+static unsigned int sqlctx = 273291;
 
 
 static struct sqlexd {
@@ -324,7 +324,7 @@ void select_a_location(int id) {
 
 
 	if(sqlca.sqlcode != 0) {
-		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << std::endl;
+		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << '\n';
 		return;
 	}
 
@@ -397,13 +397,13 @@ void select_a_location(int id) {
 
 
 	if(sqlca.sqlcode != 0) {
-		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << std::endl;
+		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << '\n';
 	} else {
 		street_address.arr[street_address.len] = '\0';
 		city.arr[city.len] = '\0';
 		country_id[COUNTRY_ID_LEN] = '\0';
 
-		std::cout << "Location is: " << street_address.arr << ", " << city.arr << " - " << country_id << std::endl;
+		std::cout << "Location is: " << street_address.arr << ", " << city.arr << " - " << country_id << '\n';
 	}
 
 	/* EXEC SQL COMMIT WORK RELEASE; */ 

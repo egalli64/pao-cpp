@@ -6,18 +6,36 @@ es: varchar street_address[41]; --> struct { unsigned short len; unsigned char a
 Le variabili definite nella DECLARE SECTION possono essere usate nelle SELECT INTO
 --> EXEC SQL SELECT street_address INTO :street_address FROM location WHERE location_id = :location_id;
 
+Se l'esecuzione della query ha successo, sqlca.sqlcode è zero
+
 Nel caso di char array / varchar, occorre settare esplicitamente il terminatore per poterli usare come stringhe, es:
 --> street_address.arr[street_address.len] = '\0';
 
 ---
-Nella DECLARE SECTION definito un oggetto di struct definita contestualmente, utilizzabile nella clausola INTO
-es: varchar street_address[41]; --> struct { unsigned short len; unsigned char arr[41]; } street_address;
+SELECT INTO object
 
-Per interrompere un loop nel caso una SELECT non trovi nessuna riga
+Nella DECLARE SECTION
+
+Si può indicare che array di caratteri e varchar siano trattati come stringhe
+- delegando a pro*c la responsabilità di aggiungere in terminatore
+- es: EXEC SQL TYPE StreetAddress IS STRING(CITY_LEN + 1) REFERENCE;
+
+Si può definire un tipo via struct, con campi corrispondenti a quelli indicati in una SELECT INTO
+* Occorre anche definire un oggetto di quel tipo
+* Può essere utilizzato nella clausola INTO
+* es: static struct Location { ... } location;
+* EXEC SQL SELECT ... INTO :location
+
+* Per interrompere un loop nel caso una SELECT non trovi nessuna riga
 --> EXEC SQL WHENEVER NOT FOUND DO break;
 
---- SELECT INTO - INDICATOR
-Nel caso un valore sia NULL, Pro*c non popola il corrispondente campo
+Gestione dei NULL
+- Il tipo STRING di Pro*C gestisce correttamente i NULL nei campi selezionati
+- Nel caso di array di caratteri e VARCHAR il supporto è limitato
+-- Per i VARCHAR viene indicata a zero la lunghezza, sta a noi usare correttamente l'informazione
+
+- SELECT INTO - INDICATOR
+Permette un maggior controllo dei NULL
 Una struct "indicator" corrispondente alla struct usata nell'INTO permette di identificare il caso
 - lo short corrispondente è settato a -1 per indicare un NULL
  

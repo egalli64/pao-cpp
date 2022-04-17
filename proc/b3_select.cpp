@@ -60,16 +60,16 @@ static struct sqltdss sqltds =
 struct sqlcxp
 {
   unsigned short fillen;
-           char  filnam[15];
+           char  filnam[13];
 };
 static const struct sqlcxp sqlfpn =
 {
-    14,
-    ".\\b3_select.pc"
+    12,
+    "b3_select.pc"
 };
 
 
-static unsigned int sqlctx = 1029003;
+static unsigned int sqlctx = 275339;
 
 
 static struct sqlexd {
@@ -137,9 +137,9 @@ typedef struct { unsigned short len; unsigned char arr[1]; } varchar;
 /* cud (compilation unit data) array */
 static const short sqlcud0[] =
 {13,4130,178,0,0,
-5,0,0,0,0,0,27,44,0,0,4,4,0,1,0,1,97,0,0,1,10,0,0,1,10,0,0,1,10,0,0,
-36,0,0,2,129,0,4,54,0,0,5,1,0,1,0,2,9,0,0,2,9,0,0,2,9,0,0,2,97,0,0,1,3,0,0,
-71,0,0,3,0,0,30,79,0,0,0,0,0,1,0,
+5,0,0,0,0,0,27,55,0,0,4,4,0,1,0,1,97,0,0,1,10,0,0,1,10,0,0,1,10,0,0,
+36,0,0,2,129,0,4,64,0,0,5,1,0,1,0,2,5,0,0,2,5,0,0,2,5,0,0,2,5,0,0,1,3,0,0,
+71,0,0,3,0,0,30,85,0,0,0,0,0,1,0,
 };
 
 
@@ -163,21 +163,30 @@ static const char* connection_string = HRON_CONNECTION;
 static int location_id;
 
 const int STREET_ADDRESS_LEN = 40;
+typedef char StreetAddress[STREET_ADDRESS_LEN + 1];
+/* EXEC SQL TYPE StreetAddress IS STRING(CITY_LEN + 1) REFERENCE; */ 
+
+
 const int CITY_LEN = 30;
+typedef char City[CITY_LEN + 1];
+/* EXEC SQL TYPE City IS STRING(CITY_LEN + 1) REFERENCE; */ 
+
+
 const int STATE_PROVINCE_LEN = 25;
+typedef char StateProvince[STATE_PROVINCE_LEN + 1];
+/* EXEC SQL TYPE StateProvince IS STRING(STATE_PROVINCE_LEN + 1) REFERENCE; */ 
+
+
 const int COUNTRY_ID_LEN = 2;
+typedef char CountryId[COUNTRY_ID_LEN + 1];
+/* EXEC SQL TYPE CountryId IS STRING(COUNTRY_ID_LEN + 1) REFERENCE; */ 
+
 
 static struct Location {
-	/* varchar street_address[STREET_ADDRESS_LEN + 1]; */ 
-struct { unsigned short len; unsigned char arr[41]; } street_address;
-
-	/* varchar city[CITY_LEN + 1]; */ 
-struct { unsigned short len; unsigned char arr[31]; } city;
-
-	/* varchar state_province[STATE_PROVINCE_LEN + 1]; */ 
-struct { unsigned short len; unsigned char arr[26]; } state_province;
-
-	char country_id[COUNTRY_ID_LEN + 1];
+	StreetAddress street_address;
+	City city;
+	StateProvince state_province;
+	CountryId country_id;
 } location;
 
 static struct LocationIndicator {
@@ -336,13 +345,12 @@ void select_locations_null_from(int id) {
 
 
 	if(sqlca.sqlcode != 0) {
-		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << std::endl;
+		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << '\n';
 		return;
 	}
 
-	for(int current_id = id; ; current_id += 100) {
-		location_id = current_id;
-
+	location_id = id;
+	while(true) {
 		/* EXEC SQL WHENEVER NOT FOUND DO break; */ 
 
 		/* EXEC SQL SELECT street_address, city, state_province, country_id
@@ -366,24 +374,24 @@ o :s1:i1 ,:s2:i2 ,:s3:i3 ,:s4:i4   from location where location_id=:b2";
   sqlstm.sqlest = (unsigned char  *)&sqlca;
   sqlstm.sqlety = (unsigned short)4352;
   sqlstm.occurs = (unsigned int  )0;
-  sqlstm.sqhstv[0] = (         void  *)&location.street_address;
-  sqlstm.sqhstl[0] = (unsigned int  )43;
+  sqlstm.sqhstv[0] = (         void  *)location.street_address;
+  sqlstm.sqhstl[0] = (unsigned int  )31;
   sqlstm.sqhsts[0] = (         int  )0;
   sqlstm.sqindv[0] = (         void  *)&indicator.street_address;
   sqlstm.sqinds[0] = (         int  )0;
   sqlstm.sqharm[0] = (unsigned int  )0;
   sqlstm.sqadto[0] = (unsigned short )0;
   sqlstm.sqtdso[0] = (unsigned short )0;
-  sqlstm.sqhstv[1] = (         void  *)&location.city;
-  sqlstm.sqhstl[1] = (unsigned int  )33;
+  sqlstm.sqhstv[1] = (         void  *)location.city;
+  sqlstm.sqhstl[1] = (unsigned int  )31;
   sqlstm.sqhsts[1] = (         int  )0;
   sqlstm.sqindv[1] = (         void  *)&indicator.city;
   sqlstm.sqinds[1] = (         int  )0;
   sqlstm.sqharm[1] = (unsigned int  )0;
   sqlstm.sqadto[1] = (unsigned short )0;
   sqlstm.sqtdso[1] = (unsigned short )0;
-  sqlstm.sqhstv[2] = (         void  *)&location.state_province;
-  sqlstm.sqhstl[2] = (unsigned int  )28;
+  sqlstm.sqhstv[2] = (         void  *)location.state_province;
+  sqlstm.sqhstl[2] = (unsigned int  )26;
   sqlstm.sqhsts[2] = (         int  )0;
   sqlstm.sqindv[2] = (         void  *)&indicator.state_province;
   sqlstm.sqinds[2] = (         int  )0;
@@ -422,23 +430,19 @@ o :s1:i1 ,:s2:i2 ,:s3:i3 ,:s4:i4   from location where location_id=:b2";
 
 
 		if(sqlca.sqlcode != 0) {
-			std::cout << "error " << sqlca.sqlerrm.sqlerrmc << std::endl;
+			std::cout << "error " << sqlca.sqlerrm.sqlerrmc << '\n';
 		} else {
-			location.street_address.arr[location.street_address.len] = '\0';
-			location.city.arr[location.city.len] = '\0';
-			if(indicator.state_province != -1) {
-				location.state_province.arr[location.state_province.len] = '\0';
-			} else {
-				location.state_province.arr[0] = '-';
-				location.state_province.arr[1] = '\0';
+			if(indicator.state_province == -1) {
+				location.state_province[0] = '-';
+				location.state_province[1] = '\0';
 			}
-			location.country_id[COUNTRY_ID_LEN] = '\0';
-
-			std::cout << '[' << current_id << "] "
-				<< location.street_address.arr << ", "
-				<< location.city.arr << " ("<< location.state_province.arr << ") "
-				<< location.country_id << std::endl;
+			std::cout << location_id << ": "
+				<< location.street_address << ", "
+				<< location.city << " ("<< location.state_province << ") "
+				<< location.country_id << '\n';
 		}
+
+		location_id += 100;
 	}
 
 	/* EXEC SQL COMMIT WORK RELEASE; */ 

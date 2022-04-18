@@ -23,25 +23,25 @@ EXEC SQL INCLUDE sqlca;
 void delete_country() {
 	EXEC SQL CONNECT :connection_string;
 	if(sqlca.sqlcode != 0) {
-		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << std::endl;
+		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << '\n';
 		return;
 	}
 
-	std::cout << "Before DELETE" << std::endl;
+	std::cout << "Before DELETE" << '\n';
 	select_country_by_id("KW", true);
 
 	EXEC SQL DELETE country WHERE country_id = 'KW';
 	if(sqlca.sqlcode != 0) {
-		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << std::endl;
+		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << '\n';
+	} else {
+		std::cout << "After DELETE" << '\n';
+		select_country_by_id("KW", false);
+
+		EXEC SQL ROLLBACK;
+
+		std::cout << "After ROLLBACK" << '\n';
+		select_country_by_id("KW", true);
 	}
-
-	std::cout << "After DELETE" << std::endl;
-	select_country_by_id("KW", false);
-
-	EXEC SQL ROLLBACK;
-
-	std::cout << "After ROLLBACK" << std::endl;
-	select_country_by_id("KW", true);
 
 	EXEC SQL ROLLBACK RELEASE;
 }

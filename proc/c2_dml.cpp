@@ -139,7 +139,7 @@ static const short sqlcud0[] =
 {13,4130,178,0,0,
 5,0,0,0,0,0,27,24,0,0,4,4,0,1,0,1,97,0,0,1,10,0,0,1,10,0,0,1,10,0,0,
 36,0,0,2,55,0,5,33,0,0,0,0,0,1,0,
-51,0,0,3,0,0,31,41,0,0,0,0,0,1,0,
+51,0,0,3,0,0,31,40,0,0,0,0,0,1,0,
 66,0,0,4,0,0,32,46,0,0,0,0,0,1,0,
 };
 
@@ -311,11 +311,11 @@ void update_country() {
 
 
 	if(sqlca.sqlcode != 0) {
-		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << std::endl;
+		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << '\n';
 		return;
 	}
 
-	std::cout << "Before UPDATE" << std::endl;
+	std::cout << "Before UPDATE" << '\n';
 	select_country_by_id("IT", true);
 
 	/* EXEC SQL UPDATE country SET name = 'Italia' WHERE country_id = 'IT'; */ 
@@ -338,33 +338,33 @@ void update_country() {
 
 
 	if(sqlca.sqlcode != 0) {
-		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << std::endl;
-	}
+		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << '\n';
+	} else {
+		std::cout << "After UPDATE" << '\n';
+		select_country_by_id("IT", true);
 
-	std::cout << "After UPDATE" << std::endl;
-	select_country_by_id("IT", true);
-
-	/* EXEC SQL ROLLBACK; */ 
+		/* EXEC SQL ROLLBACK; */ 
 
 {
- struct sqlexd sqlstm;
- sqlstm.sqlvsn = 13;
- sqlstm.arrsiz = 4;
- sqlstm.sqladtp = &sqladt;
- sqlstm.sqltdsp = &sqltds;
- sqlstm.iters = (unsigned int  )1;
- sqlstm.offset = (unsigned int  )51;
- sqlstm.cud = sqlcud0;
- sqlstm.sqlest = (unsigned char  *)&sqlca;
- sqlstm.sqlety = (unsigned short)4352;
- sqlstm.occurs = (unsigned int  )0;
- sqlcxt((void **)0, &sqlctx, &sqlstm, &sqlfpn);
+  struct sqlexd sqlstm;
+  sqlstm.sqlvsn = 13;
+  sqlstm.arrsiz = 4;
+  sqlstm.sqladtp = &sqladt;
+  sqlstm.sqltdsp = &sqltds;
+  sqlstm.iters = (unsigned int  )1;
+  sqlstm.offset = (unsigned int  )51;
+  sqlstm.cud = sqlcud0;
+  sqlstm.sqlest = (unsigned char  *)&sqlca;
+  sqlstm.sqlety = (unsigned short)4352;
+  sqlstm.occurs = (unsigned int  )0;
+  sqlcxt((void **)0, &sqlctx, &sqlstm, &sqlfpn);
 }
 
 
 
-	std::cout << "After ROLLBACK" << std::endl;
-	select_country_by_id("IT", true);
+		std::cout << "After ROLLBACK" << '\n';
+		select_country_by_id("IT", true);
+	}
 
 	/* EXEC SQL ROLLBACK RELEASE; */ 
 

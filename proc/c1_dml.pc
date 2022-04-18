@@ -23,25 +23,25 @@ EXEC SQL INCLUDE sqlca;
 void insert_country() {
 	EXEC SQL CONNECT :connection_string;
 	if(sqlca.sqlcode != 0) {
-		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << std::endl;
+		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << '\n';
 		return;
 	}
 
-	std::cout << "Before INSERT INTO" << std::endl;
+	std::cout << "Before INSERT INTO" << '\n';
 	select_country_by_id("ES", false);
 
 	EXEC SQL INSERT INTO country (country_id, name, region_id) VALUES ('ES', 'Spain', 1);
 	if(sqlca.sqlcode != 0) {
-		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << std::endl;
+		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << '\n';
+	} else {
+		std::cout << "After INSERT INTO" << '\n';
+		select_country_by_id("ES", true);
+
+		EXEC SQL ROLLBACK;
+
+		std::cout << "After ROLLBACK" << '\n';
+		select_country_by_id("ES", false);
 	}
-
-	std::cout << "After INSERT INTO" << std::endl;
-	select_country_by_id("ES", true);
-
-	EXEC SQL ROLLBACK;
-
-	std::cout << "After ROLLBACK" << std::endl;
-	select_country_by_id("ES", false);
 
 	EXEC SQL ROLLBACK RELEASE;
 }

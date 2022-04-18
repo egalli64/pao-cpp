@@ -1,0 +1,14 @@
+Pro*C - DML
+
+I comandi DML sono supportati via
+- EXEC SQL INSERT INTO ...
+- EXEC SQL UPDATE ...
+- EXEC SQL DELETE ...
+
+La transazione viene terminata via
+- EXEC SQL COMMIT;
+- EXEC SQL ROLLBACK;
+
+La chiusura della connessione richiede anche di specificare come terminare la transazione corrente
+- EXEC SQL COMMIT RELEASE;
+- EXEC SQL ROLLBACK RELEASE;

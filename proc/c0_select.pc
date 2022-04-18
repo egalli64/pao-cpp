@@ -13,15 +13,20 @@
 EXEC SQL BEGIN DECLARE SECTION;
 
 const int COUNTRY_ID_LEN = 2;
-const int NAME_LEN = 40;
+typedef char CountryId[COUNTRY_ID_LEN + 1];
+EXEC SQL TYPE CountryId IS STRING(COUNTRY_ID_LEN + 1) REFERENCE;
 
-const char* country_id;
+const int NAME_LEN = 40;
+typedef char Name[NAME_LEN + 1];
+EXEC SQL TYPE Name IS STRING(NAME_LEN + 1) REFERENCE;
 
 static struct Country {
-	char country_id[COUNTRY_ID_LEN + 1];
-	varchar name[NAME_LEN + 1];
+	CountryId country_id;
+	Name name;
 	int region_id;
 } country;
+
+const char* country_id;
 
 EXEC SQL END DECLARE SECTION;
 
@@ -38,21 +43,18 @@ void select_country_by_id(const char* id, bool expected) {
 
 	if(sqlca.sqlcode != 0) {
 		if(!expected) {
-			std::cout << "As expected, " << id << " is not in the database" << std::endl;
+			std::cout << "As expected, " << id << " is not in the database" << '\n';
 		} else {
-			std::cout << "Unexpectedly, can't get " << id << ". Error " << sqlca.sqlerrm.sqlerrmc << std::endl;
+			std::cout << "Unexpectedly, can't get " << id << ". Error " << sqlca.sqlerrm.sqlerrmc << '\n';
 		}
 	} else {
 		if(!expected) {
-			std::cout << "Unexpected! " << id << " should not be in the database" << std::endl;
+			std::cout << "Unexpected! " << id << " should not be in the database" << '\n';
 		} else {
 			std::cout << "As expected, " << id << " is in the database" << ": ";
 		}
 
-		country.country_id[COUNTRY_ID_LEN] = '\0';
-		country.name.arr[country.name.len] = '\0';
-
-		std::cout << country.country_id << " - " << country.name.arr
-			<< " ("<< country.region_id << ")" << std::endl;
+		std::cout << country.country_id << " - " << country.name
+			<< " ("<< country.region_id << ")" << '\n';
 	}
 }

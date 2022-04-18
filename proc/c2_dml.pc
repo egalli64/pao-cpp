@@ -23,25 +23,25 @@ EXEC SQL INCLUDE sqlca;
 void update_country() {
 	EXEC SQL CONNECT :connection_string;
 	if(sqlca.sqlcode != 0) {
-		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << std::endl;
+		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << '\n';
 		return;
 	}
 
-	std::cout << "Before UPDATE" << std::endl;
+	std::cout << "Before UPDATE" << '\n';
 	select_country_by_id("IT", true);
 
 	EXEC SQL UPDATE country SET name = 'Italia' WHERE country_id = 'IT';
 	if(sqlca.sqlcode != 0) {
-		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << std::endl;
+		std::cout << "error " << sqlca.sqlerrm.sqlerrmc << '\n';
+	} else {
+		std::cout << "After UPDATE" << '\n';
+		select_country_by_id("IT", true);
+
+		EXEC SQL ROLLBACK;
+
+		std::cout << "After ROLLBACK" << '\n';
+		select_country_by_id("IT", true);
 	}
-
-	std::cout << "After UPDATE" << std::endl;
-	select_country_by_id("IT", true);
-
-	EXEC SQL ROLLBACK;
-
-	std::cout << "After ROLLBACK" << std::endl;
-	select_country_by_id("IT", true);
 
 	EXEC SQL ROLLBACK RELEASE;
 }

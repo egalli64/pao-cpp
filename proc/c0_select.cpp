@@ -137,7 +137,7 @@ typedef struct { unsigned short len; unsigned char arr[1]; } varchar;
 /* cud (compilation unit data) array */
 static const short sqlcud0[] =
 {13,4130,178,0,0,
-5,0,0,1,89,0,4,34,0,0,4,1,0,1,0,2,97,0,0,2,9,0,0,2,3,0,0,1,97,0,0,
+5,0,0,1,89,0,4,39,0,0,4,1,0,1,0,2,5,0,0,2,5,0,0,2,3,0,0,1,97,0,0,
 };
 
 
@@ -157,17 +157,22 @@ static const short sqlcud0[] =
 
 
 const int COUNTRY_ID_LEN = 2;
-const int NAME_LEN = 40;
+typedef char CountryId[COUNTRY_ID_LEN + 1];
+/* EXEC SQL TYPE CountryId IS STRING(COUNTRY_ID_LEN + 1) REFERENCE; */ 
 
-const char* country_id;
+
+const int NAME_LEN = 40;
+typedef char Name[NAME_LEN + 1];
+/* EXEC SQL TYPE Name IS STRING(NAME_LEN + 1) REFERENCE; */ 
+
 
 static struct Country {
-	char country_id[COUNTRY_ID_LEN + 1];
-	/* varchar name[NAME_LEN + 1]; */ 
-struct { unsigned short len; unsigned char arr[41]; } name;
-
+	CountryId country_id;
+	Name name;
 	int region_id;
 } country;
+
+const char* country_id;
 
 /* EXEC SQL END DECLARE SECTION; */ 
 
@@ -308,8 +313,8 @@ void select_country_by_id(const char* id, bool expected) {
  sqlstm.sqharm[0] = (unsigned int  )0;
  sqlstm.sqadto[0] = (unsigned short )0;
  sqlstm.sqtdso[0] = (unsigned short )0;
- sqlstm.sqhstv[1] = (         void  *)&country.name;
- sqlstm.sqhstl[1] = (unsigned int  )43;
+ sqlstm.sqhstv[1] = (         void  *)country.name;
+ sqlstm.sqhstl[1] = (unsigned int  )41;
  sqlstm.sqhsts[1] = (         int  )0;
  sqlstm.sqindv[1] = (         void  *)0;
  sqlstm.sqinds[1] = (         int  )0;
@@ -348,21 +353,18 @@ void select_country_by_id(const char* id, bool expected) {
 
 	if(sqlca.sqlcode != 0) {
 		if(!expected) {
-			std::cout << "As expected, " << id << " is not in the database" << std::endl;
+			std::cout << "As expected, " << id << " is not in the database" << '\n';
 		} else {
-			std::cout << "Unexpectedly, can't get " << id << ". Error " << sqlca.sqlerrm.sqlerrmc << std::endl;
+			std::cout << "Unexpectedly, can't get " << id << ". Error " << sqlca.sqlerrm.sqlerrmc << '\n';
 		}
 	} else {
 		if(!expected) {
-			std::cout << "Unexpected! " << id << " should not be in the database" << std::endl;
+			std::cout << "Unexpected! " << id << " should not be in the database" << '\n';
 		} else {
 			std::cout << "As expected, " << id << " is in the database" << ": ";
 		}
 
-		country.country_id[COUNTRY_ID_LEN] = '\0';
-		country.name.arr[country.name.len] = '\0';
-
-		std::cout << country.country_id << " - " << country.name.arr
-			<< " ("<< country.region_id << ")" << std::endl;
+		std::cout << country.country_id << " - " << country.name
+			<< " ("<< country.region_id << ")" << '\n';
 	}
 }

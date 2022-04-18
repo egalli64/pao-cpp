@@ -13,12 +13,15 @@ public:
         cout << "Actor ctor for " << name << endl;
     }
 
-    ~Actor() { cout << "Actor dtor for " << name_ << endl; }
+    virtual void sayHello() {}
+
+    virtual ~Actor() { cout << "Actor dtor for " << name_ << endl; }
 
     const string& name() const { return name_; }
 };
 
 class Animal : virtual public Actor {
+    int age_;
 public:
     Animal() {
         cout << "Animal default ctor" << endl;
@@ -28,6 +31,8 @@ public:
         cout << "Animal ctor for " << name << endl;
     }
     ~Animal() { cout << "Animal dtor" << endl; }
+
+    void sayHello() override {}
 };
 
 class Player : virtual public Actor {

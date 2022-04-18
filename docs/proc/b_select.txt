@@ -38,4 +38,31 @@ Gestione dei NULL
 Permette un maggior controllo dei NULL
 Una struct "indicator" corrispondente alla struct usata nell'INTO permette di identificare il caso
 - lo short corrispondente è settato a -1 per indicare un NULL
+
+---
+CURSOR
+
+Pro*C supporta i cursori Oracle DB e permette di effettuarne il fetch in strutture C
+
+Nella DECLARE SECTION
+- Definizione di una struttura per le colonne che si vogliono selezionare
+- Dichiarazione di un puntatore alla struttura e sua inizializzazione
+
+EXEC SQL DECLARE <cursore> CURSOR FOR SELECT ...
+- Dichiara un cursore per la query specificata
+- Il nome del cursore può essere usato solo in statement EXEC SQL
+
+EXEC SQL OPEN <cursore>;
+- Esegue la query, popolando il cursore
+
+EXEC SQL WHENEVER NOT FOUND DO break;
+- Interrompe il loop per l'accesso al cursore al suo termine
+
+EXEC SQL FETCH <cursore> INTO :<puntatore a struttura>;
+- Legge il cursore nella posizione corrente
+- Copia i dati nell'area di memoria associata al puntatore
+
+EXEC SQL CLOSE <cursore>;
+- Chiude il cursore
+
  

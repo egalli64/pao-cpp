@@ -1,0 +1,11 @@
+Lambda
+
+Spesso create per essere passate come argomento ad un altra funzione
+Ad esempio, std::sort()
+- Accetta un callable per confrontare gli elementi nel sorting
+	Due parametri, gli elementi da confrontare
+	Ritorna true se il primo precede il secondo
+- Se il callable è usato da altre parti o se è complesso, di solito si usa
+	Una funzione
+	Un functor
+- Una lambda è spesso preferita per l’uso singolo e se è molto semplice

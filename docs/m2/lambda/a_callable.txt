@@ -1,0 +1,12 @@
+Callable
+
+Funzione
+Puntatore a funzione
+Function Object (Functor)
+- Classe un cui oggetto è invocabile come se fosse una funzione
+- Ha uno stato, inizializzato dal ctor, e può ricevere parametri
+Espressione lambda – è in realtà un Function Object
+- Il compilatore genera una classe anonima equivalente
+- Il codice è più snello, con maggiore leggibilità
+	Minimale: []{}
+	Completa: [capture list] (params) -> type { /*… */ }

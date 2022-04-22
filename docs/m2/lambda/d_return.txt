@@ -1,0 +1,9 @@
+Return
+
+Il compilatore cerca di dedurre il tipo di ritorno di una lambda
+ Se non c’è nessun return statement, assume void
+Determinazione implicita del tipo di ritorno
+ Se c’è almeno un return e non ci sono ambiguità
+ Letterali interi e reali, se possibile, sono interpretati come int e double
+È possibile esplicitare il tipo di ritorno
+ Sintassi “-> type” tra la lista dei parametri e il body della lambda

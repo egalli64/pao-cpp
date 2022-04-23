@@ -1,11 +1,17 @@
 ## Smart pointers
 	
 Gli smart pointer, per default, operano su puntatori a oggetti nella memoria heap
-	Allocati via new e deallocati via delete
-Ma possono anche essere utilizzati per puntatori ad altre risorse
+- Normalmente gli oggetti sono allocati via new e deallocati via delete
+- Ma possono anche essere utilizzati per puntatori ad altre risorse
 	Specificando via "Deleter", passato al costruttore, come effettuare il cleanup 
 
 Definiti nell'header memory
+
+Uso di smart pointer (per memoria)
+- Si alloca un oggetto nello heap via new e lo si assegna a uno smart pointer
+- Se "shared", gli altri smart pointer sono generati a partire dal primo
+- L'uso combinato di puntatori smart e raw è possibile ma sconsigliato
+	il metodo get(), che permette di accedere il puntatore gestito, va usato con cautela
 
 ### unique_ptr
 

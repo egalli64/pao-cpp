@@ -3,6 +3,8 @@
 
 int main() {
     std::cout << "Dereferencing a shared ptr\n";
-    std::shared_ptr<int> sp{ new int(42) };
-    std::cout << "The value is " << *sp << '\n';
+    int* p = new int(42);
+    std::shared_ptr<int> sp{ p };
+    std::cout << "Raw ptr: " << p << ", value: " << *p << '\n';
+    std::cout << "Smart ptr: " << sp << ", value:" << *sp << '\n';
 }

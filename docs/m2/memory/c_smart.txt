@@ -33,8 +33,6 @@ Più shared_ptr possono gestire un unico oggetto
 Un contatore, accedibile via use_count(), tiene traccia del loro numero
 Quando use_count va a zero, ovvero l'ultimo shared_ptr sull'oggetto esce di scope, l'oggetto è eliminato
 
-La template function factory make_shared() semplifica la creazione di un shared_ptr
-
 ### weak_ptr
 
 Smart pointer "debole", non implica il possesso dell'oggetto

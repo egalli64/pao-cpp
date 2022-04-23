@@ -4,7 +4,6 @@ Default ctor: crea uno shared pointer non associato ad alcun oggetto
     es: std::shared_ptr<int> sp;
 
 In contesto booleano lo shared pointer è true se il raw pointer associato non è NULL
-L'operatore ! (not) è opportunamente ridefinito
     es: if (!sp) { // ...
 
 Per accedere al valore della risorsa si usa l'operatore *
@@ -15,3 +14,9 @@ Se la risorsa è l'istanza di una classe, con l'operatore -> si accedono ai suoi
 
 Il metodo get() permette di estrarre il puntatore raw
     es: Base* p = sp.get();
+
+La template function factory make_shared()
+    Rende più efficiente la creazione di uno shared_ptr 
+
+Il metodo use_count() ritorna il numero di condivisioni della risorsa
+Il metodo unique() ritorna true se la risorsa non è condivisa

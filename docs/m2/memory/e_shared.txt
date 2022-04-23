@@ -1,0 +1,17 @@
+shared_ptr
+
+Default ctor: crea uno shared pointer non associato ad alcun oggetto
+    es: std::shared_ptr<int> sp;
+
+In contesto booleano lo shared pointer è true se il raw pointer associato non è NULL
+L'operatore ! (not) è opportunamente ridefinito
+    es: if (!sp) { // ...
+
+Per accedere al valore della risorsa si usa l'operatore *
+    es: std::cout << *sp // ...
+
+Se la risorsa è l'istanza di una classe, con l'operatore -> si accedono ai suoi membri
+    es: sp->hello();
+
+Il metodo get() permette di estrarre il puntatore raw
+    es: Base* p = sp.get();

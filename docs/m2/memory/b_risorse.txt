@@ -1,0 +1,13 @@
+Risorse
+
+Per risorsa si intende "qualcosa" che deve essere
+	Acquisito prima di poter essere utilizzato
+	Rilasciato quando se ne è terminato l’uso
+In C++ si segue la tecnica RAII: Resource Acquisition Is Initialization
+- Si definisce una classe che opera come gestore della risorsa
+	Il costruttore ne determina l'acquisizione
+	Il rilascio è effettuato dal distruttore
+- Il compilatore garantisce l'invocazione
+	Del costruttore alla definizione della variabile
+	Del distruttore quando la variabile esce dal suo "scope"
+		Anche in caso di eccezioni

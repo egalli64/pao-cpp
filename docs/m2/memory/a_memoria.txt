@@ -1,0 +1,29 @@
+1.1 Process memory
+
+La memoria associata a un processo è divisa in quattro aree
+
+# Text/Code
+
+Area in cui è tenuto il codice eseguibile
+Potrebbe essere memoria read-only
+
+# Data Segment
+
+Area in cui sono gestite le variabili globali e statiche
+
+Divisa in due parti
+- Inizializzata seguendo le richieste del codice
+- (BSS) Non esplicitamente inizializzata (messa a 0)
+
+# Stack
+
+Area a disposizione delle variabili locali, gestita automaticamente
+
+# Free memory (heap)
+
+Area a disposizione delle variabili locali, gestita via new / delete
+	Singolo oggetto: new / delete
+	Array di oggetti: new [] / delete []
+
+È possibile usare le funzioni C: malloc / calloc / realloc e free
+	Con le dovute cautele, e non mescolando blocchi di memoria gestiti in modo diverso

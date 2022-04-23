@@ -5,6 +5,8 @@ Gli smart pointer, per default, operano su puntatori a oggetti nella memoria hea
 Ma possono anche essere utilizzati per puntatori ad altre risorse
 	Specificando via "Deleter", passato al costruttore, come effettuare il cleanup 
 
+Definiti nell'header memory
+
 ### unique_ptr
 
 La proprietà dell'oggetto (o array di oggetti) è assegnata a un unico gestore
@@ -21,13 +23,15 @@ La template function factory make_unique() semplifica la creazione di un unique_
 
 Tiene conto del numero di riferimenti all'oggetto gestito
 Più shared_ptr possono gestire un unico oggetto
+ La proprietà dell'oggetto è condivisa
 Un contatore, accedibile via use_count(), tiene traccia del loro numero
 Quando use_count va a zero, ovvero l'ultimo shared_ptr sull'oggetto esce di scope, l'oggetto è eliminato
 
 La template function factory make_shared() semplifica la creazione di un shared_ptr
 
-
 ### weak_ptr
 
 Smart pointer "debole", non implica il possesso dell'oggetto
+ Ne mantiene un riferimento che permette di osservare il suo stato
+ Il possesso è detenuto da uno (o più) shared_ptr 
 Semplifica la gestione della memoria nel caso di dipendenze cicliche

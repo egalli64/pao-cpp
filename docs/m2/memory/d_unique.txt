@@ -1,0 +1,24 @@
+unique_ptr
+
+Default ctor: crea un unique pointer non associato ad alcun oggetto
+    es: std::unique_ptr<int> up;
+
+In contesto booleano un unique pointer è true se il raw pointer associato non è nullptr
+    es: if (!up) { // ...
+
+Per accedere al valore della risorsa si usa l'operatore *
+    es: std::cout << *up // ...
+
+Se la risorsa è l'istanza di una classe, con l'operatore -> si accedono ai suoi membri
+    es: up->hello();
+
+Il metodo get() permette di estrarre il puntatore raw
+    es: Thing* pt = up.get();
+Il metodo release() ritorna il puntatore associato alla risorsa, che non è più proprietà dello smart pointer
+
+La template function factory make_unique()
+    Rende più efficiente la creazione di uno unique_ptr 
+
+Il metodo reset() permette di distruggere la risorsa prima che lo smart pointer esca di scope
+    Può associare un altro oggetto allo smart pointer
+        O lasciarlo vuoto - stesso comportamento dell'operatore di assegnamento per nullptr

@@ -13,7 +13,7 @@ Se la risorsa è l'istanza di una classe, con l'operatore -> si accedono ai suoi
     es: sp->hello();
 
 Il metodo get() permette di estrarre il puntatore raw
-    es: Base* p = sp.get();
+    es: Thing* pt = sp.get();
 
 La template function factory make_shared()
     Rende più efficiente la creazione di uno shared_ptr 

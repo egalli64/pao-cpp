@@ -20,3 +20,6 @@ La template function factory make_shared()
 
 Il metodo use_count() ritorna il numero di condivisioni della risorsa
 Il metodo unique() ritorna true se la risorsa non è condivisa
+
+Il copy-ctor incrementa lo use_count
+    Per segnalare che aumenta il numero di condivisioni

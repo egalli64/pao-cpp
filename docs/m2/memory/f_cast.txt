@@ -1,0 +1,4 @@
+Ereditarietà
+
+Gli smart pointer supportano l'uso di gerarchie di oggetti
+ A patto che la classe base sia progettata correttamente (virtual dtor)

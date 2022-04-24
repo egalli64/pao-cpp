@@ -1,13 +1,12 @@
 #include <iostream>
 #include <memory>
-#include "../Base.h"
+#include "../Thing.h"
 
 int main() {
-    std::cout << "Shared ptr copy ctor behavior\n\n";
-    std::shared_ptr<Base> sp = std::make_shared<Base>(42);
+    std::shared_ptr<Thing> sp = std::make_shared<Thing>(42);
 
     if (sp.unique()) {
-        std::shared_ptr<Base> sp2{ sp };
+        std::shared_ptr<Thing> sp2{ sp };
         std::cout << "A new shared ptr created by copy just increase the count\n";
         if (!sp.unique()) {
             std::cout << "There are more owners\n";

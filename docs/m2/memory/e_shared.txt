@@ -3,7 +3,7 @@ shared_ptr
 Default ctor: crea uno shared pointer non associato ad alcun oggetto
     es: std::shared_ptr<int> sp;
 
-In contesto booleano lo shared pointer è true se il raw pointer associato non è NULL
+In contesto booleano lo shared pointer è true se il raw pointer associato non è nullptr
     es: if (!sp) { // ...
 
 Per accedere al valore della risorsa si usa l'operatore *
@@ -23,3 +23,9 @@ Il metodo unique() ritorna true se la risorsa non è condivisa
 
 Il copy-ctor incrementa lo use_count
     Per segnalare che aumenta il numero di condivisioni
+
+Il dtor decrementa lo use_count, se va a zero la risorsa viene distrutta
+
+Il metodo reset() permette di distruggere la risorsa prima che lo smart pointer esca di scope
+    Può associare un altro oggetto allo smart pointer
+        O lasciarlo vuoto - stesso comportamento dell'operatore di assegnamento per nullptr

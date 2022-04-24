@@ -7,7 +7,8 @@ int main() {
     if (sp.unique()) {
         std::cout << "There is only one owner\n";
         std::cout << "The use count is set to " << sp.use_count() << '\n';
-    } else {
+    }
+    else {
         std::cout << "Unexpected!\n";
     }
 }

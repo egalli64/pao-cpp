@@ -2,3 +2,9 @@ Ereditarietà
 
 Gli smart pointer supportano l'uso di gerarchie di oggetti
  A patto che la classe base sia progettata correttamente (virtual dtor)
+
+Per il cast dei puntatori gestiti via shared_pointer si possono usare
+    static_pointer_cast
+    const_pointer_cast
+    dynamic_pointer_cast
+- Corrispondono agli operatori di cast con il nome simile

@@ -44,6 +44,14 @@ void smart() {
     else {
         std::cout << "Use count to the resource now is " << spte.use_count() << '\n';
     }
+
+    if (spte == spt) {
+        std::cout << "The referenced object is the same\n";
+    }
+
+    if (spt != spto) {
+        std::cout << "Comparing against a no-owning smart pointer works as expected\n";
+    }
 }
 
 int main() {

@@ -8,3 +8,6 @@ Per il cast dei puntatori gestiti via shared_pointer si possono usare
     const_pointer_cast
     dynamic_pointer_cast
 - Corrispondono agli operatori di cast con il nome simile
+
+Gli operatori == e != comparano il puntatore posseduto dallo smart pointer
+    Allo stesso modo del confronto tra puntatori raw

@@ -22,3 +22,7 @@ La template function factory make_unique()
 Il metodo reset() permette di distruggere la risorsa prima che lo smart pointer esca di scope
     Può associare un altro oggetto allo smart pointer
         O lasciarlo vuoto - stesso comportamento dell'operatore di assegnamento per nullptr
+
+Copia e assegnamento sono disabilitati
+    Per passare un unique_ptr a una funzione, occorre fare un "move" della risorsa 
+    Se un unique_ptr è ritornato da una funzione, la "copy elision" ottimizza il processo

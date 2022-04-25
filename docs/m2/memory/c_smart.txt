@@ -16,14 +16,12 @@ Uso di smart pointer (per memoria)
 ### unique_ptr
 
 La proprietà dell'oggetto (o array di oggetti) è assegnata a un unico gestore
-- può essere passata a un altro gestore
+- può essere passata a un altro smart pointer via move
 - copy ctor e assegnamento di questo smart pointer sono disabilitati
 
 L'eliminazione dell'oggetto viene effettuata
 - quando lo smart pointer esce dal suo scope
 - o quando il puntatore a un altro oggetto è assegnato allo smart pointer via reset()
-
-La template function factory make_unique() semplifica la creazione di un unique_ptr
 
 ### shared_ptr
 

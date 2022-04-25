@@ -1,0 +1,16 @@
+weak_ptr
+
+Default ctor, il weak pointer non è associato ad alcun oggetto
+    es: std::weak_ptr<int> wpEmpty;
+
+Conversion ctor da shared_ptr a weak_ptr
+    es: std::weak_ptr<int> wp{ sp };
+
+Copy ctor
+    es: std::weak_ptr<int> wp2 = { wp };
+
+Non è possibile usare esplicitamente nullptr per creare o fare il reset di un weak_ptr
+
+Il metodo expired() ritorna true se
+    Non c'è alcun puntatore raw associato
+    C'è un puntatore ma non è più utilizzabile

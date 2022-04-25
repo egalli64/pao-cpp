@@ -14,3 +14,6 @@ Non è possibile usare esplicitamente nullptr per creare o fare il reset di un w
 Il metodo expired() ritorna true se
     Non c'è alcun puntatore raw associato
     C'è un puntatore ma non è più utilizzabile
+
+Il metodo lock() ritorna uno shared_ptr alla risorsa
+    Può non essere valido, se la risorsa è stata rilasciata prima del lock

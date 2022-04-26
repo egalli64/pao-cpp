@@ -43,8 +43,8 @@ public:
         std::cout << "Thing dtor " << x_ << '\n';
     }
 
-    friend std::ostream& operator<<(std::ostream& os, const Thing& base) {
-        return os << '{' << base.x_ << '}';
+    friend std::ostream& operator<<(std::ostream& os, const Thing& thing) {
+        return os << '{' << thing.x_ << '}';
     }
 };
 

@@ -61,4 +61,16 @@ int main() {
         std::cout << *p << ' ';
     }
     std::cout << '\n';
+
+    projects.erase(projects.begin());
+
+    for (const auto p : programmers) {
+        std::cout << *p << ' ';
+    }
+    std::cout << '\n';
+
+    for (const auto p : projects) {
+        std::cout << *p << ' ';
+    }
+    std::cout << '\n';
 }

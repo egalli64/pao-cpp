@@ -53,4 +53,6 @@ public:
     }
 };
 
+std::ostream& operator<<(std::ostream& os, const Project& project);
+
 #endif // PAO_CPP_M2_MEMORY_WEAK_PROJECT

@@ -25,14 +25,37 @@ std::ostream& operator<<(std::ostream& os, const Programmer& programmer) {
     os << " [ ";
     for (auto p : programmer.projects_) {
         std::shared_ptr<Project> sp = p.lock();
-        if(sp) {
+        if (sp) {
             os << sp->name() << ' ';
-        } else {
+        }
+        else {
             os << "Expired project ";
         }
     }
 
     return os << "]}";
+}
+
+namespace {
+    void link(std::shared_ptr<Programmer> programmer, std::shared_ptr<Project> project) {
+        std::cout << programmer->name() << " -> " << project->name() << '\n';
+        programmer->attachTo(project);
+        project->add(programmer);
+    }
+
+    void dump(const std::vector<std::shared_ptr<Programmer>>& programmers) {
+        for (const auto programmer : programmers) {
+            std::cout << *programmer << ' ';
+        }
+        std::cout << '\n';
+    }
+
+    void dump(const std::vector<std::shared_ptr<Project>>& projects) {
+        for (const auto project : projects) {
+            std::cout << *project << ' ';
+        }
+        std::cout << '\n';
+    }
 }
 
 int main() {
@@ -45,34 +68,18 @@ int main() {
     projects.push_back(std::make_shared<Project>("Delta"));
     projects.push_back(std::make_shared<Project>("Tango"));
 
-    programmers[0]->attachTo(projects[0]);
-    projects[0]->add(programmers[0]);
+    dump(programmers);
+    dump(projects);
 
-    programmers[1]->attachTo(projects[0]);
-    projects[0]->add(programmers[1]);
+    link(programmers[0], projects[0]);
+    link(programmers[1], projects[0]);
+    link(programmers[2], projects[1]);
 
-    programmers[2]->attachTo(projects[1]);
-    projects[1]->add(programmers[2]);
-
-    for (const auto p : programmers) {
-        std::cout << *p << ' ';
-    }
-    std::cout << '\n';
-
-    for (const auto p : projects) {
-        std::cout << *p << ' ';
-    }
-    std::cout << '\n';
+    dump(programmers);
+    dump(projects);
 
     projects.erase(projects.begin());
 
-    for (const auto p : programmers) {
-        std::cout << *p << ' ';
-    }
-    std::cout << '\n';
-
-    for (const auto p : projects) {
-        std::cout << *p << ' ';
-    }
-    std::cout << '\n';
+    dump(programmers);
+    dump(projects);
 }

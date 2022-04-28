@@ -7,7 +7,6 @@
 #include "Project.h"
 
 class Programmer final {
-//    friend std::ostream& operator<<(std::ostream& os, const Project& project);
     friend std::ostream& operator<<(std::ostream& os, const Programmer& programmer);
 private:
     std::string name_;
@@ -53,5 +52,7 @@ public:
         projects_.push_back(p);
     }
 };
+
+std::ostream& operator<<(std::ostream& os, const Programmer& programmer);
 
 #endif // PAO_CPP_M2_MEMORY_WEAK_PROGRAMMER

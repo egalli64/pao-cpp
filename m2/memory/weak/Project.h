@@ -10,8 +10,8 @@ class Project final {
     friend std::ostream& operator<<(std::ostream& os, const Project& project);
 private:
     std::string name_;
-public:
     std::vector<std::weak_ptr<Programmer>> programmers_;
+public:
     Project(const std::string& name) : name_{ name } {
         std::cout << "Project ctor " << name_ << '\n';
     }
@@ -44,8 +44,12 @@ public:
         std::cout << "Project dtor " << name_ << '\n';
     }
 
-    std::string name() {
+    const std::string& name() const {
         return name_;
+    }
+
+    void add(std::shared_ptr<Programmer> p) {
+        programmers_.push_back(p);
     }
 };
 

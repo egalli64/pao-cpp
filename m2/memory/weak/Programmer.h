@@ -7,13 +7,12 @@
 #include "Project.h"
 
 class Programmer final {
-    friend std::ostream& operator<<(std::ostream& os, const Project& project);
+//    friend std::ostream& operator<<(std::ostream& os, const Project& project);
     friend std::ostream& operator<<(std::ostream& os, const Programmer& programmer);
 private:
     std::string name_;
-public:
     std::vector<std::weak_ptr<Project>> projects_;
-
+public:
     Programmer(const std::string& name) : name_{ name } {
         std::cout << "Programmer ctor " << name_ << '\n';
     }
@@ -44,6 +43,14 @@ public:
 
     ~Programmer() {
         std::cout << "Programmer dtor " << name_ << '\n';
+    }
+
+    const std::string& name() const {
+        return name_;
+    }
+
+    void attachTo(std::shared_ptr<Project> p) {
+        projects_.push_back(p);
     }
 };
 

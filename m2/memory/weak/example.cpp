@@ -10,7 +10,7 @@ std::ostream& operator<<(std::ostream& os, const Project& project) {
     for (auto p : project.programmers_) {
         std::shared_ptr<Programmer> sp = p.lock();
         if (sp) {
-            os << sp->name_ << ' ';
+            os << sp->name() << ' ';
         }
         else {
             os << "Expired programmer ";
@@ -45,12 +45,14 @@ int main() {
     projects.push_back(std::make_shared<Project>("Delta"));
     projects.push_back(std::make_shared<Project>("Tango"));
 
-    programmers[0]->projects_.push_back(projects[0]);
-    programmers[1]->projects_.push_back(projects[0]);
-    programmers[2]->projects_.push_back(projects[1]);
-    projects[0]->programmers_.push_back(programmers[0]);
-    projects[0]->programmers_.push_back(programmers[1]);
-    projects[1]->programmers_.push_back(programmers[2]);
+    programmers[0]->attachTo(projects[0]);
+    projects[0]->add(programmers[0]);
+
+    programmers[1]->attachTo(projects[0]);
+    projects[0]->add(programmers[1]);
+
+    programmers[2]->attachTo(projects[1]);
+    projects[1]->add(programmers[2]);
 
     for (const auto p : programmers) {
         std::cout << *p << ' ';

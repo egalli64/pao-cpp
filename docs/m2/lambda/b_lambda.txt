@@ -3,12 +3,12 @@ Lambda
 Di solito il return type è facilmente deducibile dal compilatore
 Es: [] (double value) { return value * value; }; 
 
-Spesso create per essere passate come argomento ad un altra funzione
-Per evitare ripetizioni, sono ancora usati gli altri callable 
-	Una funzione è più appropriata se il codice è semplice
-	Un function object permette un approccio Object Oriented
+Spesso le lambda sono pensate come argomento ad un altra funzione
+Gli altri callable sono ancora usati, in particolare se il codice è di uso comune
+	Funzioni per codice semplice e compatto
+	Function object per usare un approccio Object Oriented
 
 Ad esempio, std::sort()
-- Accetta un callable per confrontare gli elementi nel sorting
+- Accetta un callable per determinare come ordinare gli elementi
 	Due parametri, gli elementi da confrontare
-	Ritorna true se il primo precede il secondo
+	Ritorna true se i due elementi sono in ordine

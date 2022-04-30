@@ -2,14 +2,14 @@ Capture list
 
 Permette di inizializzare la lambda al momento della sua creazione
 - Usando variabili locali definite nel contesto corrente
-- Agisce come un costruttore canonico per il functor generato dal compilatore
+- Agisce come un costruttore canonico per il function object generato dal compilatore
 - Le variabili catturate sono utilizzabili nel body della lambda
 Per default la cattura è effettuata by value
 	[variable_name]{ /* … */ }
 Indicando ‘&’, si richiede la cattura by reference
 	[&variable_name]{ /* … */ }
 	È responsabilità del programmatore usare il reference correttamente
-Per le funzioni, è possibile avere un effetto di adattamento simile via bind
+Si può ottenere un risultato simile sulle funzioni via std::bind
 
 ---
 

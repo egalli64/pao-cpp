@@ -7,5 +7,5 @@ Ad esempio, std::sort()
 	Ritorna true se il primo precede il secondo
 - Se il callable è usato da altre parti o se è complesso, di solito si usa
 	Una funzione
-	Un functor
-- Una lambda è spesso preferita per l’uso singolo e se è molto semplice
+	Un function object
+- Una lambda è spesso preferita per l’uso singolo

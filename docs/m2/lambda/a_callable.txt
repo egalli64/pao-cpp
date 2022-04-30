@@ -9,4 +9,4 @@ Espressione lambda – è in realtà un Function Object
 - Il compilatore genera una classe anonima equivalente
 - Il codice è più snello, con maggiore leggibilità
 	Minimale: []{}
-	Completa: [capture list] (params) -> type { /*… */ }
+	Completa: [capture list] (params) specifiers -> type { /*… */ }

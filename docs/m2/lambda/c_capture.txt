@@ -19,5 +19,6 @@ Si può ottenere un risultato simile sulle funzioni via std::bind
  [&] tutte by reference
 	[&, a, ...] esplicite (qui ‘a’, …) by value, le altre by reference
 Le variabili catturate by value sono immutabili per default
-- Se si vuole modificarle nella lambda, keyword mutable
+- Se si vuole modificarle nella lambda, va indicato lo specifier mutable
 - Dopo la lista dei parametri prima del body, es: [x]() mutable {/* … */}
+	In questo caso le parentesi tonde per la lista dei parametri sono obbligatorie

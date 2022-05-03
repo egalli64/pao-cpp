@@ -7,3 +7,6 @@ Determinazione implicita del tipo di ritorno
  Letterali interi e reali, se possibile, sono interpretati come int e double
 È possibile esplicitare il tipo di ritorno
  Sintassi “-> type” tra la lista dei parametri e il body della lambda
+La specifica noexcept assicura che la lambda non tira eccezioni
+ La violazione del contratto implica la terminazione del programmatore
+ 

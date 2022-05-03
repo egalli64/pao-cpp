@@ -17,10 +17,6 @@ int main() {
     auto v3a = [] {return 42.7F;}();
     cout << "A float returned by a lambda: " << v3a << ", size: " << sizeof(v3a) << '\n';
 
-    auto myLambda = []() -> long double {return 42;};
-    auto result = myLambda();
-    // same as:
-    // auto result = []() -> long double {return 42;}();
-
+    auto result = []() -> long double {return 42;}();
     cout << "A long double explicitely returned by a lambda: " << result << ", size: " << sizeof(result) << '\n';
 }

@@ -1,7 +1,7 @@
 Capture list
 
 Permette di inizializzare la lambda al momento della sua creazione
-- Usando variabili locali definite nel contesto corrente
+- Usando variabili locali non statiche definite nel contesto corrente
 - Agisce come un costruttore canonico per il function object generato dal compilatore
 - Le variabili catturate sono utilizzabili nel body della lambda
 Per default la cattura è effettuata by value

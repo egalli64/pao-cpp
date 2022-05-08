@@ -4,23 +4,27 @@
 #include <iostream>
 #include <boost/thread.hpp>
 
-void a_function() {
-    std::cout << "Run a function in another thread\n";
+void greeter() {
+    std::cout << "Hello from thread " << boost::this_thread::get_id() << '\n';
 }
 
-class AFunctor {
+class Greeter {
 public:
     void operator()() const {
-        std::cout << "Run a functor in another thread\n";
+        std::cout << "Cheers from thread " << boost::this_thread::get_id() << '\n';
     }
 };
 
 int main() {
     std::cout << "Warning! This code is not thread safe!\n";
 
-    boost::thread t1{ a_function };
-    boost::thread t2{ AFunctor() };
-    boost::thread t3{ [] { std::cout << "Run a lambda in another thread\n"; } };
+    boost::thread t1{ greeter };
+    boost::thread t2{ Greeter() };
+    boost::thread t3{ [] { std::cout << "Goodbye from thread " << boost::this_thread::get_id() << '\n'; } };
+
+    std::cout << "The main thread is ";
+    std::cout << boost::this_thread::get_id();
+    std::cout << '\n';
 
     std::cout << "The access to the resource cout is shared but not protected!\n";
 

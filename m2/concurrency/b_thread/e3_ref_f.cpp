@@ -1,5 +1,5 @@
 /*
- * g++ -pthread -o a.out e3_ref_fun.cpp
+ * g++ -pthread -o a.out e3_ref_f.cpp
  */
 #include <functional>
 #include <iostream>

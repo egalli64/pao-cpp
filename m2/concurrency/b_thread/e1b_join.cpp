@@ -1,5 +1,5 @@
 /*
- * g++ -pthread -o a.out e1b.cpp -lboost_system -lboost_thread
+ * g++ -pthread -o a.out e1b_join.cpp -lboost_system -lboost_thread
  */
 #include <iostream>
 #include <boost/thread.hpp>
@@ -22,7 +22,7 @@ int main() {
     boost::thread t2{ AFunctor() };
     boost::thread t3{ [] { std::cout << "Run a lambda in another thread\n"; } };
 
-    std::cout << "Warning! This code is not thread safe!\n";
+    std::cout << "The access to the resource cout is shared but not protected!\n";
 
     t1.join();
     t2.join();

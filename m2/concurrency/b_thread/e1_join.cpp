@@ -1,5 +1,5 @@
 /*
- * g++ -pthread -o a.out e1.cpp
+ * g++ -pthread -o a.out e1_join.cpp
  */
 #include <iostream>
 #include <thread>
@@ -22,7 +22,7 @@ int main() {
     std::thread t2{ AFunctor() };
     std::thread t3{ [] { std::cout << "Run a lambda in another thread\n"; } };
 
-    std::cout << "Warning! This code is not thread safe!\n";
+    std::cout << "The access to the resource cout is shared but not protected!\n";
 
     t1.join();
     t2.join();

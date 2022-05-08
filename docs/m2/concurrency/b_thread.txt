@@ -1,0 +1,19 @@
+Thread
+
+Ogni programma C++ ha almeno un thread, quello che esegue main()
+
+Da C++11 la classe std::thread permette di gestire l'esecuzione un task
+- In alternativa è possibile usare boost::thread e classi connesse
+
+Un thread figlio
+    entra in esecuzione in seguito alla sua creazione
+    termina quando raggiunge la fine del task
+
+Il main thread dovrebbe attendere la terminazione del thread figlio via join()
+    In alternativa, con le dovute cautele, si può invocare detach() 
+
+Se una risorsa è acceduta da più thread dovrebbe avere un accesso regolamentato
+
+Passaggio di argomenti a un task
+- Nel caso di funzioni si usa un costruttore variadico template
+    è richiesto l'uso di ref() / cref() per la corretta gestione delle reference

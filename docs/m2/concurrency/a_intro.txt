@@ -1,0 +1,14 @@
+Processo: programma in esecuzione
+Thread: flusso di esecuzione all'interno di un processo
+
+La concorrenza può essere ottenuta via:
+    Multiprocessing: l'esecuzione di un programma è divisa tra più processi
+    Multithreading: il programma è eseguito da un singolo processo che gestisce più thread
+
+Task: blocco di codice eseguibile in concorrenza con altro codice
+    funzione
+    functor
+    lambda
+
+IPC - Interprocess Communication (File, Pipe, Signal, Socket, ...)
+    Non è standardizzata in C++, occorre usare le API offerte dai Sistemi Operativi   

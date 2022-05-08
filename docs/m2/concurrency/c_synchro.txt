@@ -18,6 +18,7 @@ Lock-Free programming
 Uso di mutex e lock
 - Permette di regolamentare l'accesso a una variabili in modo mutualmente esclusivo
 - Solo un thread alla volta ha il permesso di accederla
+- Tutti gli accessi alla risorsa devono essere mediati dal mutex
 
 Si usa una istanza di std::mutex, che mette a disposizione i metodi:
 - lock(), per acquisire la risorsa
@@ -27,7 +28,11 @@ Sono usati direttamente solo in casi molto semplici
 - Quando è facile tenere sotto controllo il flusso di esecuzione
 - Esempio, simulazione di un metodo start per un thread
 
-lock_guard
+Si preferisce usare classi basate sull'idioma RAII
+- Resource Acquisition Is Initialization
+
+std::lock_guard - uso comune, limitato a un blocco
+
 scoped_lock
 unique_lock
 

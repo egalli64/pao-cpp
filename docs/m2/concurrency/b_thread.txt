@@ -7,7 +7,7 @@ Da C++11 la classe std::thread permette di gestire l'esecuzione un task
 
 Un thread figlio
     entra in esecuzione in seguito alla sua creazione
-    termina quando raggiunge la fine del task
+    termina quando raggiunge la fine del task: diventa joinable
 
 Il main thread dovrebbe attendere la terminazione del thread figlio via join()
     In alternativa, con le dovute cautele, si può invocare detach() 

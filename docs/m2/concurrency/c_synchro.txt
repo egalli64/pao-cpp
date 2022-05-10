@@ -27,14 +27,3 @@ Si usa una istanza di std::mutex, che mette a disposizione i metodi:
 Sono usati direttamente solo in casi molto semplici
 - Quando è facile tenere sotto controllo il flusso di esecuzione
 - Esempio, simulazione di un metodo start per un thread
-
-Si preferisce usare classi basate sull'idioma RAII
-- Resource Acquisition Is Initialization
-
-std::lock_guard - uso comune, limitato a un blocco
-
-scoped_lock
-unique_lock
-
-shared_mutex
-shared_lock

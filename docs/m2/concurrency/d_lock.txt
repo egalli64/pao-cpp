@@ -1,0 +1,13 @@
+Di solito si preferisce usare lock istanze di classi basate sull'idioma RAII
+- Resource Acquisition Is Initialization
+
+std::lock_guard - uso comune, limitato a un blocco
+
+std::scoped_lock - se occorre operare su più mutex (C++17)
+- Rischio di deadlock se diversi thread acquisiscono lock
+- Alternativa, mantenere un ordine definito nell'acquisizione dei lock
+
+unique_lock
+
+shared_mutex
+shared_lock

@@ -11,4 +11,5 @@ Task: blocco di codice eseguibile in concorrenza con altro codice
     lambda
 
 IPC - Interprocess Communication (File, Pipe, Signal, Socket, ...)
-    Non è standardizzata in C++, occorre usare le API offerte dai Sistemi Operativi   
+    Non è standardizzata in C++
+    Boost.Interprocess 

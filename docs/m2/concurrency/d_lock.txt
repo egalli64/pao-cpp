@@ -8,7 +8,6 @@ Deadlock: thread competono su più risorse protette da mutex
 - Altrimenti funzione variadica std::lock(), garantisce il lock dei mutex passati
     Si possono poi passare i lock a lock_guard, via std::adopt_lock
 
-unique_lock
-
-shared_mutex
-shared_lock
+std::unique_lock - maggior flessibilità
+- Moveable (ma non copiabile), può essere passato tra diversi scope
+- Può essere associato a un mutex in modalità defer_lock

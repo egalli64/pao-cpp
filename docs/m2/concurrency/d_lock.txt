@@ -3,9 +3,10 @@ Di solito si preferisce usare lock istanze di classi basate sull'idioma RAII
 
 std::lock_guard - uso comune, limitato a un blocco
 
-std::scoped_lock - se occorre operare su più mutex (C++17)
-- Rischio di deadlock se diversi thread acquisiscono lock
-- Alternativa, mantenere un ordine definito nell'acquisizione dei lock
+Deadlock: thread competono su più risorse protette da mutex
+- Nei casi più semplici, basta mantenere un ordine definito nell'acquisizione dei lock
+- Altrimenti funzione variadica std::lock(), garantisce il lock dei mutex passati
+    Si possono poi passare i lock a lock_guard, via std::adopt_lock
 
 unique_lock
 

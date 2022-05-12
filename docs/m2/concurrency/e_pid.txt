@@ -1,0 +1,14 @@
+# Process ID
+
+Ogni processo ha un ID univoco
+
+- getpid() - ID del processo corrente
+
+Per mezzo che comando di sistema fork() un processo può fare lo spawn di un nuovo processo
+
+- fork() ritorna un intero
+    minore di zero in caso di errore
+    zero se il processo in esecuzione è il child risultante dalla fork
+    maggiore di zero, pid del child creato se è il padre in esecuzione
+
+- getppid() - ID del processo padre

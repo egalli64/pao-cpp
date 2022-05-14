@@ -11,6 +11,7 @@ namespace {
     const char* COUNTER_NAME = "MyCounter";
     const char* C2_NAME = "AnotherCounter";
     const char* AMOUNT_NAME = "MyAmount";
+    const char* VALUES_NAME = "MyValues";
     const char* MESSAGE_NAME = "MyMessage";
 }
 
@@ -36,6 +37,15 @@ int main() {
     std::pair<double*, std::size_t> pAmount = msm.find<double>(AMOUNT_NAME);
     if (pAmount.first) {
         std::cout << AMOUNT_NAME << ": " << *pAmount.first << '\n';
+    }
+
+    std::pair<double*, std::size_t> pValues = msm.find<double>(VALUES_NAME);
+    if (pValues.first) {
+        std::cout << VALUES_NAME << ": ";
+        for (size_t i = 0; i < pValues.second;++i) {
+            std::cout << pValues.first[i] << ' ';
+        }
+        std::cout << '\n';
     }
 
     std::pair<MyString*, std::size_t> pMessage = msm.find<MyString>(MESSAGE_NAME);

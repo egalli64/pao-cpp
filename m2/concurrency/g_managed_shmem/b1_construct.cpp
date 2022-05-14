@@ -2,6 +2,7 @@
 #include <boost/interprocess/managed_shared_memory.hpp>
 #include <boost/interprocess/allocators/allocator.hpp>
 #include <boost/interprocess/containers/string.hpp>
+#include <cmath>
 #include <iostream>
 
 namespace bi = boost::interprocess;
@@ -10,6 +11,7 @@ namespace {
     const char* SHMEM_NAME = "MySharedMemory";
     const char* COUNTER_NAME = "MyCounter";
     const char* AMOUNT_NAME = "MyAmount";
+    const char* VALUES_NAME = "MyValues";
     const char* MESSAGE_NAME = "MyMessage";
 }
 
@@ -29,6 +31,15 @@ int main() {
 
     double* pAmount = msm.construct<double>(AMOUNT_NAME)(42.24);
     std::cout << AMOUNT_NAME << " placed in shared memory: " << *pAmount << '\n';
+
+    double* pValues = msm.construct<double>(VALUES_NAME)[10]();
+    // set just the last value
+    pValues[9] = M_PI;
+    std::cout << VALUES_NAME << " placed in shared memory: ";
+    for (int i = 0; i < 10; ++i) {
+        std::cout << ' ' << pValues[i];
+    }
+    std::cout << '\n';
 
     MyString* pMessage = msm.construct<MyString>(MESSAGE_NAME)("Hello!", msm.get_segment_manager());
     std::cout << MESSAGE_NAME << " placed in shared memory: " << *pMessage << '\n';

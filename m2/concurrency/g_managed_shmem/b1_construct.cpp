@@ -43,4 +43,11 @@ int main() {
 
     MyString* pMessage = msm.construct<MyString>(MESSAGE_NAME)("Hello!", msm.get_segment_manager());
     std::cout << MESSAGE_NAME << " placed in shared memory: " << *pMessage << '\n';
+
+    try {
+        msm.construct<double>("No more room!")[1'000]();
+    }
+    catch (bi::bad_alloc& ex) {
+        std::cout << "Out of memory in the shared memory -> " << ex.what() << '\n';
+    }
 }

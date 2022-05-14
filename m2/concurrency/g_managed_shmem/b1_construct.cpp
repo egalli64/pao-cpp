@@ -1,5 +1,7 @@
 // c++ -Wall b1_construct.cpp -lrt -pthread -o b1.exe
 #include <boost/interprocess/managed_shared_memory.hpp>
+#include <boost/interprocess/allocators/allocator.hpp>
+#include <boost/interprocess/containers/string.hpp>
 #include <iostream>
 
 namespace bi = boost::interprocess;
@@ -8,7 +10,12 @@ namespace {
     const char* SHMEM_NAME = "MySharedMemory";
     const char* COUNTER_NAME = "MyCounter";
     const char* AMOUNT_NAME = "MyAmount";
+    const char* MESSAGE_NAME = "MyMessage";
 }
+
+// required to manage strings
+typedef bi::allocator<char, bi::managed_shared_memory::segment_manager> CharAllocator;
+typedef bi::basic_string<char, std::char_traits<char>, CharAllocator> MyString;
 
 int main() {
     // ensure shared memory is not already set
@@ -22,4 +29,7 @@ int main() {
 
     double* pAmount = msm.construct<double>(AMOUNT_NAME)(42.24);
     std::cout << AMOUNT_NAME << " placed in shared memory: " << *pAmount << '\n';
+
+    MyString* pMessage = msm.construct<MyString>(MESSAGE_NAME)("Hello!", msm.get_segment_manager());
+    std::cout << MESSAGE_NAME << " placed in shared memory: " << *pMessage << '\n';
 }

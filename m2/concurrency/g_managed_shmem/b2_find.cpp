@@ -1,29 +1,45 @@
 // c++ -Wall b2_find.cpp -lrt -pthread -o b2.exe
 #include <boost/interprocess/managed_shared_memory.hpp>
+#include <boost/interprocess/allocators/allocator.hpp>
+#include <boost/interprocess/containers/string.hpp>
 #include <iostream>
-#include <string>
 
 namespace bi = boost::interprocess;
 
 namespace {
     const char* SHMEM_NAME = "MySharedMemory";
     const char* COUNTER_NAME = "MyCounter";
+    const char* C2_NAME = "AnotherCounter";
     const char* AMOUNT_NAME = "MyAmount";
+    const char* MESSAGE_NAME = "MyMessage";
 }
+
+// required to manage strings
+typedef bi::allocator<char, bi::managed_shared_memory::segment_manager> CharAllocator;
+typedef bi::basic_string<char, std::char_traits<char>, CharAllocator> MyString;
 
 int main() {
     bi::managed_shared_memory msm{ bi::open_only, SHMEM_NAME };
 
     std::pair<int*, std::size_t> pCounter = msm.find<int>(COUNTER_NAME);
-    if (pCounter.second != 1) {
-        std::cout << "A single counter was expected!\n";
-    }
-    else if (pCounter.first) {
+    if (pCounter.first) {
         std::cout << COUNTER_NAME << ": " << *pCounter.first << '\n';
     }
+
+    std::pair<int*, std::size_t> pC2 = msm.find<int>(C2_NAME);
+    std::cout << C2_NAME;
+    if (pC2.first) {
+        std::cout << ": " << *pC2.first;
+    }
+    std::cout << ", size is " << pC2.second << '\n';
 
     std::pair<double*, std::size_t> pAmount = msm.find<double>(AMOUNT_NAME);
     if (pAmount.first) {
         std::cout << AMOUNT_NAME << ": " << *pAmount.first << '\n';
+    }
+
+    std::pair<MyString*, std::size_t> pMessage = msm.find<MyString>(MESSAGE_NAME);
+    if (pMessage.first) {
+        std::cout << MESSAGE_NAME << ": " << *pMessage.first << '\n';
     }
 }

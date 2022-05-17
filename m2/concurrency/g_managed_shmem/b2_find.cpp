@@ -26,6 +26,9 @@ int main() {
     if (pCounter.first) {
         std::cout << COUNTER_NAME << ": " << *pCounter.first << '\n';
     }
+    else {
+        std::cout << COUNTER_NAME << " not found\n";
+    }
 
     std::pair<int*, std::size_t> pC2 = msm.find<int>(C2_NAME);
     std::cout << C2_NAME;
@@ -38,6 +41,9 @@ int main() {
     if (pAmount.first) {
         std::cout << AMOUNT_NAME << ": " << *pAmount.first << '\n';
     }
+    else {
+        std::cout << AMOUNT_NAME << " not found\n";
+    }
 
     std::pair<double*, std::size_t> pValues = msm.find<double>(VALUES_NAME);
     if (pValues.first) {
@@ -47,9 +53,15 @@ int main() {
         }
         std::cout << '\n';
     }
+    else {
+        std::cout << VALUES_NAME << " not found\n";
+    }
 
     std::pair<MyString*, std::size_t> pMessage = msm.find<MyString>(MESSAGE_NAME);
     if (pMessage.first) {
         std::cout << MESSAGE_NAME << ": " << *pMessage.first << '\n';
+    }
+    else {
+        std::cout << MESSAGE_NAME << " not found\n";
     }
 }

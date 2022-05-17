@@ -33,5 +33,4 @@ int main() {
 
     int* pC2 = msm.find_or_construct<int>(C2_NAME)(99);
     std::cout << C2_NAME << " placed in shared memory: " << *pC2 << '\n';
-
 }

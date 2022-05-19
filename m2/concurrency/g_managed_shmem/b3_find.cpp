@@ -1,4 +1,4 @@
-// c++ -Wall b2_find.cpp -lrt -pthread -o b2.exe
+// c++ -Wall b3_find.cpp -lrt -pthread -o b3.exe
 #include <boost/interprocess/managed_shared_memory.hpp>
 #include <boost/interprocess/allocators/allocator.hpp>
 #include <boost/interprocess/containers/string.hpp>

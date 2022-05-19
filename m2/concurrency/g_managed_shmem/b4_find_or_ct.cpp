@@ -1,4 +1,4 @@
-// c++ -Wall b3_find_or_ct.cpp -lrt -pthread -o b3.exe
+// c++ -Wall b4_find_or_ct.cpp -lrt -pthread -o b4.exe
 #include <boost/interprocess/managed_shared_memory.hpp>
 #include <boost/interprocess/allocators/allocator.hpp>
 #include <boost/interprocess/containers/string.hpp>
@@ -12,7 +12,6 @@ namespace {
     const char* C2_NAME = "AnotherCounter";
 }
 
-// required to manage strings
 typedef bi::allocator<char, bi::managed_shared_memory::segment_manager> CharAllocator;
 typedef bi::basic_string<char, std::char_traits<char>, CharAllocator> MyString;
 

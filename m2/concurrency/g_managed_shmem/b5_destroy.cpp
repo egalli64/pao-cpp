@@ -1,4 +1,4 @@
-// c++ -Wall b4_destroy.cpp -lrt -pthread -o b4.exe
+// c++ -Wall b5_destroy.cpp -lrt -pthread -o b5.exe
 #include <boost/interprocess/managed_shared_memory.hpp>
 #include <iostream>
 
@@ -22,7 +22,7 @@ int main() {
 
     std::pair<double*, std::size_t> pValues = msm.find<double>(VALUES_NAME);
     if (pValues.first) {
-        std::cout << VALUES_NAME << " found, destroy it by ptr\n";
+        std::cout << VALUES_NAME << " found, is going to be destroyed by ptr\n";
         msm.destroy_ptr<double>(pValues.first);
     }
     else {

@@ -1,8 +1,11 @@
 // c++ -Wall b3_find.cpp -lrt -pthread -o b3.exe
+#include <algorithm>
 #include <boost/interprocess/managed_shared_memory.hpp>
 #include <boost/interprocess/allocators/allocator.hpp>
 #include <boost/interprocess/containers/string.hpp>
+#include <boost/interprocess/containers/vector.hpp>
 #include <iostream>
+#include <iterator>
 
 namespace bi = boost::interprocess;
 
@@ -13,11 +16,14 @@ namespace {
     const char* AMOUNT_NAME = "MyAmount";
     const char* VALUES_NAME = "MyValues";
     const char* MESSAGE_NAME = "MyMessage";
+    const char* MESSAGE_VECTOR_NAME = "MyMessageVector";
 }
 
-// required to manage strings
 typedef bi::allocator<char, bi::managed_shared_memory::segment_manager> CharAllocator;
 typedef bi::basic_string<char, std::char_traits<char>, CharAllocator> MyString;
+
+typedef bi::allocator<MyString, bi::managed_shared_memory::segment_manager> StringAllocator;
+typedef bi::vector<MyString, StringAllocator> MyStringVector;
 
 int main() {
     bi::managed_shared_memory msm{ bi::open_only, SHMEM_NAME };
@@ -64,4 +70,16 @@ int main() {
     else {
         std::cout << MESSAGE_NAME << " not found\n";
     }
+    
+    std::pair<MyStringVector*, std::size_t> pVector = msm.find<MyStringVector>(MESSAGE_VECTOR_NAME);
+    if (pVector.first) {
+        const MyStringVector& msv = *pVector.first;
+        std::cout << MESSAGE_VECTOR_NAME << ": ";
+        std::copy(msv.cbegin(), msv.cend(), std::ostream_iterator<MyString>(std::cout, " "));
+        std::cout << '\n';
+    }
+    else {
+        std::cout << MESSAGE_VECTOR_NAME << " not found\n";
+    }
+
 }

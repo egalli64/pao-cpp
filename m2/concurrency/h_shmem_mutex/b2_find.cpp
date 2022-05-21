@@ -1,13 +1,14 @@
-// c++ -Wall named_mutex.cpp -lrt -pthread -o nm.exe
-#include <boost/interprocess/managed_shared_memory.hpp> 
-#include <boost/interprocess/sync/named_mutex.hpp>
-#include <iostream>  
+// c++ -Wall b2_find.cpp -lrt -pthread -o b2.exe
+#include <boost/interprocess/managed_shared_memory.hpp>
+#include <boost/interprocess/sync/interprocess_mutex.hpp>
+#include <iostream>
 
 namespace bi = boost::interprocess;
 
 namespace {
     const char* SHMEM_NAME = "MySharedMemory";
     const char* COUNTER_NAME = "MyCounter";
+    const char* MUTEX_NAME = "MyMutex";
 }
 
 int main() {
@@ -19,9 +20,16 @@ int main() {
         return 1;
     }
 
-    bi::named_mutex mtx{ bi::open_or_create, "mtx" };
-
     int& counter = *pCounter.first;
+
+    std::pair<bi::interprocess_mutex*, std::size_t> pMtx = msm.find<bi::interprocess_mutex>(MUTEX_NAME);
+    if (pMtx.first == nullptr) {
+        std::cout << MUTEX_NAME << " not found\n";
+        return 1;
+    }
+
+    bi::interprocess_mutex& mtx = *pMtx.first;
+
     mtx.lock();
     std::cout << COUNTER_NAME << ": " << counter << '\n';
     ++counter;

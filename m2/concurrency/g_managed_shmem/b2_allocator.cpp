@@ -25,11 +25,13 @@ int main() {
     MyString* pMessage = msm.construct<MyString>(MESSAGE_NAME)("Hello!", msm.get_segment_manager());
     std::cout << MESSAGE_NAME << " in shared memory: " << *pMessage << '\n';
 
+    MyStringVector* pVector = msm.construct<MyStringVector>(MESSAGE_VECTOR_NAME)(msm.get_segment_manager());
+
     MyString ms(msm.get_segment_manager());
     ms = "one";
-    MyStringVector* pVector = msm.construct<MyStringVector>(MESSAGE_VECTOR_NAME)(msm.get_segment_manager());
     pVector->push_back(ms);
     ms = "two";
     pVector->push_back(ms);
+
     std::cout << MESSAGE_VECTOR_NAME << " in shared memory is sized " << pVector->size() << '\n';
 }

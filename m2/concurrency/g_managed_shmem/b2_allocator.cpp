@@ -9,6 +9,8 @@ namespace bi = boost::interprocess;
 
 namespace {
     const char* SHMEM_NAME = "MySharedMemory";
+    const int SHMEM_SIZE = 1'024;
+
     const char* MESSAGE_NAME = "MyMessage";
     const char* MESSAGE_VECTOR_NAME = "MyMessageVector";
 }
@@ -20,7 +22,7 @@ typedef bi::allocator<MyString, bi::managed_shared_memory::segment_manager> Stri
 typedef bi::vector<MyString, StringAllocator> MyStringVector;
 
 int main() {
-    bi::managed_shared_memory msm{ bi::open_or_create, SHMEM_NAME, 1'024 };
+    bi::managed_shared_memory msm{ bi::open_or_create, SHMEM_NAME, SHMEM_SIZE };
 
     MyString* pMessage = msm.construct<MyString>(MESSAGE_NAME)("Hello!", msm.get_segment_manager());
     std::cout << MESSAGE_NAME << " in shared memory: " << *pMessage << '\n';

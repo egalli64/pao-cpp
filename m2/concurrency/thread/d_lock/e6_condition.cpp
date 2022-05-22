@@ -1,4 +1,4 @@
-// g++ -pthread -o a.out e5_condition.cpp
+// g++ -pthread -o a.out e6_condition.cpp
 #include <condition_variable>
 #include <iostream>
 #include <mutex>

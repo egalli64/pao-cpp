@@ -3,10 +3,12 @@
 #include <iostream>
 #include <iterator>
 
-void print(const std::string& message, const std::vector<int>& data) {
-    std::cout << message << ": ";
-    copy(data.cbegin(), data.cend(), std::ostream_iterator<int>(std::cout, " "));
-    std::cout << '\n';
+namespace {
+    void print(const std::string& message, const std::vector<int>& data) {
+        std::cout << message << ": ";
+        copy(data.cbegin(), data.cend(), std::ostream_iterator<int>(std::cout, " "));
+        std::cout << '\n';
+    }
 }
 
 int main() {

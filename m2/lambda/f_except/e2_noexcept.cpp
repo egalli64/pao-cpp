@@ -3,6 +3,8 @@
 #include <iostream>
 
 int main() {
+    []() noexcept {std::cout << "No exception!\n";}();
+
     auto mySqrt = [](int x) noexcept {
         return sqrt(x);
     };

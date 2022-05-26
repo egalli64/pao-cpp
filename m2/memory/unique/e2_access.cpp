@@ -3,7 +3,7 @@
 #include "../Thing.h"
 
 int main() {
-    int* p = new int(42);
+    int* p = new int{ 42 };
     std::cout << "Streaming a raw ptr gives its address: " << p;
     std::cout << ", use asterisk to get its value: " << *p << '\n';
 
@@ -32,4 +32,5 @@ int main() {
 
     std::cout << "The object is _not_ owned anymore by the smart pointer!\n";
     std::cout << "!!! REMEMBER TO DELETE the raw pointer !!!\n";
+    delete ptr;
 }

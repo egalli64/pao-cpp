@@ -17,7 +17,7 @@ void passUnique(std::unique_ptr<Thing> up) {
     std::cout << "A unique_ptr has moved in: ";
     up->hello();
 
-    up.reset(new ThingExt(2));
+    up.reset(new ThingExt{ 2 });
     std::cout << "Reset for unique_ptr: ";
     up->hello();
 }

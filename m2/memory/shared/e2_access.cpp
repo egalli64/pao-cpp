@@ -3,7 +3,7 @@
 #include "../Thing.h"
 
 int main() {
-    int* p = new int(42);
+    int* p = new int{ 42 };
     std::cout << "Streaming a raw ptr gives its address: " << p;
     std::cout << ", use asterisk to get its value: " << *p << '\n';
 

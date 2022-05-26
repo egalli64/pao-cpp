@@ -14,10 +14,13 @@ void raw() {
     if (pto != nullptr) {
         std::cout << "Unexpected\n";
     }
+    else {
+        std::cout << "Can't downcast to ThingOther\n";
+    }
 
     // I'm sure of what I'm doing, downcast it
     ThingExt* pte = static_cast<ThingExt*>(pt);
-    std::cout << "Downcasting: ";
+    std::cout << "Static downcasting (unsafe): ";
     pte->hello();
 
     std::cout << "Explicit delete\n";

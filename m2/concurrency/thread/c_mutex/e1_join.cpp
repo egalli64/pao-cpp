@@ -1,5 +1,5 @@
 /*
- * g++ -pthread -o a.out e1_join.cpp
+ * c++ -pthread -o a.out e1_join.cpp
  */
 #include <iostream>
 #include <thread>

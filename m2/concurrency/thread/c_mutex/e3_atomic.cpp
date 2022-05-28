@@ -1,5 +1,5 @@
 /*
- * g++ -pthread -o a.out e3_atomic.cpp
+ * c++ -pthread -o a.out e3_atomic.cpp
  */
 #include <atomic>
 #include <iostream>

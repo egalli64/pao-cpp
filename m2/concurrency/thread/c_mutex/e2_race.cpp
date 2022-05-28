@@ -1,5 +1,5 @@
 /*
- * g++ -pthread -o a.out e2_race.cpp
+ * c++ -pthread -o a.out e2_race.cpp
  */
 #include <iostream>
 #include <thread>
@@ -18,5 +18,5 @@ int main() {
     }
 
     t.join();
-    std::cout << "Undefined behavior: " << result << '\n';
+    std::cout << "Problematic data race: " << result << "!\n";
 }

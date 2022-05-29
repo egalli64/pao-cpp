@@ -1,5 +1,5 @@
 /*
- * c++ -pthread -o a.out e4_start.cpp
+ * c++ -pthread -o a.out e3_start.cpp
  */
 #include <iostream>
 #include <mutex>

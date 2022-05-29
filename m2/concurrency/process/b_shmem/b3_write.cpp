@@ -16,6 +16,7 @@ int main() {
         bi::mapped_region region{ smo, bi::read_write };
         char* data = static_cast<char*>(region.get_address());
         strcpy(data, "Hello Shared Memory!");
+        std::cout << "Message written to " << SHMEM_NAME << '\n';
     }
     catch (bi::interprocess_exception& ex) {
         std::cout << "Can't open shared memory: " << ex.what() << '\n';

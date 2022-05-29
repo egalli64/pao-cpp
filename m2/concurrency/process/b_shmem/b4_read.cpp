@@ -12,11 +12,11 @@ namespace {
 
 int main() {
     try {
-        bi::shared_memory_object smo{ bi::open_only, SHMEM_NAME, bi::read_write };
+        bi::shared_memory_object smo{ bi::open_only, SHMEM_NAME, bi::read_only };
         bi::mapped_region region{ smo, bi::read_only };
 
         const char* data = static_cast<const char*>(region.get_address());
-        std::cout << data << '\n';
+        std::cout << "Message read from " << SHMEM_NAME << ": " << data << '\n';
     }
     catch (bi::interprocess_exception& ex) {
         std::cout << "Can't open shared memory: " << ex.what() << '\n';

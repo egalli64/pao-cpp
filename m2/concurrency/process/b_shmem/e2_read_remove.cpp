@@ -4,8 +4,10 @@
 #include <sys/shm.h>
 #include <unistd.h>
 
-static const key_t SHM_KEY = 0xBAD1DEA;
-static int SHM_SEGMENT_SIZE = 1024;
+namespace {
+	const key_t SHM_KEY = 0xBAD1DEA;
+	const int SHM_SEGMENT_SIZE = 1'024;
+}
 
 int main() {
 	std::cout << "Read from shared memory\n";
@@ -14,7 +16,7 @@ int main() {
 	int shmid = shmget(SHM_KEY, SHM_SEGMENT_SIZE, 0666);
 	if (shmid == -1) {
 		std::cerr << "Can't get shared memory\n";
-		return 1;
+		return EXIT_FAILURE;
 	}
 
 	// attach the shared memory segment to the address space, read only
@@ -23,7 +25,7 @@ int main() {
 		std::cerr << "Can't attach to shared memory\n";
 		attachedMemory = nullptr;
 
-		return 1;
+		return EXIT_FAILURE;
 	}
 	else { // access the data
 		char* pSharedSegment = static_cast<char*>(attachedMemory);

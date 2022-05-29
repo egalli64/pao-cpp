@@ -6,22 +6,24 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-static int SHM_SEGMENT_SIZE = 1024;
-static void* attachedMemory = nullptr;
+namespace {
+	const int SHM_SEGMENT_SIZE = 1'024;
+	void* attachedMemory = nullptr;
+}
 
 int main() {
 	std::cout << "The parent creates a private shm segment\n";
 	int shmid = shmget(IPC_PRIVATE, SHM_SEGMENT_SIZE, 0644 | IPC_CREAT);
 	if (shmid == -1) {
 		std::cerr << "Can't get shared memory\n";
-		return 1;
+		return EXIT_FAILURE;
 	}
 
 	// attach the shared memory segment to the address space, read/write
 	attachedMemory = shmat(shmid, nullptr, 0);
 	if (attachedMemory == (void*)-1) {
 		std::cerr << "Can't attach to shared memory\n";
-		return 2;
+		return EXIT_FAILURE;
 	}
 	else { // data transfer
 		char* pSharedSegment = static_cast<char*>(attachedMemory);
@@ -33,9 +35,9 @@ int main() {
 		sleep(1);
 
 		const char* pSharedSegment = static_cast<const char*>(attachedMemory);
-		std::cout << pSharedSegment << '\n';
+		std::cout << "Message read from parent: " << pSharedSegment << '\n';
 
-		return 0;
+		return EXIT_SUCCESS;
 	}
 
 	std::cout << "The parent has spawned its child\n";

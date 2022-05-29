@@ -6,6 +6,7 @@ namespace bi = boost::interprocess;
 
 namespace {
     const char* SHMEM_NAME = "MySharedMemory";
+    const int SHMEM_SIZE = 1'024;
 }
 
 int main() {
@@ -13,7 +14,7 @@ int main() {
         // instead of create_only the more permissive open_or_create could be passed
         bi::shared_memory_object smo{ bi::create_only, SHMEM_NAME, bi::read_write };
 
-        smo.truncate(1024);
+        smo.truncate(SHMEM_SIZE);
 
         std::cout << smo.get_name() << " created";
         bi::offset_t size;
@@ -21,7 +22,8 @@ int main() {
             std::cout << " with size " << size;
         }
         std::cout << '\n';
-    } catch(bi::interprocess_exception& ex) {
+    }
+    catch (bi::interprocess_exception& ex) {
         std::cout << "Can't create shared memory: " << ex.what() << '\n';
     }
 }

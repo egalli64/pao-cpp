@@ -9,10 +9,9 @@ namespace {
 }
 
 int main() {
-    try {
-        bi::shared_memory_object smo{ bi::open_only, SHMEM_NAME, bi::read_only };
-        bi::shared_memory_object::remove(SHMEM_NAME);
-    } catch(bi::interprocess_exception& ex) {
-        std::cout << "Can't open/remove shared memory: " << ex.what() << '\n';
+    std::cout << SHMEM_NAME;
+    if (!bi::shared_memory_object::remove(SHMEM_NAME)) {
+        std::cout << " not";
     }
+    std::cout << " removed\n";
 }

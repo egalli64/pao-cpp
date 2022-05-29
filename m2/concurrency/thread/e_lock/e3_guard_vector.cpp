@@ -1,5 +1,5 @@
 /*
- * g++ -pthread -o a.out e1_guard.cpp
+ * c++ -pthread -o a.out e3_guard_vector.cpp
  */
 #include <algorithm>
 #include <iostream>

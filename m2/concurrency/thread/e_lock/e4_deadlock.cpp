@@ -1,5 +1,5 @@
 /*
- * g++ -pthread -o a.out e3_deadlock.cpp
+ * c++ -pthread -o a.out e4_deadlock.cpp
  */
 #include <cmath>
 #include <cstdlib>
@@ -66,4 +66,6 @@ int main() {
 
     t1.join();
     t2.join();
+
+    std::cout << "Done(?)\n";
 }

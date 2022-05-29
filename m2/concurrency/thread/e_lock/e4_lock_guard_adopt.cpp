@@ -1,5 +1,5 @@
 /*
- * g++ -pthread -o a.out e4_lock.cpp
+ * c++ -pthread -o a.out e4_lock_guard_adopt.cpp
  */
 #include <cmath>
 #include <cstdlib>
@@ -62,4 +62,6 @@ int main() {
 
     t1.join();
     t2.join();
+
+    std::cout << "Done\n";
 }

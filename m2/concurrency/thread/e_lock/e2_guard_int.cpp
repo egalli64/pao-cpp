@@ -1,5 +1,5 @@
 /*
- * g++ -pthread -o a.out e2_guard.cpp
+ * c++ -pthread -o a.out e2_guard_int.cpp
  */
 #include <iostream>
 #include <thread>

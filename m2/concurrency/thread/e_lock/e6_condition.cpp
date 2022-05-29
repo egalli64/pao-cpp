@@ -1,4 +1,4 @@
-// g++ -pthread -o a.out e6_condition.cpp
+// c++ -pthread -o a.out e6_condition.cpp
 #include <condition_variable>
 #include <iostream>
 #include <mutex>
@@ -8,17 +8,17 @@ namespace {
     std::mutex mtx;
     std::condition_variable cnd;
 
-    bool produced = false;
+    bool ready = false;
     int stock = 10;
 
     void consumer() {
         while (stock > 0) {
-            std::unique_lock<std::mutex> lock(mtx);
-            cnd.wait(lock, []() { return produced; });
+            std::unique_lock<std::mutex> lock{ mtx };
+            cnd.wait(lock, [] { return ready; });
 
             stock -= 2;
             std::cout << "C:" << stock << ' ';
-            produced = false;
+            ready = false;
 
             cnd.notify_one();
         }
@@ -29,13 +29,13 @@ int main() {
     std::thread t{ consumer };
 
     while (stock > 0) {
-        std::unique_lock<std::mutex> lock(mtx);
+        std::unique_lock<std::mutex> lock{ mtx };
 
         std::cout << "P:" << ++stock << ' ';
-        produced = true;
+        ready = true;
 
         cnd.notify_one();
-        cnd.wait(lock, []() { return !produced; });
+        cnd.wait(lock, [] { return !ready; });
     }
 
     t.join();

@@ -10,6 +10,7 @@ int main() {
 	std::cout << "Fork returns negative (error), zero or child id: " << fid << '\n';
 
 	if (fid < 0) {
+		std::cout << "Unexpected\n";
 		return 1;
 	}
 

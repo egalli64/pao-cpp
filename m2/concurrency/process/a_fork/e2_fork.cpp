@@ -4,13 +4,14 @@
 
 int main() {
 	pid_t pid = getpid();
-	std::cout << "Process id " << pid << '\n';
+	std::cout << "Process ID " << pid << '\n';
 
+	// spawn a child
 	pid_t fid = fork();
-	std::cout << "Fork returns negative (error), zero or child id: " << fid << '\n';
+	std::cout << "Fork returns negative (error), zero or child ID: " << fid << '\n';
 
 	if (fid < 0) {
-		std::cout << "Unexpected\n";
+		std::cout << "Unexpected, can't fork process\n";
 		return 1;
 	}
 

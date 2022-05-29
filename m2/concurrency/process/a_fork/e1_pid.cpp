@@ -2,6 +2,6 @@
 #include <iostream>
 
 int main() {
-	std::cout << "This process id: " << getpid() << '\n';
-	std::cout << "The parent process id: " << getppid() << '\n';
+	std::cout << "This process ID: " << getpid() << '\n';
+	std::cout << "The parent process ID: " << getppid() << '\n';
 }

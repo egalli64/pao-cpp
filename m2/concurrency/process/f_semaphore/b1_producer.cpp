@@ -14,7 +14,7 @@ namespace {
 }
 
 // on startup produce is on and consume is off
-inline MySharedData::MySharedData(int x) : produce(1), consume(0), stock(x) {}
+inline MySharedData::MySharedData(int x) : produce{ 1 }, consume{ 0 }, stock{ x } {}
 
 int main() {
     Cleaner cleaner{ SHMEM_NAME };

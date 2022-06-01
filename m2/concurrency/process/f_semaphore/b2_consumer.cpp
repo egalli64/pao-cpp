@@ -23,7 +23,7 @@ int main() {
     }
     else {
         std::cout << DATA_NAME << " not found\n";
-        return 1;
+        return EXIT_FAILURE;
     }
     MySharedData& data = *pData.first;
 

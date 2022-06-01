@@ -1,6 +1,5 @@
 // c++ -Wall b1_construct.cpp -lrt -pthread -o b1.exe
 #include <boost/interprocess/managed_shared_memory.hpp>
-#include <cmath>
 #include <iostream>
 
 namespace bi = boost::interprocess;
@@ -29,7 +28,7 @@ int main() {
 
     double* pValues = msm.construct<double>(VALUES_NAME)[10]();
     // set just the last value
-    pValues[9] = M_PI;
+    pValues[9] = *pAmount / 3;
     std::cout << VALUES_NAME << " placed in shared memory: ";
     for (int i = 0; i < 10; ++i) {
         std::cout << ' ' << pValues[i];

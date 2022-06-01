@@ -54,7 +54,7 @@ int main() {
     std::pair<double*, std::size_t> pValues = msm.find<double>(VALUES_NAME);
     if (pValues.first) {
         std::cout << VALUES_NAME << ": ";
-        for (size_t i = 0; i < pValues.second;++i) {
+        for (size_t i = 0; i < pValues.second; ++i) {
             std::cout << pValues.first[i] << ' ';
         }
         std::cout << '\n';
@@ -70,7 +70,7 @@ int main() {
     else {
         std::cout << MESSAGE_NAME << " not found\n";
     }
-    
+
     std::pair<MyStringVector*, std::size_t> pVector = msm.find<MyStringVector>(MESSAGE_VECTOR_NAME);
     if (pVector.first) {
         const MyStringVector& msv = *pVector.first;

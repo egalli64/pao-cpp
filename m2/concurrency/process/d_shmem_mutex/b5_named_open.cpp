@@ -17,7 +17,7 @@ int main() {
     std::pair<int*, std::size_t> pCounter = msm.find<int>(COUNTER_NAME);
     if (pCounter.first == nullptr) {
         std::cout << COUNTER_NAME << " not found\n";
-        return 1;
+        return EXIT_FAILURE;
     }
 
     int& counter = *pCounter.first;

@@ -15,7 +15,7 @@ class OddFirst {
 private:
     bool natural_;
 public:
-    OddFirst(bool odd) : natural_(odd) {
+    OddFirst(bool natural) : natural_(natural) {
         std::cout << "Odd first " << (natural_ ? "natural" : "inverse");
     }
 

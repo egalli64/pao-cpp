@@ -28,7 +28,7 @@ int main() {
 
     Thing* ptr = upt.release();
     std::cout << "Access by raw pointer _released_ from smart pointer: ";
-    pt->hello();
+    ptr->hello();
 
     std::cout << "The object is _not_ owned anymore by the smart pointer!\n";
     std::cout << "!!! REMEMBER TO DELETE the raw pointer !!!\n";

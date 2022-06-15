@@ -8,6 +8,7 @@ int main() {
     std::cout << "A char on the heap: " << *pc << '\n';
     delete pc;
 
+    // the other three elements are initialized to 0! 
     int sData[6]{ 1,2,3 };
     std::cout << "An array of int on the stack: ";
     for (int cur : sData) {
@@ -15,6 +16,7 @@ int main() {
     }
     std::cout << '\n';
 
+    // the other three elements are initialized to 0! 
     int* hData = new int[6]{ 1,2,3 };
     std::cout << "An array of int on the heap: ";
     for (int i = 0; i < 6; ++i) {

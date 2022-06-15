@@ -1,3 +1,5 @@
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
 
 int main() {
@@ -17,11 +19,21 @@ int main() {
     std::cout << '\n';
 
     // the other three elements are initialized to 0! 
-    int* hData = new int[6]{ 1,2,3 };
+    int* hData = new int[6] { 1, 2, 3 };
     std::cout << "An array of int on the heap: ";
     for (int i = 0; i < 6; ++i) {
         std::cout << hData[i] << ' ';
     }
     std::cout << '\n';
     delete[] hData;
+
+    // works in GCC, but it is not standard C++!
+    srand(time(nullptr));
+    int size = rand() % 10;
+    std::cout << "An array on the stack sized " << size << ": ";
+    double values[size] = { };
+    for (int i = 0; i < size; ++i) {
+        std::cout << values[i] << ' ';
+    }
+    std::cout << '\n';
 }

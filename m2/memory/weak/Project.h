@@ -18,18 +18,21 @@ public:
 
     Project(const Project& other) : name_{ other.name_ } {
         std::cout << "Project copy ctor " << name_ << '\n';
+        programmers_ = other.programmers_;
     }
 
     Project(Project&& other) noexcept {
         std::cout << "Project move ctor for " << other.name_ << '\n';
 
         name_ = std::move(other.name_);
+        programmers_ = std::move(other.programmers_);
     }
 
     Project& operator=(const Project& other) {
         std::cout << "Project assigment for " << other.name_ << '\n';
 
         name_ = other.name_;
+        programmers_ = other.programmers_;
         return *this;
     }
 
@@ -37,6 +40,7 @@ public:
         std::cout << "Project move assigment for " << other.name_ << '\n';
 
         name_ = std::move(other.name_);
+        programmers_ = std::move(other.programmers_);
         return *this;
     }
 
